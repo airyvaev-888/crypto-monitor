@@ -1,0 +1,30 @@
+name: Crypto Monitor
+
+on:
+  schedule:
+    # Запуск каждый час (в 00 минут)
+    - cron: '0 * * * *'
+  workflow_dispatch: # Кнопка для ручного запуска
+
+jobs:
+  check-market:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Копируем код
+        uses: actions/checkout@v4
+
+      - name: Настраиваем Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Устанавливаем библиотеки
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytz
+
+      - name: Запускаем бота
+        env:
+          APPRISE_URL: ${{ secrets.APPRISE_URL }}
+        run: python crypto_monitor.py
