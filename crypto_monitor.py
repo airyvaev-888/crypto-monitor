@@ -1,96 +1,226 @@
-import ccxt
-import pandas as pd
-from datetime import datetime
-import apprise
+"""Часовой монитор ликвидных монет из history.json.
+Отправляет сигналы в ntfy через Apprise с логикой "через раз".
+Асинхронная версия с контролем RPS и группировкой уведомлений."""
+import asyncio
+import json
 import os
+from datetime import datetime
+
+import apprise
+import ccxt.async_support as ccxt
+import pandas as pd
 import pytz
 
-# --- НАСТРОЙКИ ---
-APPRISE_URL = os.getenv('APPRISE_URL', 'ntfys://ntfy.sh/air-crypto-alerts-888')
-apobj = apprise.Apprise()
-apobj.add(APPRISE_URL)
+from indicators import (
+    compute_rsi, compute_bollinger, compute_avg_volume,
+)
 
-# Ограничение по времени (Оренбург, UTC+5)
+HISTORY_FILE = 'history.json'
+STATE_FILE = 'monitor_state.json'
+TIMEFRAME = '1h'
+
+EXCHANGE_IDS = ['binance', 'kucoin', 'bybit', 'mexc', 'gateio']
+FALLBACK_SYMBOLS = ['BTC/USDT', 'ETH/USDT', 'SOL/USDT']
+
 ORENBURG_TZ = pytz.timezone('Asia/Yekaterinburg')
-now_orenburg = datetime.now(ORENBURG_TZ)
-current_hour = now_orenburg.hour
-if current_hour < 8 or current_hour >= 20:
-    print(f"Время {now_orenburg.strftime('%H:%M')} вне окна 08:00-20:00. Завершаем работу.")
-    exit()
+WINDOW_START = 8
+WINDOW_END = 20
 
-SYMBOLS = ['ICP/USDT', 'FIL/USDT', 'LUNC/USDT', 'XOR/USDT', 'XEM/USDT', 'JASMY/USDT', 'VR/USDT', 'XVG/USDT', 'BTC/USDT']
-TIMEFRAME = '1h'  # 1 час, так как запуск раз в час
-exchange_ids = ['binance', 'kucoin', 'bybit', 'mexc']
+RSI_LOW = 30
+RSI_HIGH = 70
+VOLUME_SPIKE_RATIO = 2.5
+VOLUME_SPIKE_CHANGE_PCT = 2.5
 
-# Пороги для аномалий
-PRICE_CHANGE_THRESHOLD = 2.5  # Изменение цены за 1 час в %
-VOLUME_SPIKE_MULTIPLIER = 2.5 # Во сколько раз объем выше среднего
+# Лимиты RPS для бирж
+RPS_LIMITS = {
+    'binance': 10,
+    'kucoin': 10,
+    'bybit': 10,
+    'mexc': 5,
+    'gateio': 5
+}
 
-exchanges = {ex: getattr(ccxt, ex)({'enableRateLimit': True}) for ex in exchange_ids}
 
-def send_alert(title, message):
-    print(f"🚨 Отправка: {title}")
-    apobj.notify(body=message, title=title)
+def now_orenburg():
+    return datetime.now(ORENBURG_TZ)
 
-def get_indicators(exchange, symbol):
-    ohlcv = exchange.fetch_ohlcv(symbol, timeframe=TIMEFRAME, limit=200)
-    df = pd.DataFrame(ohlcv, columns=['timestamp', 'open', 'high', 'low', 'close', 'volume'])
-    
-    # RSI
-    delta = df['close'].diff()
-    gain = (delta.where(delta > 0, 0)).rolling(window=14).mean()
-    loss = (-delta.where(delta < 0, 0)).rolling(window=14).mean()
-    df['RSI'] = 100 - (100 / (1 + gain / loss))
-    
-    # Средний объем
-    df['Volume_MA20'] = df['volume'].rolling(window=20).mean()
-    
-    # EMA50
-    df['EMA50'] = df['close'].ewm(span=50, adjust=False).mean()
-    
-    # Полосы Боллинджера
-    df['SMA20'] = df['close'].rolling(window=20).mean()
-    df['STD20'] = df['close'].rolling(window=20).std()
-    df['Upper_BB'] = df['SMA20'] + (df['STD20'] * 2)
-    df['Lower_BB'] = df['SMA20'] - (df['STD20'] * 2)
 
-    price_change_pct = ((df['close'].iloc[-1] - df['open'].iloc[-1]) / df['open'].iloc[-1]) * 100
-    
-    return {
-        'price': df['close'].iloc[-1],
-        'rsi': df['RSI'].iloc[-1],
-        'change_pct': price_change_pct,
-        'vol': df['volume'].iloc[-1],
-        'avg_vol': df['Volume_MA20'].iloc[-1],
-        'lower_bb': df['Lower_BB'].iloc[-1],
-        'upper_bb': df['Upper_BB'].iloc[-1]
-    }
+def in_window() -> bool:
+    h = now_orenburg().hour
+    return WINDOW_START <= h < WINDOW_END
 
-print(f"Запуск проверки в {now_orenburg.strftime('%H:%M')} (Оренбург)")
 
-for ex_id, exchange in exchanges.items():
-    for symbol in SYMBOLS:
+def load_json(path, default):
+    if os.path.exists(path):
         try:
-            data = get_indicators(exchange, symbol)
-            if pd.isna(data['rsi']):
-                continue
-            
-            # Логика 1: RSI + Боллинджер
-            if data['rsi'] < 30 and data['price'] <= data['lower_bb']:
-                send_alert(f"💎 Отскок от низа ({ex_id.upper()})", f"{symbol} у нижней BB! RSI: {data['rsi']:.1f}. Цена: {data['price']:.8f}.")
-            elif data['rsi'] > 70 and data['price'] >= data['upper_bb']:
-                send_alert(f"🔥 Отскок от верха ({ex_id.upper()})", f"{symbol} у верхней BB! RSI: {data['rsi']:.1f}. Цена: {data['price']:.8f}.")
-                
-            # Логика 2: Аномальный объем и резкое движение
-            if data['avg_vol'] > 0:
-                vol_ratio = data['vol'] / data['avg_vol']
-                if abs(data['change_pct']) >= PRICE_CHANGE_THRESHOLD and vol_ratio >= VOLUME_SPIKE_MULTIPLIER:
-                    direction = "📈 РОСТ" if data['change_pct'] > 0 else "📉 ПАДЕНИЕ"
-                    send_alert(
-                        f"🔥 Аномалия: {direction} ({ex_id.upper()})",
-                        f"{symbol} изменился на {data['change_pct']:.2f}% за 1 час.\nОбъем: в {vol_ratio:.1f} раз выше среднего.\nЦена: {data['price']:.8f}"
-                    )
-        except Exception:
-            pass
+            with open(path) as f:
+                return json.load(f)
+        except Exception as e:
+            print(f"Ошибка чтения {path}: {e}")
+    return default
 
-print("Проверка завершена.")
+
+def atomic_save(path, data):
+    tmp_path = f"{path}.tmp"
+    with open(tmp_path, 'w') as f:
+        json.dump(data, f, indent=2, ensure_ascii=False)
+    os.replace(tmp_path, path)
+
+
+def load_symbols():
+    hist = load_json(HISTORY_FILE, {})
+    items = hist.get('liquid_symbols', [])
+    pairs = []
+    seen = set()
+    for it in items:
+        ex, sym = it.get('exchange'), it.get('symbol')
+        if ex and sym and (ex, sym) not in seen:
+            seen.add((ex, sym))
+            pairs.append((ex, sym))
+    if not pairs:
+        print("history.json пуст — использую fallback")
+        for ex in EXCHANGE_IDS:
+            for sym in FALLBACK_SYMBOLS:
+                pairs.append((ex, sym))
+    return pairs
+
+
+async def analyze_symbol(exchange, symbol, semaphore):
+    async with semaphore:
+        try:
+            ohlcv = await exchange.fetch_ohlcv(symbol, timeframe=TIMEFRAME, limit=100)
+            if not ohlcv or len(ohlcv) < 30:
+                return []
+            df = pd.DataFrame(ohlcv, columns=['ts', 'open', 'high', 'low', 'close', 'volume'])
+            close = df['close']
+            volume = df['volume']
+
+            rsi = float(compute_rsi(close, 14).iloc[-1])
+            _, upper, lower = compute_bollinger(close, 20, 2)
+            avg_vol = float(compute_avg_volume(volume, 20).iloc[-1])
+            price = float(close.iloc[-1])
+            cur_vol = float(volume.iloc[-1])
+            prev_close = float(close.iloc[-2]) if len(close) > 1 else price
+            change_pct = (price - prev_close) / prev_close * 100 if prev_close else 0
+
+            signals = []
+            if rsi < RSI_LOW and price <= float(lower.iloc[-1]):
+                signals.append(('bounce_low', f"RSI={rsi:.1f}, цена у нижней BB ({price:.6g}) — отскок от низа"))
+            if rsi > RSI_HIGH and price >= float(upper.iloc[-1]):
+                signals.append(('bounce_high', f"RSI={rsi:.1f}, цена у верхней BB ({price:.6g}) — отскок от верха"))
+            if avg_vol > 0 and (cur_vol / avg_vol) >= VOLUME_SPIKE_RATIO \
+                    and abs(change_pct) >= VOLUME_SPIKE_CHANGE_PCT:
+                arrow = "↑" if change_pct > 0 else "↓"
+                signals.append(('volume_anomaly',
+                                f"Объём x{cur_vol/avg_vol:.1f} при изменении {change_pct:+.2f}% {arrow}"))
+            return signals
+        except Exception as e:
+            print(f"Ошибка {exchange.id} {symbol}: {e}")
+            return None
+
+
+async def main():
+    if not in_window():
+        print(f"Вне окна ({now_orenburg().strftime('%H:%M')} Оренбург). Выход.")
+        return
+
+    state = load_json(STATE_FILE, {'counters': {}, 'error_breakers': {}})
+    counters = state.get('counters', {})
+    breakers = state.get('error_breakers', {})
+    prev_snapshot = json.dumps(counters, sort_keys=True)
+
+    # Circuit Breaker: исключаем биржи с ошибками
+    active_exchanges = [ex for ex in EXCHANGE_IDS if breakers.get(ex, 0) < 3]
+    if not active_exchanges:
+        print("Все биржи в блоке (Circuit Breaker). Выход.")
+        return
+
+    pairs = load_symbols()
+    print(f"Проверяю {len(pairs)} пар")
+
+    apobj = apprise.Apprise()
+    apobj.add(os.environ['APPRISE_URL'])
+
+    exchanges = {}
+    semaphore_map = {}
+    for ex_id in active_exchanges:
+        cls = getattr(ccxt, ex_id, None)
+        if cls is None:
+            continue
+        try:
+            exchanges[ex_id] = cls({'enableRateLimit': True})
+            semaphore_map[ex_id] = asyncio.Semaphore(RPS_LIMITS.get(ex_id, 5))
+        except Exception as e:
+            print(f"Ошибка инициализации {ex_id}: {e}")
+            breakers[ex_id] = breakers.get(ex_id, 0) + 1
+
+    # Группировка задач по бирже
+    tasks = []
+    for ex_id, sym in pairs:
+        if ex_id not in exchanges:
+            continue
+        tasks.append((ex_id, sym, analyze_symbol(exchanges[ex_id], sym, semaphore_map[ex_id])))
+
+    results = await asyncio.gather(*[t[2] for t in tasks], return_exceptions=True)
+
+    # Собираем сигналы и обновляем счетчики ошибок
+    current_keys = set()
+    grouped = {}
+    for (ex_id, sym), res in zip([(t[0], t[1]) for t in tasks], results):
+        if isinstance(res, Exception):
+            print(f"Task error {ex_id} {sym}: {res}")
+            breakers[ex_id] = breakers.get(ex_id, 0) + 1
+            continue
+        if not res:
+            continue
+        for sig_type, desc in res:
+            key = f"{ex_id}:{sym}:{sig_type}"
+            current_keys.add(key)
+            counters[key] = counters.get(key, 0) + 1
+            grouped.setdefault((sym.replace('/USDT', ''), sig_type), []).append(
+                (ex_id, desc, counters[key]))
+
+    # Сброс счетчиков
+    for key in list(counters.keys()):
+        if key not in current_keys:
+            del counters[key]
+
+    # Группировка уведомлений (дедупликация)
+    messages_to_send = []
+    for (short_sym, sig_type), occ in grouped.items():
+        to_notify = [(ex, desc) for ex, desc, cnt in occ if cnt % 2 == 1]
+        if not to_notify:
+            continue
+        n_total = len(occ)
+        all_exchanges = ", ".join(ex for ex, _, _ in occ)
+        first_desc = occ[0][1]
+        if n_total == 1:
+            msg = f"🔔 {short_sym} на {all_exchanges}: {sig_type}\n{first_desc}"
+        else:
+            msg = (f"🔔 {short_sym}: {sig_type} — сигнал на {n_total} из {len(EXCHANGE_IDS)} бирж\n"
+                   f"Биржи: {all_exchanges}\n{first_desc}")
+        messages_to_send.append(msg)
+
+    # Отправка батчем
+    if messages_to_send:
+        try:
+            apobj.notify(title="Crypto Monitor", body="\n\n".join(messages_to_send))
+            print(f"Отправлено уведомлений: {len(messages_to_send)}")
+        except Exception as e:
+            print(f"Ошибка отправки: {e}")
+
+    # Обновление состояния
+    state['counters'] = counters
+    state['error_breakers'] = breakers
+    if json.dumps(counters, sort_keys=True) != prev_snapshot:
+        atomic_save(STATE_FILE, state)
+        print("monitor_state.json обновлён")
+    else:
+        print("Счётчики не изменились")
+
+    # Закрытие сессий
+    await asyncio.gather(*[ex.close() for ex in exchanges.values()])
+
+
+if __name__ == '__main__':
+    asyncio.run(main())
