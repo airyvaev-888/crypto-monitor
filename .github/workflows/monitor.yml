@@ -1,9 +1,8 @@
-name: Crypto Monitor
+name: Crypto Screener
 
 on:
   schedule:
-    # Запуск каждый час с 08:00 до 19:59 по Оренбургу (UTC+5)
-    - cron: '0 3-15 * * *'
+    - cron: '0 3 * * *'   # 08:00 Оренбург
   workflow_dispatch:
 
 concurrency:
@@ -14,10 +13,9 @@ permissions:
   contents: write
 
 jobs:
-  check-market:
+  screener:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
-
+    timeout-minutes: 30
     steps:
       - name: Копируем код
         uses: actions/checkout@v4
@@ -36,30 +34,29 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Запускаем бота
+      - name: Запускаем скринер
         env:
+          CMC_API_KEY: ${{ secrets.CMC_API_KEY }}
           APPRISE_URL: ${{ secrets.APPRISE_URL }}
-        run: python crypto_monitor.py
+        run: python screener.py
 
-      - name: Фиксируем состояние (monitor_state.json)
+      - name: Фиксируем состояние (history.json)
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           
-          # Проверяем, существует ли файл и есть ли в нем данные
-          if [ -f "monitor_state.json" ] && [ -s "monitor_state.json" ]; then
-            echo "📝 Файл monitor_state.json найден, добавляем в индекс..."
-            git add monitor_state.json
+          if [ -f "history.json" ] && [ -s "history.json" ]; then
+            echo "📝 Файл history.json найден, добавляем в индекс..."
+            git add history.json
             
-            # Проверяем, есть ли реальные изменения (не пустой коммит)
             if ! git diff --cached --quiet; then
               echo "✅ Изменения обнаружены, создаем коммит..."
-              git commit -m "Update monitor_state.json [skip ci]"
+              git commit -m "Update history.json [skip ci]"
               git push
               echo "🚀 Коммит успешно отправлен."
             else
               echo "ℹ️ Файл существует, но изменений нет. Коммит не требуется."
             fi
           else
-            echo "⚠️ Файл monitor_state.json отсутствует или пуст. Пропускаем фиксацию."
+            echo "⚠️ Файл history.json отсутствует или пуст. Пропускаем фиксацию."
           fi
