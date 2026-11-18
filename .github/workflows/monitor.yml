@@ -3,11 +3,7 @@ name: Crypto Monitor
 on:
   schedule:
     # Запуск каждый час с 08:00 до 19:59 по Оренбургу (UTC+5)
-    # В UTC это 03:00 – 14:00. 
-    # Последний запуск в 14:00 UTC отработает по данным свечи 13:00-14:00,
-    # что соответствует 18:00-19:00 Оренбурга. 
-    # Чтобы захватить интервал до 20:00, нужен запуск в 15:00 UTC (20:00 Оренбург).
-    - cron: '0 3-15 * * *' 
+    - cron: '0 3-15 * * *'
   workflow_dispatch:
 
 concurrency:
@@ -50,11 +46,20 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           
-          git add monitor_state.json
-          if git diff --cached --quiet; then
-            echo "No changes to commit."
-            exit 0
+          # Проверяем, существует ли файл и есть ли в нем данные
+          if [ -f "monitor_state.json" ] && [ -s "monitor_state.json" ]; then
+            echo "📝 Файл monitor_state.json найден, добавляем в индекс..."
+            git add monitor_state.json
+            
+            # Проверяем, есть ли реальные изменения (не пустой коммит)
+            if ! git diff --cached --quiet; then
+              echo "✅ Изменения обнаружены, создаем коммит..."
+              git commit -m "Update monitor_state.json [skip ci]"
+              git push
+              echo "🚀 Коммит успешно отправлен."
+            else
+              echo "ℹ️ Файл существует, но изменений нет. Коммит не требуется."
+            fi
+          else
+            echo "⚠️ Файл monitor_state.json отсутствует или пуст. Пропускаем фиксацию."
           fi
-          
-          git commit -m "Update monitor_state.json [skip ci]"
-          git push
