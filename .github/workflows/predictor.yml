@@ -1,0 +1,62 @@
+name: Crypto Predictor
+
+on:
+  schedule:
+    - cron: '0 3,9,15 * * *'   # 08:00 / 14:00 / 20:00 Оренбург
+  workflow_dispatch:
+
+concurrency:
+  group: state-writes
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  predictor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Копируем код
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Настраиваем Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+          cache-dependency-path: requirements.txt
+
+      - name: Устанавливаем библиотеки
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Запускаем предиктора
+        env:
+          CMC_API_KEY: ${{ secrets.CMC_API_KEY }}
+          APPRISE_URL: ${{ secrets.APPRISE_URL }}
+        run: python market_predictor.py
+
+      - name: Фиксируем состояние (predictor_state.json)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          if [ -f "predictor_state.json" ] && [ -s "predictor_state.json" ]; then
+            echo "📝 Файл predictor_state.json найден, добавляем в индекс..."
+            git add predictor_state.json
+            
+            if ! git diff --cached --quiet; then
+              echo "✅ Изменения обнаружены, создаем коммит..."
+              git commit -m "Update predictor_state.json [skip ci]"
+              git push
+              echo "🚀 Коммит успешно отправлен."
+            else
+              echo "ℹ️ Файл существует, но изменений нет. Коммит не требуется."
+            fi
+          else
+            echo "⚠️ Файл predictor_state.json отсутствует или пуст. Пропускаем фиксацию."
+          fi
