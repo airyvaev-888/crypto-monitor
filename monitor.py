@@ -1,4 +1,4 @@
-"""Часовой монитор ликвидных монет из history.json с генерацией торговых сигналов."""
+"""Часовой монитор ликвидных монет из history.json с историей сигналов и ntfy-уведомлениями."""
 import asyncio
 import json
 import os
@@ -91,7 +91,7 @@ async def analyze_symbol(exchange, symbol, semaphore):
         try:
             ohlcv = await exchange.fetch_ohlcv(symbol, timeframe=TIMEFRAME, limit=100)
             if not ohlcv or len(ohlcv) < 30:
-                return []
+                return None
             df = pd.DataFrame(ohlcv, columns=['ts', 'open', 'high', 'low', 'close', 'volume'])
             close = df['close']
             volume = df['volume']
@@ -113,50 +113,31 @@ async def analyze_symbol(exchange, symbol, semaphore):
             stoch_k, _ = compute_stoch(high, low, close)
             adx, _, _ = compute_adx(high, low, close)
 
-            print(f"[{exchange.id}] {symbol}: Цена={price:.4g}, RSI={rsi:.1f}, MACD={macd_line.iloc[-1]:.4g}/{signal_line.iloc[-1]:.4g}")
-
             # 3. Генерация торгового сигнала (BUY/SELL/HOLD)
             signal = generate_signal(
                 close=close,
                 volume=volume,
-                rsi=pd.Series([rsi]),  # Передаем как Series для совместимости
+                rsi=pd.Series([rsi]),
                 macd=macd_line,
                 signal_line=signal_line,
-                ema=close.ewm(span=50, adjust=False),  # Используем EMA 50 как тренд
+                ema=close.ewm(span=50, adjust=False),
                 stoch_k=stoch_k,
                 adx=adx,
                 bollinger_upper=pd.Series([upper.iloc[-1]]),
                 bollinger_lower=pd.Series([lower.iloc[-1]])
             )
 
-            # 4. Логика аномалий (оставляем как доп. инфу)
-            signals = []
-            if rsi < RSI_LOW and price <= float(lower.iloc[-1]):
-                signals.append(('bounce_low', f"RSI={rsi:.1f}, цена у нижней BB"))
-            if rsi > RSI_HIGH and price >= float(upper.iloc[-1]):
-                signals.append(('bounce_high', f"RSI={rsi:.1f}, цена у верхней BB"))
-            if avg_vol > 0 and vol_ratio >= VOLUME_SPIKE_RATIO \
-                    and abs(change_pct) >= VOLUME_SPIKE_CHANGE_PCT:
-                arrow = "↑" if change_pct > 0 else "↓"
-                signals.append(('volume_anomaly',
-                                f"Объём x{vol_ratio:.1f} при изменении {change_pct:+.2f}% {arrow}"))
-            
-            # 5. Формируем итоговый результат
-            result = {
+            print(f"[{exchange.id}] {symbol}: Цена={price:.4g}, Сигнал={signal}, RSI={rsi:.1f}")
+
+            return {
                 'symbol': symbol,
                 'exchange': exchange.id,
                 'price': price,
-                'signal': signal,  # <-- ГЛАВНЫЙ РЕЗУЛЬТАТ
+                'signal': signal,
                 'rsi': rsi,
                 'vol_ratio': vol_ratio,
-                'change_pct': change_pct,
-                'anomalies': [s[0] for s in signals]  # Сохраняем коды аномалий
+                'change_pct': change_pct
             }
-            
-            if signal != 'HOLD':
-                print(f"🔥 ТОРГОВЫЙ СИГНАЛ: {exchange.id} {symbol} -> {signal}")
-            
-            return result
         except Exception as e:
             print(f"❌ Ошибка запроса {exchange.id} {symbol}: {e}")
             return None
@@ -182,98 +163,17 @@ async def main():
     pairs = load_symbols()
     print(f"Проверяю {len(pairs)} пар")
 
+    # === НОВОЕ: Инициализация Apprise для ntfy ===
     apobj = apprise.Apprise()
-    apobj.add(os.environ['APPRISE_URL'])
+    # Убедись, что в .env или Secrets GitHub есть NTFY_URL
+    ntfy_url = os.environ.get('NTFY_URL')
+    if not ntfy_url:
+        print("❌ ОШИБКА: Переменная NTFY_URL не найдена в окружении!")
+        return
+    apobj.add(ntfy_url)
 
     exchanges = {}
     semaphore_map = {}
     for ex_id in active_exchanges:
         cls = getattr(ccxt, ex_id, None)
         if cls is None:
-            continue
-        try:
-            exchanges[ex_id] = cls({'enableRateLimit': True})
-            semaphore_map[ex_id] = asyncio.Semaphore(RPS_LIMITS.get(ex_id, 5))
-        except Exception as e:
-            print(f"Ошибка инициализации {ex_id}: {e}")
-            breakers[ex_id] = breakers.get(ex_id, 0) + 1
-
-    tasks = []
-    for ex_id, sym in pairs:
-        if ex_id not in exchanges:
-            continue
-        tasks.append((ex_id, sym, analyze_symbol(exchanges[ex_id], sym, semaphore_map[ex_id])))
-
-    results = await asyncio.gather(*[t[2] for t in tasks], return_exceptions=True)
-
-    current_keys = set()
-    grouped = {}
-    for res in results:
-        if isinstance(res, Exception):
-            print(f"Task error: {res}")
-            continue
-        if not res:
-            continue
-        
-        key = f"{res['exchange']}:{res['symbol']}"
-        current_keys.add(key)
-        
-        # Обновляем счетчики аномалий (старая логика)
-        for anomaly in res.get('anomalies', []):
-            anomaly_key = f"{key}:{anomaly}"
-            counters[anomaly_key] = counters.get(anomaly_key, 0) + 1
-        
-        # Сохраняем торговый сигнал
-        state['signals'][key] = {
-            'signal': res['signal'],
-            'price': res['price'],
-            'rsi': res['rsi'],
-            'vol_ratio': res['vol_ratio'],
-            'timestamp': pd.Timestamp.now().isoformat()
-        }
-        
-        # Группируем для уведомлений
-        if res['signal'] != 'HOLD':
-            grouped.setdefault(res['signal'], []).append(res)
-
-    # Очистка старых счетчиков
-    for key in list(counters.keys()):
-        if key not in current_keys:
-            del counters[key]
-
-    messages_to_send = []
-    for sig_type, occ in grouped.items():
-        n_total = len(occ)
-        all_symbols = ", ".join([f"{o['symbol']} ({o['exchange']})" for o in occ])
-        first_price = occ[0]['price']
-        
-        if n_total == 1:
-            msg = f"🔔 {occ[0]['symbol']} на {occ[0]['exchange']}: {sig_type}\nЦена: {first_price:.6g}"
-        else:
-            msg = (f"🔔 МАССОВЫЙ СИГНАЛ: {sig_type}\n"
-                   f"Найдено на {n_total} парах\n"
-                   f"Пары: {all_symbols}")
-        messages_to_send.append(msg)
-
-    if messages_to_send:
-        print(f"📤 Отправляем батч из {len(messages_to_send)} уведомлений...")
-        try:
-            success = apobj.notify(title="Crypto Monitor", body="\n\n".join(messages_to_send))
-            print(f"Результат отправки Apprise: {success}")
-        except Exception as e:
-            print(f"❌ Ошибка отправки: {e}")
-    else:
-        print("🤷‍♂️ Сигналов для отправки нет.")
-
-    state['counters'] = counters
-    state['error_breakers'] = breakers
-    if json.dumps(counters, sort_keys=True) != prev_snapshot:
-        atomic_save(STATE_FILE, state)
-        print("💾 monitor_state.json обновлён")
-    else:
-        print("ℹ️ Счётчики не изменились, state не сохранен")
-
-    await asyncio.gather(*[ex.close() for ex in exchanges.values()])
-
-if __name__ == '__main__':
-    asyncio.run(main())
