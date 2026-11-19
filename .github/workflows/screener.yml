@@ -45,18 +45,24 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           
-          if [ -f "history.json" ] && [ -s "history.json" ]; then
+          if [ -f "history.json" ]; then
             echo "📝 Файл history.json найден, добавляем в индекс..."
             git add history.json
             
             if ! git diff --cached --quiet; then
               echo "✅ Изменения обнаружены, создаем коммит..."
               git commit -m "Update history.json [skip ci]"
+              
+              # 🔑 КЛЮЧЕВОЕ ИСПРАВЛЕНИЕ: Подтягиваем свежие изменения с перебазированием
+              echo "🔄 Синхронизируемся с удаленной веткой main..."
+              git pull --rebase origin main
+              
+              echo "🚀 Отправляем коммит..."
               git push
-              echo "🚀 Коммит успешно отправлен."
+              echo "✅ Коммит успешно отправлен."
             else
               echo "ℹ️ Файл существует, но изменений нет. Коммит не требуется."
             fi
           else
-            echo "⚠️ Файл history.json отсутствует или пуст. Пропускаем фиксацию."
+            echo "⚠️ Файл history.json отсутствует. Пропускаем фиксацию."
           fi
