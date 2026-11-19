@@ -9,18 +9,18 @@ import ccxt.async_support as ccxt
 import pandas as pd
 import pytz
 
-# === НОВОЕ: Импортируем все индикаторы и функцию сигналов ===
+# === НОВОЕ: Импортируем все индикаторы, функцию сигналов и детектор дивергенций ===
 from indicators import (
     compute_rsi, compute_bollinger, compute_avg_volume,
     compute_macd, compute_stoch, compute_adx,
-    generate_signal  # <-- Главная новая функция
+    generate_signal,  # <-- Главная новая функция
+    detect_divergence # <-- Новая функция для поиска дивергенций
 )
 
 HISTORY_FILE = 'history.json'
 STATE_FILE = 'monitor_state.json'
 TIMEFRAME = '1h'
 
-# Оставили только те биржи, которые не блокируют GitHub
 EXCHANGE_IDS = ['kucoin', 'mexc', 'gateio']
 FALLBACK_SYMBOLS = ['BTC/USDT', 'ETH/USDT', 'SOL/USDT']
 
@@ -28,7 +28,6 @@ ORENBURG_TZ = pytz.timezone('Asia/Yekaterinburg')
 WINDOW_START = 8
 WINDOW_END = 20
 
-# Пороги для базовых фильтров (оставляем для логики аномалий)
 RSI_LOW = 30
 RSI_HIGH = 70
 VOLUME_SPIKE_RATIO = 2.5
@@ -85,7 +84,6 @@ def load_symbols():
     return pairs
 
 
-# === НОВОЕ: Обновленная функция анализа с расчетом всех индикаторов ===
 async def analyze_symbol(exchange, symbol, semaphore):
     async with semaphore:
         try:
@@ -98,45 +96,52 @@ async def analyze_symbol(exchange, symbol, semaphore):
             high = df['high']
             low = df['low']
 
-            # 1. Базовые индикаторы (были раньше)
-            rsi = float(compute_rsi(close, 14).iloc[-1])
+            # 1. Базовые индикаторы
+            rsi = compute_rsi(close, 14)
             _, upper, lower = compute_bollinger(close, 20, 2)
-            avg_vol = float(compute_avg_volume(volume, 20).iloc[-1])
+            avg_vol = compute_avg_volume(volume, 20)
             price = float(close.iloc[-1])
             cur_vol = float(volume.iloc[-1])
             prev_close = float(close.iloc[-2]) if len(close) > 1 else price
             change_pct = (price - prev_close) / prev_close * 100 if prev_close else 0
-            vol_ratio = cur_vol / avg_vol if avg_vol > 0 else 0
+            vol_ratio = cur_vol / avg_vol.iloc[-1] if avg_vol.iloc[-1] > 0 else 0
 
             # 2. Новые индикаторы для сигналов
             macd_line, signal_line, _ = compute_macd(close)
             stoch_k, _ = compute_stoch(high, low, close)
             adx, _, _ = compute_adx(high, low, close)
+            ema_50 = compute_ema(close, 50)
 
-            # 3. Генерация торгового сигнала (BUY/SELL/HOLD)
+            # 3. Поиск дивергенций (НОВОЕ)
+            rsi_divergence = detect_divergence(close, rsi, lookback=10)
+            macd_divergence = detect_divergence(close, macd_line, lookback=10)
+
+            print(f"[{exchange.id}] {symbol}: Цена={price:.4g}, Сигнал=?, RSI={rsi.iloc[-1]:.1f}")
+
+            # 4. Генерация торгового сигнала
             signal = generate_signal(
                 close=close,
                 volume=volume,
-                rsi=pd.Series([rsi]),
+                rsi=rsi,
                 macd=macd_line,
                 signal_line=signal_line,
-                ema=close.ewm(span=50, adjust=False),
+                ema=ema_50,
                 stoch_k=stoch_k,
                 adx=adx,
                 bollinger_upper=pd.Series([upper.iloc[-1]]),
                 bollinger_lower=pd.Series([lower.iloc[-1]])
             )
 
-            print(f"[{exchange.id}] {symbol}: Цена={price:.4g}, Сигнал={signal}, RSI={rsi:.1f}")
-
             return {
                 'symbol': symbol,
                 'exchange': exchange.id,
                 'price': price,
                 'signal': signal,
-                'rsi': rsi,
-                'vol_ratio': vol_ratio,
-                'change_pct': change_pct
+                'rsi': float(rsi.iloc[-1]),
+                'vol_ratio': float(vol_ratio),
+                'change_pct': change_pct,
+                'rsi_divergence': rsi_divergence,
+                'macd_divergence': macd_divergence
             }
         except Exception as e:
             print(f"❌ Ошибка запроса {exchange.id} {symbol}: {e}")
@@ -165,7 +170,6 @@ async def main():
 
     # === НОВОЕ: Инициализация Apprise для ntfy ===
     apobj = apprise.Apprise()
-    # Убедись, что в .env или Secrets GitHub есть NTFY_URL
     ntfy_url = os.environ.get('NTFY_URL')
     if not ntfy_url:
         print("❌ ОШИБКА: Переменная NTFY_URL не найдена в окружении!")
@@ -206,26 +210,32 @@ async def main():
         key = f"{res['exchange']}:{res['symbol']}"
         current_keys.add(key)
         
+        # Обновляем счетчики аномалий (старая логика)
+        # ... (здесь можно оставить логику для volume_anomaly, если нужно)
+        
         # === НОВОЕ: Логика истории сигналов и уведомлений ===
         old_signal = state.get('signals', {}).get(key, {}).get('signal')
         new_signal = res['signal']
         
-        # Обновляем состояние в любом случае
+        # Сохраняем текущее состояние
         state['signals'][key] = {
             'signal': new_signal,
             'price': res['price'],
             'rsi': res['rsi'],
             'vol_ratio': res['vol_ratio'],
+            'rsi_divergence': res['rsi_divergence'],
+            'macd_divergence': res['macd_divergence'],
             'timestamp': pd.Timestamp.now().isoformat()
         }
         
         # Если сигнал изменился (и это не первый запуск), готовим уведомление
         if old_signal and old_signal != new_signal:
-            # Формируем сообщение для ntfy
             title = f"📈 {res['symbol']} ({res['exchange']})"
             body = (f"🔄 Смена сигнала: {old_signal} → {new_signal}\n"
                     f"💰 Цена: {res['price']:.6g}\n"
-                    f"📉 RSI: {res['rsi']:.1f}")
+                    f"📉 RSI: {res['rsi']:.1f}\n"
+                    f"📈 Дивергенция RSI: {res['rsi_divergence']}\n"
+                    f"📈 Дивергенция MACD: {res['macd_divergence']}")
             
             messages_to_send.append({
                 'title': title,
@@ -233,7 +243,7 @@ async def main():
             })
             print(f"🔔 УВЕДОМЛЕНИЕ: {title} | {old_signal} -> {new_signal}")
 
-    # Очистка старых счетчиков (если нужно)
+    # Очистка старых счетчиков
     for key in list(counters.keys()):
         if key not in current_keys:
             del counters[key]
@@ -242,7 +252,6 @@ async def main():
     if messages_to_send:
         print(f"📤 Отправляем батч из {len(messages_to_send)} уведомлений в ntfy...")
         try:
-            # Apprise позволяет отправлять несколько сообщений за раз
             for msg in messages_to_send:
                 success = apobj.notify(title=msg['title'], body=msg['body'])
                 if not success:
