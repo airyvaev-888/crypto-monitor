@@ -1,9 +1,7 @@
-"""Вспомогательные функции для Crypto Monitor.
-Логирование, работа с API, форматирование данных, обработка ошибок."""
+"""Вспомогательные функции для Crypto Monitor."""
 
 import asyncio
 import json
-import logging
 import os
 from datetime import datetime
 from typing import Any, Dict, List, Optional
@@ -13,10 +11,9 @@ import requests
 from loguru import logger
 
 
-# Настройка логирования
 def setup_logging(log_level: str = 'INFO'):
     """Настраивает логирование через loguru."""
-    logger.remove()  # Удаляем стандартный обработчик
+    logger.remove()
     logger.add(
         'logs/crypto_monitor.log',
         rotation='10 MB',
@@ -27,7 +24,6 @@ def setup_logging(log_level: str = 'INFO'):
     logger.info(f"Логирование настроено. Уровень: {log_level}")
 
 
-# Работа с JSON
 def load_json(path: str) -> Dict[str, Any]:
     """Загружает JSON файл."""
     if os.path.exists(path):
@@ -52,7 +48,6 @@ def save_json(path: str, data: Dict[str, Any]):
         logger.error(f"Ошибка сохранения {path}: {e}")
 
 
-# Работа с API
 async def fetch_with_retry(
     url: str,
     headers: Optional[Dict[str, str]] = None,
@@ -73,11 +68,10 @@ async def fetch_with_retry(
             if attempt == max_retries - 1:
                 logger.error(f"Все попытки провалились для {url}")
                 return None
-            await asyncio.sleep(2 ** attempt)  # Экспоненциальная задержка
+            await asyncio.sleep(2 ** attempt)
     return None
 
 
-# Форматирование данных
 def format_price(price: float) -> str:
     """Форматирует цену для вывода."""
     if price >= 1000:
@@ -108,7 +102,6 @@ def format_percentage(value: float) -> str:
         return f"{value:.2f}%"
 
 
-# Обработка ошибок
 def handle_error(error: Exception, context: str = "Неизвестная ошибка"):
     """Обрабатывает ошибки и логирует их."""
     logger.error(f"{context}: {error}")
@@ -119,7 +112,6 @@ def handle_error(error: Exception, context: str = "Неизвестная оши
     }
 
 
-# Проверка окружения
 def check_env_variables(required_vars: List[str]) -> bool:
     """Проверяет наличие обязательных переменных окружения."""
     missing = [var for var in required_vars if not os.getenv(var)]
@@ -129,7 +121,6 @@ def check_env_variables(required_vars: List[str]) -> bool:
     return True
 
 
-# Утилиты для работы с временем
 def get_current_time(tz: str = 'UTC') -> datetime:
     """Возвращает текущее время в указанном часовом поясе."""
     from pytz import timezone
@@ -141,7 +132,6 @@ def timestamp_to_str(timestamp: float, fmt: str = '%Y-%m-%d %H:%M:%S') -> str:
     return datetime.fromtimestamp(timestamp).strftime(fmt)
 
 
-# Пример использования
 if __name__ == '__main__':
     setup_logging()
     logger.info("Utils module loaded successfully")
