@@ -1,87 +1,78 @@
-name: Crypto Monitor
+name: Crypto Monitor - Market Data
 
+# Когда запускать:
+# 1. По расписанию: каждые 15 минут.
+# 2. Вручную через вкладку Actions (workflow_dispatch).
 on:
   schedule:
-    # Запуск каждый час с 08:00 до 19:59 по Оренбургу (UTC+5)
-    - cron: '0 3-15 * * *'
+    - cron: '*/15 * * * *' # Каждые 15 минут
   workflow_dispatch:
 
-concurrency:
-  group: state-writes
-  cancel-in-progress: false
-
-permissions:
-  contents: write
-
 jobs:
-  check-market:
+  monitor-market:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
-    
+    # Настраиваем часовой пояс (опционально, но полезно для логов)
+    env:
+      TZ: Europe/Moscow
+
     steps:
-      - name: Копируем код
+      # 1. Качаем код репозитория
+      - name: Checkout code
         uses: actions/checkout@v4
         with:
+          # Важно: сохраняем токен, чтобы мы могли делать git push позже
+          persist-credentials: true
+          # Качаем всю историю, чтобы git pull работал корректно
           fetch-depth: 0
 
-      - name: Настраиваем Python
+      # 2. Настраиваем Python
+      - name: Set up Python 3.11
         uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
-          cache: 'pip'
-          cache-dependency-path: requirements.txt
+          python-version: '3.11'
+          cache: 'pip' # Ускоряет установку, если библиотеки не менялись
 
-      - name: Устанавливаем библиотеки
+      # 3. Устанавливаем зависимости
+      - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # 🧪 ТЕСТ УВЕДОМЛЕНИЙ (Временный шаг для проверки)
-      - name: Проверка отправки Apprise
+      # 4. Запускаем бота (основная логика)
+      - name: Run Crypto Monitor
         env:
-          APPRISE_URL: ${{ secrets.APPRISE_URL }}
+          CMC_API_KEY: ${{ secrets.CMC_API_KEY }}
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
         run: |
-          echo "Проверяем, передан ли секрет..."
-          if [ -z "$APPRISE_URL" ]; then
-            echo "❌ ОШИБКА: Секрет APPRISE_URL пуст или не передан!"
-          else
-            echo "✅ Секрет передан. Пробуем отправить тестовое сообщение..."
-            python -c "
-          import apprise
-          a = apprise.Apprise()
-          a.add('$APPRISE_URL')
-          success = a.notify(title='Тест из GitHub Actions', body='Если вы видите это сообщение, Apprise работает корректно!')
-          print('Успешно отправлено!' if success else '❌ Ошибка отправки Apprise (проверьте URL).')
-          "
-          fi
+          echo "Запуск бота мониторинга..."
+          python src/crypto_monitor.py
 
-      - name: Запускаем бота
-        env:
-          APPRISE_URL: ${{ secrets.APPRISE_URL }}
-        run: python crypto_monitor.py
-
-      - name: Проверяем файлы в директории
+      # 5. Синхронизируем репозиторий (РЕШЕНИЕ ТВОЕЙ ОШИБКИ)
+      # Перед тем как коммитить, забираем свежие данные с GitHub
+      - name: Sync with remote repository (git pull)
         run: |
-          echo "📂 Текущая директория: $(pwd)"
-          ls -la
-
-      - name: Фиксируем состояние (monitor_state.json)
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           
-          if [ -f "monitor_state.json" ] && [ -s "monitor_state.json" ]; then
-            echo "📝 Файл monitor_state.json найден, добавляем в индекс..."
-            git add monitor_state.json
-            
-            if ! git diff --cached --quiet; then
-              echo "✅ Изменения обнаружены, создаем коммит..."
-              git commit -m "Update monitor_state.json [skip ci]"
-              git push
-              echo "🚀 Коммит успешно отправлен."
-            else
-              echo "ℹ️ Файл существует, но изменений нет. Коммит не требуется."
-            fi
-          else
-            echo "⚠️ Файл monitor_state.json отсутствует или пуст. Пропускаем фиксацию."
+          echo "Пытаемся забрать свежие изменения с сервера..."
+          git pull origin main --rebase --verbose
+          
+      # 6. Фиксируем состояние портфеля (monitor_state.json)
+      - name: Commit monitor_state.json if changed
+        run: |
+          # Проверяем, есть ли изменения в нужном файле
+          if git diff --quiet HEAD -- data/monitor_state.json; then
+            echo "✅ Файл monitor_state.json не изменился. Завершаем работу."
+            exit 0
           fi
+          
+          echo "🔄 Обнаружены изменения в monitor_state.json. Создаем коммит..."
+          git add data/monitor_state.json
+          git commit -m "🤖 Auto-update: monitor_state.json [skip ci]"
+          
+          echo "📤 Отправляем изменения на GitHub..."
+          git push origin main
+        env:
+          # Используем стандартный токен GitHub для записи
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
