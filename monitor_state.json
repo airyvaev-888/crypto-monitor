@@ -1,0 +1,9 @@
+{
+  "counters": {
+    "kucoin:MMT/USDT:bounce_low": 1,
+    "mexc:LIT/USDT:bounce_high": 1,
+    "mexc:TRX/USDT:bounce_high": 1,
+    "mexc:ETHFI/USDT:bounce_high": 1
+  },
+  "error_breakers": {}
+}
