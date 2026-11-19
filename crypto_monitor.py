@@ -1,6 +1,4 @@
-"""Часовой монитор ликвидных монет из history.json.
-Отправляет сигналы в ntfy через Apprise с логикой "через раз".
-Асинхронная версия с контролем RPS и группировкой уведомлений."""
+"""Часовой монитор ликвидных монет из history.json."""
 import asyncio
 import json
 import os
@@ -31,7 +29,6 @@ RSI_HIGH = 70
 VOLUME_SPIKE_RATIO = 2.5
 VOLUME_SPIKE_CHANGE_PCT = 2.5
 
-# Лимиты RPS для бирж
 RPS_LIMITS = {
     'binance': 10,
     'kucoin': 10,
@@ -78,7 +75,7 @@ def load_symbols():
             seen.add((ex, sym))
             pairs.append((ex, sym))
     if not pairs:
-        print("history.json пуст — использую fallback")
+        print("⚠️ history.json пуст — использую fallback")
         for ex in EXCHANGE_IDS:
             for sym in FALLBACK_SYMBOLS:
                 pairs.append((ex, sym))
@@ -103,38 +100,46 @@ async def analyze_symbol(exchange, symbol, semaphore):
             prev_close = float(close.iloc[-2]) if len(close) > 1 else price
             change_pct = (price - prev_close) / prev_close * 100 if prev_close else 0
 
+            # 🔍 ДИАГНОСТИКА: Выводим метрики в лог, чтобы видеть, что происходит
+            vol_ratio = cur_vol / avg_vol if avg_vol > 0 else 0
+            print(f"[{exchange.id}] {symbol}: Цена={price:.4g}, RSI={rsi:.1f}, Объем={vol_ratio:.1f}x, Изм={change_pct:+.2f}%")
+
             signals = []
             if rsi < RSI_LOW and price <= float(lower.iloc[-1]):
                 signals.append(('bounce_low', f"RSI={rsi:.1f}, цена у нижней BB ({price:.6g}) — отскок от низа"))
             if rsi > RSI_HIGH and price >= float(upper.iloc[-1]):
                 signals.append(('bounce_high', f"RSI={rsi:.1f}, цена у верхней BB ({price:.6g}) — отскок от верха"))
-            if avg_vol > 0 and (cur_vol / avg_vol) >= VOLUME_SPIKE_RATIO \
+            if avg_vol > 0 and vol_ratio >= VOLUME_SPIKE_RATIO \
                     and abs(change_pct) >= VOLUME_SPIKE_CHANGE_PCT:
                 arrow = "↑" if change_pct > 0 else "↓"
                 signals.append(('volume_anomaly',
-                                f"Объём x{cur_vol/avg_vol:.1f} при изменении {change_pct:+.2f}% {arrow}"))
+                                f"Объём x{vol_ratio:.1f} при изменении {change_pct:+.2f}% {arrow}"))
+            
+            if signals:
+                print(f"🔥 НАЙДЕН СИГНАЛ: {exchange.id} {symbol} -> {signals}")
             return signals
         except Exception as e:
-            print(f"Ошибка {exchange.id} {symbol}: {e}")
+            print(f"❌ Ошибка запроса {exchange.id} {symbol}: {e}")
             return None
 
 
 async def main():
     if not in_window():
-        print(f"Вне окна ({now_orenburg().strftime('%H:%M')} Оренбург). Выход.")
+        print(f"⏳ Вне окна ({now_orenburg().strftime('%H:%M')} Оренбург). Выход.")
         return
 
+    print("✅ Мы внутри временного окна. Начинаем работу...")
     state = load_json(STATE_FILE, {'counters': {}, 'error_breakers': {}})
     counters = state.get('counters', {})
     breakers = state.get('error_breakers', {})
     prev_snapshot = json.dumps(counters, sort_keys=True)
 
-    # Circuit Breaker: исключаем биржи с ошибками
     active_exchanges = [ex for ex in EXCHANGE_IDS if breakers.get(ex, 0) < 3]
     if not active_exchanges:
-        print("Все биржи в блоке (Circuit Breaker). Выход.")
+        print("❌ Все биржи в блоке (Circuit Breaker). Выход.")
         return
 
+    print(f"Активные биржи (не в блоке): {active_exchanges}")
     pairs = load_symbols()
     print(f"Проверяю {len(pairs)} пар")
 
@@ -154,7 +159,6 @@ async def main():
             print(f"Ошибка инициализации {ex_id}: {e}")
             breakers[ex_id] = breakers.get(ex_id, 0) + 1
 
-    # Группировка задач по бирже
     tasks = []
     for ex_id, sym in pairs:
         if ex_id not in exchanges:
@@ -163,7 +167,6 @@ async def main():
 
     results = await asyncio.gather(*[t[2] for t in tasks], return_exceptions=True)
 
-    # Собираем сигналы и обновляем счетчики ошибок
     current_keys = set()
     grouped = {}
     for (ex_id, sym), res in zip([(t[0], t[1]) for t in tasks], results):
@@ -180,16 +183,16 @@ async def main():
             grouped.setdefault((sym.replace('/USDT', ''), sig_type), []).append(
                 (ex_id, desc, counters[key]))
 
-    # Сброс счетчиков
     for key in list(counters.keys()):
         if key not in current_keys:
+            print(f"♻️ Сброс счетчика (сигнал пропал): {key}")
             del counters[key]
 
-    # Группировка уведомлений (дедупликация)
     messages_to_send = []
     for (short_sym, sig_type), occ in grouped.items():
         to_notify = [(ex, desc) for ex, desc, cnt in occ if cnt % 2 == 1]
         if not to_notify:
+            print(f"⏭️ Пропуск отправки для {short_sym} ({sig_type}) - логика 'через раз' (счетчик четный)")
             continue
         n_total = len(occ)
         all_exchanges = ", ".join(ex for ex, _, _ in occ)
@@ -201,26 +204,25 @@ async def main():
                    f"Биржи: {all_exchanges}\n{first_desc}")
         messages_to_send.append(msg)
 
-    # Отправка батчем
     if messages_to_send:
+        print(f"📤 Отправляем батч из {len(messages_to_send)} уведомлений...")
         try:
-            apobj.notify(title="Crypto Monitor", body="\n\n".join(messages_to_send))
-            print(f"Отправлено уведомлений: {len(messages_to_send)}")
+            success = apobj.notify(title="Crypto Monitor", body="\n\n".join(messages_to_send))
+            print(f"Результат отправки Apprise: {success}")
         except Exception as e:
-            print(f"Ошибка отправки: {e}")
+            print(f"❌ Ошибка отправки: {e}")
+    else:
+        print("🤷‍♂️ Сигналов для отправки нет.")
 
-    # Обновление состояния
     state['counters'] = counters
     state['error_breakers'] = breakers
     if json.dumps(counters, sort_keys=True) != prev_snapshot:
         atomic_save(STATE_FILE, state)
-        print("monitor_state.json обновлён")
+        print("💾 monitor_state.json обновлён")
     else:
-        print("Счётчики не изменились")
+        print("ℹ️ Счётчики не изменились, state не сохранен")
 
-    # Закрытие сессий
     await asyncio.gather(*[ex.close() for ex in exchanges.values()])
-
 
 if __name__ == '__main__':
     asyncio.run(main())
