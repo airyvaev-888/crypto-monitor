@@ -1,174 +1,214 @@
-"""Технические индикаторы для Crypto Monitor.
-Реализация без pandas-ta (только pandas + numpy)."""
+"""Обработка торговых сигналов и отправка уведомлений."""
 
+import asyncio
+import json
+import os
+from datetime import datetime
+
+import apprise
+import ccxt.async_support as ccxt
 import pandas as pd
-import numpy as np
+
+from indicators import (
+    compute_rsi, compute_bollinger, compute_avg_volume,
+    compute_macd, compute_stoch, compute_adx,
+    generate_signal, detect_divergence
+)
+
+STATE_FILE = 'data/signals.json'
+EXCHANGE_IDS = ['binance', 'kucoin', 'bybit', 'gateio', 'mexc']
+TIMEFRAME = '1h'
+
+RSI_LOW = 30
+RSI_HIGH = 70
+ADX_THRESHOLD = 25
+VOLUME_SPIKE = 1.5
+VOLATILITY_THRESHOLD = 0.02
 
 
-def compute_rsi(close: pd.Series, period: int = 14) -> pd.Series:
-    """Вычисляет RSI (Индекс относительной силы)."""
-    delta = close.diff()
-    gain = (delta.where(delta > 0, 0)).rolling(window=period).mean()
-    loss = (-delta.where(delta < 0, 0)).rolling(window=period).mean()
-    rs = gain / loss
-    rsi = 100 - (100 / (1 + rs))
-    return rsi
+def load_state():
+    if os.path.exists(STATE_FILE):
+        try:
+            with open(STATE_FILE, 'r') as f:
+                return json.load(f)
+        except Exception as e:
+            print(f"⚠️ Ошибка чтения {STATE_FILE}: {e}")
+    return {'signals': {}, 'counters': {}, 'error_breakers': {}}
 
 
-def compute_ema(close: pd.Series, period: int = 50) -> pd.Series:
-    """Вычисляет EMA (Экспоненциальная скользящая средняя)."""
-    return close.ewm(span=period, adjust=False).mean()
+def save_state(state):
+    os.makedirs('data', exist_ok=True)
+    tmp_path = f"{STATE_FILE}.tmp"
+    with open(tmp_path, 'w') as f:
+        json.dump(state, f, indent=2, ensure_ascii=False)
+    os.replace(tmp_path, STATE_FILE)
+    print("💾 signals.json обновлён")
 
 
-def compute_macd(close: pd.Series, fast_period: int = 12, slow_period: int = 26, signal_period: int = 9):
-    """Вычисляет MACD, сигнальную линию и гистограмму."""
-    ema_fast = close.ewm(span=fast_period, adjust=False).mean()
-    ema_slow = close.ewm(span=slow_period, adjust=False).mean()
-    macd_line = ema_fast - ema_slow
-    signal_line = macd_line.ewm(span=signal_period, adjust=False).mean()
-    histogram = macd_line - signal_line
-    return macd_line, signal_line, histogram
+async def analyze_symbol(exchange, symbol, semaphore):
+    async with semaphore:
+        try:
+            ohlcv = await exchange.fetch_ohlcv(symbol, timeframe=TIMEFRAME, limit=100)
+            if not ohlcv or len(ohlcv) < 30:
+                return None
+            df = pd.DataFrame(ohlcv, columns=['ts', 'open', 'high', 'low', 'close', 'volume'])
+            close = df['close']
+            volume = df['volume']
+            high = df['high']
+            low = df['low']
+
+            rsi = compute_rsi(close, 14)
+            _, upper, lower = compute_bollinger(close, 20, 2)
+            avg_vol = compute_avg_volume(volume, 20)
+            price = float(close.iloc[-1])
+            cur_vol = float(volume.iloc[-1])
+            prev_close = float(close.iloc[-2]) if len(close) > 1 else price
+            change_pct = (price - prev_close) / prev_close * 100 if prev_close else 0
+            vol_ratio = cur_vol / avg_vol.iloc[-1] if avg_vol.iloc[-1] > 0 else 0
+
+            macd_line, signal_line, _ = compute_macd(close)
+            stoch_k, _ = compute_stoch(high, low, close)
+            adx, _, _ = compute_adx(high, low, close)
+            ema_50 = compute_ema(close, 50)
+
+            rsi_divergence = detect_divergence(close, rsi, lookback=10)
+            macd_divergence = detect_divergence(close, macd_line, lookback=10)
+
+            signal = generate_signal(
+                close=close,
+                volume=volume,
+                rsi=rsi,
+                macd=macd_line,
+                signal_line=signal_line,
+                ema=ema_50,
+                stoch_k=stoch_k,
+                adx=adx,
+                bollinger_upper=pd.Series([upper.iloc[-1]]),
+                bollinger_lower=pd.Series([lower.iloc[-1]]),
+                rsi_oversold=RSI_LOW,
+                rsi_overbought=RSI_HIGH,
+                adx_trend_threshold=ADX_THRESHOLD,
+                volume_spike_multiplier=VOLUME_SPIKE,
+                volatility_threshold=VOLATILITY_THRESHOLD
+            )
+
+            print(f"[{exchange.id}] {symbol}: Цена={price:.4g}, Сигнал={signal}, RSI={rsi.iloc[-1]:.1f}")
+
+            return {
+                'symbol': symbol,
+                'exchange': exchange.id,
+                'price': price,
+                'signal': signal,
+                'rsi': float(rsi.iloc[-1]),
+                'vol_ratio': float(vol_ratio),
+                'change_pct': change_pct,
+                'rsi_divergence': rsi_divergence,
+                'macd_divergence': macd_divergence
+            }
+        except Exception as e:
+            print(f"❌ Ошибка запроса {exchange.id} {symbol}: {e}")
+            return None
 
 
-def compute_bollinger(close: pd.Series, period: int = 20, std_mult: float = 2.0):
-    """Вычисляет Bollinger Bands (Ленты Боллинджера)."""
-    ma = close.rolling(window=period).mean()
-    std = close.rolling(window=period).std()
-    upper = ma + std_mult * std
-    lower = ma - std_mult * std
-    return ma, upper, lower
+async def main():
+    print(f"🚀 Запуск мониторинга сигналов: {datetime.now().isoformat()}")
+    state = load_state()
+    prev_snapshot = json.dumps(state.get('counters', {}), sort_keys=True)
 
+    exchanges = {}
+    semaphore_map = {}
+    for ex_id in EXCHANGE_IDS:
+        cls = getattr(ccxt, ex_id, None)
+        if cls is None:
+            continue
+        try:
+            exchanges[ex_id] = cls({
+                'enableRateLimit': True,
+                'apiKey': os.environ.get(f'{ex_id.upper()}_API_KEY'),
+                'secret': os.environ.get(f'{ex_id.upper()}_API_SECRET')
+            })
+            semaphore_map[ex_id] = asyncio.Semaphore(5)
+        except Exception as e:
+            print(f"❌ Ошибка инициализации {ex_id}: {e}")
 
-def compute_stoch(high: pd.Series, low: pd.Series, close: pd.Series, k_period: int = 14, d_period: int = 3):
-    """Вычисляет Stochastic Oscillator (%K и %D)."""
-    lowest_low = low.rolling(window=k_period).min()
-    highest_high = high.rolling(window=k_period).max()
-    stoch_k = 100 * ((close - lowest_low) / (highest_high - lowest_low))
-    stoch_d = stoch_k.rolling(window=d_period).mean()
-    return stoch_k, stoch_d
+    pairs = []
+    for ex_id in exchanges:
+        try:
+            tickers = await exchanges[ex_id].fetch_tickers()
+            usdt_pairs = [(s, d) for s, d in tickers.items() if s.endswith('/USDT') and d.get('quoteVolume')]
+            usdt_pairs.sort(key=lambda x: x[1]['quoteVolume'], reverse=True)
+            for symbol, data in usdt_pairs[:20]:
+                pairs.append((ex_id, symbol))
+        except Exception as e:
+            print(f"❌ Ошибка загрузки тикеров {ex_id}: {e}")
 
+    print(f"Проверяю {len(pairs)} пар")
 
-def compute_adx(high: pd.Series, low: pd.Series, close: pd.Series, period: int = 14):
-    """Вычисляет ADX (сила тренда), +DI и -DI."""
-    tr = pd.concat([
-        high - low,
-        (high - close.shift()).abs(),
-        (low - close.shift()).abs()
-    ], axis=1).max(axis=1)
-    atr = tr.rolling(window=period).mean()
-    up_move = high.diff()
-    down_move = low.diff().abs()
-    plus_dm = up_move.where((up_move > down_move) & (up_move > 0), 0.0)
-    minus_dm = down_move.where((down_move > up_move) & (down_move > 0), 0.0)
-    plus_di = 100 * (plus_dm.rolling(window=period).mean() / atr)
-    minus_di = 100 * (minus_dm.rolling(window=period).mean() / atr)
-    dx = 100 * ((plus_di - minus_di).abs() / (plus_di + minus_di))
-    adx = dx.rolling(window=period).mean()
-    return adx, plus_di, minus_di
+    tasks = [(ex_id, sym, analyze_symbol(exchanges[ex_id], sym, semaphore_map[ex_id])) for ex_id, sym in pairs]
+    results = await asyncio.gather(*[t[2] for t in tasks], return_exceptions=True)
 
+    current_keys = set()
+    messages_to_send = []
+    
+    for res in results:
+        if isinstance(res, Exception) or not res:
+            continue
+        
+        key = f"{res['exchange']}:{res['symbol']}"
+        current_keys.add(key)
+        
+        old_signal = state.get('signals', {}).get(key, {}).get('signal')
+        new_signal = res['signal']
+        
+        state['signals'][key] = {
+            'signal': new_signal,
+            'price': res['price'],
+            'rsi': res['rsi'],
+            'vol_ratio': res['vol_ratio'],
+            'rsi_divergence': res['rsi_divergence'],
+            'macd_divergence': res['macd_divergence'],
+            'timestamp': pd.Timestamp.now().isoformat()
+        }
+        
+        if old_signal and old_signal != new_signal:
+            title = f"📈 {res['symbol']} ({res['exchange']})"
+            body = (f"🔄 Смена сигнала: {old_signal} → {new_signal}\n"
+                    f"💰 Цена: {res['price']:.6g}\n"
+                    f"📉 RSI: {res['rsi']:.1f}\n"
+                    f"📈 Дивергенция RSI: {res['rsi_divergence']}\n"
+                    f"📈 Дивергенция MACD: {res['macd_divergence']}")
+            
+            messages_to_send.append({
+                'title': title,
+                'body': body
+            })
+            print(f"🔔 УВЕДОМЛЕНИЕ: {title} | {old_signal} -> {new_signal}")
 
-def compute_avg_volume(volume: pd.Series, period: int = 20) -> pd.Series:
-    """Вычисляет средний объем за период."""
-    return volume.rolling(window=period).mean()
+    for key in list(state.get('counters', {}).keys()):
+        if key not in current_keys:
+            del state['counters'][key]
 
-
-def detect_divergence(close: pd.Series, indicator: pd.Series, lookback: int = 10) -> str:
-    """Ищет дивергенцию между ценой и индикатором."""
-    if len(close) < lookback * 2:
-        return 'none'
-    price_min_idx = close.iloc[-lookback:].idxmin()
-    price_max_idx = close.iloc[-lookback:].idxmax()
-    price_min_val = close.loc[price_min_idx]
-    price_max_val = close.loc[price_max_idx]
-    ind_min_val = indicator.loc[price_min_idx]
-    ind_max_val = indicator.loc[price_max_idx]
-    if price_min_val < close.iloc[-2] and ind_min_val > indicator.iloc[-2]:
-        return 'bullish'
-    if price_max_val > close.iloc[-2] and ind_max_val < indicator.iloc[-2]:
-        return 'bearish'
-    return 'none'
-
-
-def generate_signal(
-    close: pd.Series,
-    volume: pd.Series = None,
-    rsi: pd.Series = None,
-    macd: pd.Series = None,
-    signal_line: pd.Series = None,
-    ema: pd.Series = None,
-    stoch_k: pd.Series = None,
-    adx: pd.Series = None,
-    bollinger_upper: pd.Series = None,
-    bollinger_lower: pd.Series = None,
-    rsi_oversold: int = 30,
-    rsi_overbought: int = 70,
-    adx_trend_threshold: int = 25,
-    volume_spike_multiplier: float = 1.5,
-    volatility_threshold: float = 0.02
-) -> str:
-    """Генерирует торговый сигнал (BUY, SELL или HOLD)."""
-    if len(close) < 2 or close.isna().any():
-        return 'HOLD'
-    close_curr = close.iloc[-1]
-    close_prev = close.iloc[-2]
-    trend_is_bullish = close_curr > ema.iloc[-1] if ema is not None else True
-    trend_is_bearish = close_curr < ema.iloc[-1] if ema is not None else False
-    volume_confirm = True
-    if volume is not None:
-        avg_volume = volume.rolling(window=20).mean().iloc[-1]
-        curr_volume = volume.iloc[-1]
-        volume_confirm = curr_volume > (avg_volume * volume_spike_multiplier)
-    volatility_confirm = True
-    if bollinger_upper is not None and bollinger_lower is not None:
-        upper = bollinger_upper.iloc[-1]
-        lower = bollinger_lower.iloc[-1]
-        band_width = (upper - lower) / close_curr
-        volatility_confirm = band_width > volatility_threshold
-    macd_buy = False
-    macd_sell = False
-    if macd is not None and signal_line is not None:
-        macd_curr, signal_curr = macd.iloc[-1], signal_line.iloc[-1]
-        macd_prev, signal_prev = macd.iloc[-2], signal_line.iloc[-2]
-        if macd_prev < signal_prev and macd_curr > signal_curr:
-            macd_buy = True
-        elif macd_prev > signal_prev and macd_curr < signal_curr:
-            macd_sell = True
-    rsi_buy = False
-    rsi_sell = False
-    if rsi is not None:
-        rsi_curr = rsi.iloc[-1]
-        if rsi_curr > rsi_oversold and rsi_curr < 50:
-            rsi_buy = True
-        elif rsi_curr > rsi_overbought:
-            rsi_sell = True
-    stoch_buy = False
-    stoch_sell = False
-    if stoch_k is not None:
-        stoch_curr = stoch_k.iloc[-1]
-        if stoch_curr < 20:
-            stoch_buy = True
-        elif stoch_curr > 80:
-            stoch_sell = True
-    trend_is_strong = True
-    if adx is not None:
-        trend_is_strong = adx.iloc[-1] > adx_trend_threshold
-    is_buy_signal = (
-        trend_is_bullish and
-        (macd_buy or rsi_buy or stoch_buy) and
-        trend_is_strong and
-        volume_confirm and
-        volatility_confirm
-    )
-    is_sell_signal = (
-        trend_is_bearish and
-        (macd_sell or rsi_sell or stoch_sell) and
-        trend_is_strong and
-        volume_confirm and
-        volatility_confirm
-    )
-    if is_buy_signal:
-        return 'BUY'
-    elif is_sell_signal:
-        return 'SELL'
+    if messages_to_send:
+        print(f"📤 Отправляем батч из {len(messages_to_send)} уведомлений в ntfy...")
+        try:
+            apobj = apprise.Apprise()
+            apobj.add(os.environ['NTFY_URL'])
+            for msg in messages_to_send:
+                success = apobj.notify(title=msg['title'], body=msg['body'])
+                if not success:
+                    print(f"❌ Ошибка отправки в ntfy для {msg['title']}")
+        except Exception as e:
+            print(f"❌ Ошибка работы Apprise: {e}")
     else:
-        return 'HOLD'
+        print("🤷‍♂️ Смен сигналов не обнаружено. Уведомления не отправлены.")
+
+    if json.dumps(state.get('counters', {}), sort_keys=True) != prev_snapshot:
+        save_state(state)
+    else:
+        print("ℹ️ Счётчики не изменились, state не сохранен")
+
+    await asyncio.gather(*[ex.close() for ex in exchanges.values()])
+
+
+if __name__ == '__main__':
+    asyncio.run(main())
