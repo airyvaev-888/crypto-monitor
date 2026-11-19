@@ -1,0 +1,26 @@
+name: Crypto Monitor - CoinMarketCap
+on:
+  schedule:
+    - cron: '0 2,8,14 * * *'  # 08:00, 14:00, 20:00 Оренбург
+  workflow_dispatch:
+jobs:
+  cmc:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Run CMC monitor
+        env:
+          CMC_API_KEY: ${{ secrets.CMC_API_KEY }}
+        run: python src/cmc_monitor.py
+      - name: Commit results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/cmc_history.json
+          git commit -m "📊 Auto-update: cmc_history.json [skip ci]" || echo "No changes"
+          git push
