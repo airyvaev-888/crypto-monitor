@@ -1,5 +1,4 @@
-"""Обработка торговых сигналов и отправка уведомлений.
-Связывает индикаторы с внешними сервисами (ntfy, Telegram)."""
+"""Обработка торговых сигналов и отправка уведомлений."""
 
 import asyncio
 import json
@@ -16,12 +15,10 @@ from indicators import (
     generate_signal, detect_divergence
 )
 
-# Настройки
 STATE_FILE = 'data/signals.json'
 EXCHANGE_IDS = ['binance', 'kucoin', 'bybit', 'gateio', 'mexc']
 TIMEFRAME = '1h'
 
-# Пороги для сигналов
 RSI_LOW = 30
 RSI_HIGH = 70
 ADX_THRESHOLD = 25
@@ -49,7 +46,6 @@ def save_state(state):
 
 
 async def analyze_symbol(exchange, symbol, semaphore):
-    """Анализирует OHLCV данные и возвращает сигнал."""
     async with semaphore:
         try:
             ohlcv = await exchange.fetch_ohlcv(symbol, timeframe=TIMEFRAME, limit=100)
@@ -61,7 +57,6 @@ async def analyze_symbol(exchange, symbol, semaphore):
             high = df['high']
             low = df['low']
 
-            # Индикаторы
             rsi = compute_rsi(close, 14)
             _, upper, lower = compute_bollinger(close, 20, 2)
             avg_vol = compute_avg_volume(volume, 20)
@@ -76,11 +71,9 @@ async def analyze_symbol(exchange, symbol, semaphore):
             adx, _, _ = compute_adx(high, low, close)
             ema_50 = compute_ema(close, 50)
 
-            # Дивергенции
             rsi_divergence = detect_divergence(close, rsi, lookback=10)
             macd_divergence = detect_divergence(close, macd_line, lookback=10)
 
-            # Сигнал
             signal = generate_signal(
                 close=close,
                 volume=volume,
@@ -122,7 +115,6 @@ async def main():
     state = load_state()
     prev_snapshot = json.dumps(state.get('counters', {}), sort_keys=True)
 
-    # Инициализация бирж
     exchanges = {}
     semaphore_map = {}
     for ex_id in EXCHANGE_IDS:
@@ -139,8 +131,6 @@ async def main():
         except Exception as e:
             print(f"❌ Ошибка инициализации {ex_id}: {e}")
 
-    # Список пар (для примера возьмем топ-20 по объему с каждой биржи)
-    # В реальности лучше загружать из history.json или через API
     pairs = []
     for ex_id in exchanges:
         try:
@@ -154,11 +144,9 @@ async def main():
 
     print(f"Проверяю {len(pairs)} пар")
 
-    # Анализ
     tasks = [(ex_id, sym, analyze_symbol(exchanges[ex_id], sym, semaphore_map[ex_id])) for ex_id, sym in pairs]
     results = await asyncio.gather(*[t[2] for t in tasks], return_exceptions=True)
 
-    # Обработка результатов
     current_keys = set()
     messages_to_send = []
     
@@ -196,12 +184,10 @@ async def main():
             })
             print(f"🔔 УВЕДОМЛЕНИЕ: {title} | {old_signal} -> {new_signal}")
 
-    # Очистка старых данных
     for key in list(state.get('counters', {}).keys()):
         if key not in current_keys:
             del state['counters'][key]
 
-    # Отправка уведомлений
     if messages_to_send:
         print(f"📤 Отправляем батч из {len(messages_to_send)} уведомлений в ntfy...")
         try:
@@ -216,13 +202,11 @@ async def main():
     else:
         print("🤷‍♂️ Смен сигналов не обнаружено. Уведомления не отправлены.")
 
-    # Сохранение состояния
     if json.dumps(state.get('counters', {}), sort_keys=True) != prev_snapshot:
         save_state(state)
     else:
         print("ℹ️ Счётчики не изменились, state не сохранен")
 
-    # Закрытие соединений
     await asyncio.gather(*[ex.close() for ex in exchanges.values()])
 
 
