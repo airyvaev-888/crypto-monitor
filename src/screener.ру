@@ -1,64 +1,24 @@
-"""Скринер ликвидных монет. Собирает топ пар по объему с рабочих бирж и пишет в history.json."""
-
-import asyncio
+import requests
 import json
-import ccxt.async_support as ccxt
 import pandas as pd
 
-EXCHANGE_IDS = ['kucoin', 'mexc', 'gateio']
-TOP_N = 30  # Сколько топовых монет брать с каждой биржи
+CMC_API_KEY = os.environ['CMC_API_KEY']
 
-async def fetch_liquid_pairs(exchange_id):
-    cls = getattr(ccxt, exchange_id, None)
-    if not cls:
-        return []
-    
-    exchange = cls({'enableRateLimit': True})
-    pairs = []
-    
-    try:
-        print(f"Загружаем тикеры с {exchange_id}...")
-        tickers = await exchange.fetch_tickers()
-        
-        usdt_tickers = [
-            (symbol, data) for symbol, data in tickers.items()
-            if symbol.endswith('/USDT') and data.get('quoteVolume')
-        ]
-        usdt_tickers.sort(key=lambda x: x[1]['quoteVolume'], reverse=True)
-        
-        for symbol, data in usdt_tickers[:TOP_N]:
-            pairs.append({
-                "exchange": exchange_id,
-                "symbol": symbol,
-                "volume_24h": data['quoteVolume']
-            })
-        print(f"✅ {exchange_id}: найдено {len(pairs)} ликвидных пар.")
-    except Exception as e:
-        print(f"❌ Ошибка на {exchange_id}: {e}")
-    finally:
-        await exchange.close()
-        
-    return pairs
+url = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest"
+headers = {'X-CMC_PRO_API_KEY': CMC_API_KEY}
+params = {'start': '1', 'limit': '100', 'convert': 'USD'}
 
-async def main():
-    all_pairs = []
-    tasks = [fetch_liquid_pairs(ex) for ex in EXCHANGE_IDS]
-    results = await asyncio.gather(*tasks)
-    
-    for res in results:
-        all_pairs.extend(res)
-        
-    all_pairs.sort(key=lambda x: x['volume_24h'], reverse=True)
-    
-    history_data = {
-        "liquid_symbols": all_pairs,
-        "updated_at": pd.Timestamp.now(tz='UTC').isoformat()
-    }
-    
-    with open('history.json', 'w', encoding='utf-8') as f:
-        json.dump(history_data, f, indent=2, ensure_ascii=False)
-        
-    print(f"💾 history.json успешно обновлен. Всего пар: {len(all_pairs)}")
+response = requests.get(url, headers=headers, params=params)
+data = response.json()
 
-if __name__ == '__main__':
-    asyncio.run(main())
+pairs = []
+for item in data.get('data', []):
+    pairs.append({
+        "symbol": item['symbol'],
+        "name": item['name'],
+        "market_cap_usd": item['quote']['USD']['market_cap'],
+        "volume_24h_usd": item['quote']['USD']['volume_24h']
+    })
+
+with open('data/history.json', 'w') as f:
+    json.dump({"liquid_symbols": pairs, "updated_at": pd.Timestamp.now().isoformat()}, f, indent=2)
