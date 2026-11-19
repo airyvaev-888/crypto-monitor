@@ -5,5 +5,4 @@ apprise>=1.6.0
 loguru>=0.7.2
 ujson>=5.8.0
 pytz>=2023.3
-ccxt>=4.0.0
 python-dotenv>=1.0.0
