@@ -1,4 +1,6 @@
 {
-  "counters": {},
+  "counters": {
+    "market:macro_risk": 1
+  },
   "error_breakers": {}
 }
