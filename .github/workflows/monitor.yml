@@ -40,6 +40,17 @@ jobs:
           APPRISE_URL: ${{ secrets.APPRISE_URL }}
         run: python crypto_monitor.py
 
+        # ДОБАВЬ ЭТОТ ШАГ
+      - name: Проверяем файлы в директории
+        run: |
+          echo "Текущая директория: $(pwd)"
+          ls -la
+          echo "Поиск json-файлов:"
+          find . -name "*.json"
+
+      - name: Фиксируем состояние (monitor_state.json)
+        # ... твой код ...
+
       - name: Фиксируем состояние (monitor_state.json)
         run: |
           git config user.name "github-actions[bot]"
