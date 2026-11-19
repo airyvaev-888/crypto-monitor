@@ -1,4 +1,4 @@
-"""Часовой монитор ликвидных монет из history.json."""
+"""Часовой монитор ликвидных монет из history.json с генерацией торговых сигналов."""
 import asyncio
 import json
 import os
@@ -9,8 +9,11 @@ import ccxt.async_support as ccxt
 import pandas as pd
 import pytz
 
+# === НОВОЕ: Импортируем все индикаторы и функцию сигналов ===
 from indicators import (
     compute_rsi, compute_bollinger, compute_avg_volume,
+    compute_macd, compute_stoch, compute_adx,
+    generate_signal  # <-- Главная новая функция
 )
 
 HISTORY_FILE = 'history.json'
@@ -25,6 +28,7 @@ ORENBURG_TZ = pytz.timezone('Asia/Yekaterinburg')
 WINDOW_START = 8
 WINDOW_END = 20
 
+# Пороги для базовых фильтров (оставляем для логики аномалий)
 RSI_LOW = 30
 RSI_HIGH = 70
 VOLUME_SPIKE_RATIO = 2.5
@@ -81,6 +85,7 @@ def load_symbols():
     return pairs
 
 
+# === НОВОЕ: Обновленная функция анализа с расчетом всех индикаторов ===
 async def analyze_symbol(exchange, symbol, semaphore):
     async with semaphore:
         try:
@@ -90,7 +95,10 @@ async def analyze_symbol(exchange, symbol, semaphore):
             df = pd.DataFrame(ohlcv, columns=['ts', 'open', 'high', 'low', 'close', 'volume'])
             close = df['close']
             volume = df['volume']
+            high = df['high']
+            low = df['low']
 
+            # 1. Базовые индикаторы (были раньше)
             rsi = float(compute_rsi(close, 14).iloc[-1])
             _, upper, lower = compute_bollinger(close, 20, 2)
             avg_vol = float(compute_avg_volume(volume, 20).iloc[-1])
@@ -98,24 +106,57 @@ async def analyze_symbol(exchange, symbol, semaphore):
             cur_vol = float(volume.iloc[-1])
             prev_close = float(close.iloc[-2]) if len(close) > 1 else price
             change_pct = (price - prev_close) / prev_close * 100 if prev_close else 0
-
             vol_ratio = cur_vol / avg_vol if avg_vol > 0 else 0
-            print(f"[{exchange.id}] {symbol}: Цена={price:.4g}, RSI={rsi:.1f}, Объем={vol_ratio:.1f}x, Изм={change_pct:+.2f}%")
 
+            # 2. Новые индикаторы для сигналов
+            macd_line, signal_line, _ = compute_macd(close)
+            stoch_k, _ = compute_stoch(high, low, close)
+            adx, _, _ = compute_adx(high, low, close)
+
+            print(f"[{exchange.id}] {symbol}: Цена={price:.4g}, RSI={rsi:.1f}, MACD={macd_line.iloc[-1]:.4g}/{signal_line.iloc[-1]:.4g}")
+
+            # 3. Генерация торгового сигнала (BUY/SELL/HOLD)
+            signal = generate_signal(
+                close=close,
+                volume=volume,
+                rsi=pd.Series([rsi]),  # Передаем как Series для совместимости
+                macd=macd_line,
+                signal_line=signal_line,
+                ema=close.ewm(span=50, adjust=False),  # Используем EMA 50 как тренд
+                stoch_k=stoch_k,
+                adx=adx,
+                bollinger_upper=pd.Series([upper.iloc[-1]]),
+                bollinger_lower=pd.Series([lower.iloc[-1]])
+            )
+
+            # 4. Логика аномалий (оставляем как доп. инфу)
             signals = []
             if rsi < RSI_LOW and price <= float(lower.iloc[-1]):
-                signals.append(('bounce_low', f"RSI={rsi:.1f}, цена у нижней BB ({price:.6g}) — отскок от низа"))
+                signals.append(('bounce_low', f"RSI={rsi:.1f}, цена у нижней BB"))
             if rsi > RSI_HIGH and price >= float(upper.iloc[-1]):
-                signals.append(('bounce_high', f"RSI={rsi:.1f}, цена у верхней BB ({price:.6g}) — отскок от верха"))
+                signals.append(('bounce_high', f"RSI={rsi:.1f}, цена у верхней BB"))
             if avg_vol > 0 and vol_ratio >= VOLUME_SPIKE_RATIO \
                     and abs(change_pct) >= VOLUME_SPIKE_CHANGE_PCT:
                 arrow = "↑" if change_pct > 0 else "↓"
                 signals.append(('volume_anomaly',
                                 f"Объём x{vol_ratio:.1f} при изменении {change_pct:+.2f}% {arrow}"))
             
-            if signals:
-                print(f"🔥 НАЙДЕН СИГНАЛ: {exchange.id} {symbol} -> {signals}")
-            return signals
+            # 5. Формируем итоговый результат
+            result = {
+                'symbol': symbol,
+                'exchange': exchange.id,
+                'price': price,
+                'signal': signal,  # <-- ГЛАВНЫЙ РЕЗУЛЬТАТ
+                'rsi': rsi,
+                'vol_ratio': vol_ratio,
+                'change_pct': change_pct,
+                'anomalies': [s[0] for s in signals]  # Сохраняем коды аномалий
+            }
+            
+            if signal != 'HOLD':
+                print(f"🔥 ТОРГОВЫЙ СИГНАЛ: {exchange.id} {symbol} -> {signal}")
+            
+            return result
         except Exception as e:
             print(f"❌ Ошибка запроса {exchange.id} {symbol}: {e}")
             return None
@@ -127,7 +168,7 @@ async def main():
         return
 
     print("✅ Мы внутри временного окна. Начинаем работу...")
-    state = load_json(STATE_FILE, {'counters': {}, 'error_breakers': {}})
+    state = load_json(STATE_FILE, {'signals': {}, 'counters': {}, 'error_breakers': {}})
     counters = state.get('counters', {})
     breakers = state.get('error_breakers', {})
     prev_snapshot = json.dumps(counters, sort_keys=True)
@@ -167,38 +208,51 @@ async def main():
 
     current_keys = set()
     grouped = {}
-    for (ex_id, sym), res in zip([(t[0], t[1]) for t in tasks], results):
+    for res in results:
         if isinstance(res, Exception):
-            print(f"Task error {ex_id} {sym}: {res}")
-            breakers[ex_id] = breakers.get(ex_id, 0) + 1
+            print(f"Task error: {res}")
             continue
         if not res:
             continue
-        for sig_type, desc in res:
-            key = f"{ex_id}:{sym}:{sig_type}"
-            current_keys.add(key)
-            counters[key] = counters.get(key, 0) + 1
-            grouped.setdefault((sym.replace('/USDT', ''), sig_type), []).append(
-                (ex_id, desc, counters[key]))
+        
+        key = f"{res['exchange']}:{res['symbol']}"
+        current_keys.add(key)
+        
+        # Обновляем счетчики аномалий (старая логика)
+        for anomaly in res.get('anomalies', []):
+            anomaly_key = f"{key}:{anomaly}"
+            counters[anomaly_key] = counters.get(anomaly_key, 0) + 1
+        
+        # Сохраняем торговый сигнал
+        state['signals'][key] = {
+            'signal': res['signal'],
+            'price': res['price'],
+            'rsi': res['rsi'],
+            'vol_ratio': res['vol_ratio'],
+            'timestamp': pd.Timestamp.now().isoformat()
+        }
+        
+        # Группируем для уведомлений
+        if res['signal'] != 'HOLD':
+            grouped.setdefault(res['signal'], []).append(res)
 
+    # Очистка старых счетчиков
     for key in list(counters.keys()):
         if key not in current_keys:
             del counters[key]
 
     messages_to_send = []
-    for (short_sym, sig_type), occ in grouped.items():
-        to_notify = [(ex, desc) for ex, desc, cnt in occ if cnt % 2 == 1]
-        if not to_notify:
-            print(f"⏭️ Пропуск отправки для {short_sym} ({sig_type}) - логика 'через раз' (счетчик четный)")
-            continue
+    for sig_type, occ in grouped.items():
         n_total = len(occ)
-        all_exchanges = ", ".join(ex for ex, _, _ in occ)
-        first_desc = occ[0][1]
+        all_symbols = ", ".join([f"{o['symbol']} ({o['exchange']})" for o in occ])
+        first_price = occ[0]['price']
+        
         if n_total == 1:
-            msg = f"🔔 {short_sym} на {all_exchanges}: {sig_type}\n{first_desc}"
+            msg = f"🔔 {occ[0]['symbol']} на {occ[0]['exchange']}: {sig_type}\nЦена: {first_price:.6g}"
         else:
-            msg = (f"🔔 {short_sym}: {sig_type} — сигнал на {n_total} из {len(EXCHANGE_IDS)} бирж\n"
-                   f"Биржи: {all_exchanges}\n{first_desc}")
+            msg = (f"🔔 МАССОВЫЙ СИГНАЛ: {sig_type}\n"
+                   f"Найдено на {n_total} парах\n"
+                   f"Пары: {all_symbols}")
         messages_to_send.append(msg)
 
     if messages_to_send:
