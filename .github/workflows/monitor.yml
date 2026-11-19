@@ -3,8 +3,9 @@ name: Crypto Monitor
 on:
   schedule:
     # Запуск каждый час с 08:00 до 19:59 по Оренбургу (UTC+5)
+    # Время в UTC: с 03:00 до 15:00
     - cron: '0 3-15 * * *'
-  workflow_dispatch:
+  workflow_dispatch: # Возможность запустить вручную для теста
 
 concurrency:
   group: state-writes
@@ -17,6 +18,7 @@ jobs:
   check-market:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    
     steps:
       - name: Копируем код
         uses: actions/checkout@v4
@@ -38,28 +40,31 @@ jobs:
       - name: Запускаем бота
         env:
           APPRISE_URL: ${{ secrets.APPRISE_URL }}
+          # Если в скрипте используются другие секреты (например, токены API),
+          # раскомментируй и добавь их здесь:
+          # TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
         run: python crypto_monitor.py
 
-        # ДОБАВЬ ЭТОТ ШАГ
+      # 🔍 ДИАГНОСТИЧЕСКИЙ ШАГ (поможет найти файл, если он сохраняется не в корень)
       - name: Проверяем файлы в директории
         run: |
-          echo "Текущая директория: $(pwd)"
+          echo "📂 Текущая директория: $(pwd)"
+          echo "📄 Содержимое корневой папки:"
           ls -la
-          echo "Поиск json-файлов:"
-          find . -name "*.json"
-
-      - name: Фиксируем состояние (monitor_state.json)
-        # ... твой код ...
+          echo "🔍 Поиск всех JSON-файлов в проекте:"
+          find . -name "*.json" -not -path "./.git/*"
 
       - name: Фиксируем состояние (monitor_state.json)
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           
+          # Проверяем, существует ли файл и не пуст ли он
           if [ -f "monitor_state.json" ] && [ -s "monitor_state.json" ]; then
             echo "📝 Файл monitor_state.json найден, добавляем в индекс..."
             git add monitor_state.json
             
+            # Проверяем, есть ли реальные изменения
             if ! git diff --cached --quiet; then
               echo "✅ Изменения обнаружены, создаем коммит..."
               git commit -m "Update monitor_state.json [skip ci]"
