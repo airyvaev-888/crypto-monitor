@@ -177,3 +177,90 @@ async def main():
     for ex_id in active_exchanges:
         cls = getattr(ccxt, ex_id, None)
         if cls is None:
+            continue
+        try:
+            exchanges[ex_id] = cls({'enableRateLimit': True})
+            semaphore_map[ex_id] = asyncio.Semaphore(RPS_LIMITS.get(ex_id, 5))
+        except Exception as e:
+            print(f"Ошибка инициализации {ex_id}: {e}")
+            breakers[ex_id] = breakers.get(ex_id, 0) + 1
+
+    tasks = []
+    for ex_id, sym in pairs:
+        if ex_id not in exchanges:
+            continue
+        tasks.append((ex_id, sym, analyze_symbol(exchanges[ex_id], sym, semaphore_map[ex_id])))
+
+    results = await asyncio.gather(*[t[2] for t in tasks], return_exceptions=True)
+
+    current_keys = set()
+    messages_to_send = []
+    
+    for res in results:
+        if isinstance(res, Exception):
+            print(f"Task error: {res}")
+            continue
+        if not res:
+            continue
+        
+        key = f"{res['exchange']}:{res['symbol']}"
+        current_keys.add(key)
+        
+        # === НОВОЕ: Логика истории сигналов и уведомлений ===
+        old_signal = state.get('signals', {}).get(key, {}).get('signal')
+        new_signal = res['signal']
+        
+        # Обновляем состояние в любом случае
+        state['signals'][key] = {
+            'signal': new_signal,
+            'price': res['price'],
+            'rsi': res['rsi'],
+            'vol_ratio': res['vol_ratio'],
+            'timestamp': pd.Timestamp.now().isoformat()
+        }
+        
+        # Если сигнал изменился (и это не первый запуск), готовим уведомление
+        if old_signal and old_signal != new_signal:
+            # Формируем сообщение для ntfy
+            title = f"📈 {res['symbol']} ({res['exchange']})"
+            body = (f"🔄 Смена сигнала: {old_signal} → {new_signal}\n"
+                    f"💰 Цена: {res['price']:.6g}\n"
+                    f"📉 RSI: {res['rsi']:.1f}")
+            
+            messages_to_send.append({
+                'title': title,
+                'body': body
+            })
+            print(f"🔔 УВЕДОМЛЕНИЕ: {title} | {old_signal} -> {new_signal}")
+
+    # Очистка старых счетчиков (если нужно)
+    for key in list(counters.keys()):
+        if key not in current_keys:
+            del counters[key]
+
+    # === НОВОЕ: Отправка батча в ntfy ===
+    if messages_to_send:
+        print(f"📤 Отправляем батч из {len(messages_to_send)} уведомлений в ntfy...")
+        try:
+            # Apprise позволяет отправлять несколько сообщений за раз
+            for msg in messages_to_send:
+                success = apobj.notify(title=msg['title'], body=msg['body'])
+                if not success:
+                    print(f"❌ Ошибка отправки в ntfy для {msg['title']}")
+        except Exception as e:
+            print(f"❌ Ошибка работы Apprise: {e}")
+    else:
+        print("🤷‍♂️ Смен сигналов не обнаружено. Уведомления не отправлены.")
+
+    state['counters'] = counters
+    state['error_breakers'] = breakers
+    if json.dumps(counters, sort_keys=True) != prev_snapshot:
+        atomic_save(STATE_FILE, state)
+        print("💾 monitor_state.json обновлён")
+    else:
+        print("ℹ️ Счётчики не изменились, state не сохранен")
+
+    await asyncio.gather(*[ex.close() for ex in exchanges.values()])
+
+if __name__ == '__main__':
+    asyncio.run(main())
