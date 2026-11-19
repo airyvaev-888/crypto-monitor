@@ -17,22 +17,21 @@ HISTORY_FILE = 'history.json'
 STATE_FILE = 'monitor_state.json'
 TIMEFRAME = '1h'
 
-EXCHANGE_IDS = ['binance', 'kucoin', 'bybit', 'mexc', 'gateio']
+# Оставили только те биржи, которые не блокируют GitHub
+EXCHANGE_IDS = ['kucoin', 'mexc', 'gateio']
 FALLBACK_SYMBOLS = ['BTC/USDT', 'ETH/USDT', 'SOL/USDT']
 
 ORENBURG_TZ = pytz.timezone('Asia/Yekaterinburg')
 WINDOW_START = 8
 WINDOW_END = 20
 
-RSI_LOW = 99
+RSI_LOW = 30
 RSI_HIGH = 70
 VOLUME_SPIKE_RATIO = 2.5
 VOLUME_SPIKE_CHANGE_PCT = 2.5
 
 RPS_LIMITS = {
-    'binance': 10,
     'kucoin': 10,
-    'bybit': 10,
     'mexc': 5,
     'gateio': 5
 }
@@ -100,7 +99,6 @@ async def analyze_symbol(exchange, symbol, semaphore):
             prev_close = float(close.iloc[-2]) if len(close) > 1 else price
             change_pct = (price - prev_close) / prev_close * 100 if prev_close else 0
 
-            # 🔍 ДИАГНОСТИКА: Выводим метрики в лог, чтобы видеть, что происходит
             vol_ratio = cur_vol / avg_vol if avg_vol > 0 else 0
             print(f"[{exchange.id}] {symbol}: Цена={price:.4g}, RSI={rsi:.1f}, Объем={vol_ratio:.1f}x, Изм={change_pct:+.2f}%")
 
@@ -185,7 +183,6 @@ async def main():
 
     for key in list(counters.keys()):
         if key not in current_keys:
-            print(f"♻️ Сброс счетчика (сигнал пропал): {key}")
             del counters[key]
 
     messages_to_send = []
