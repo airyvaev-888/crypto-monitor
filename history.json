@@ -1,5 +1,305 @@
 {
-  "liquid_symbols": [],
-  "last_updated": "2026-11-19T04:19:16.591201+00:00",
-  "total": 0
+  "liquid_symbols": [
+    {
+      "exchange": "kucoin",
+      "symbol": "BTC/USDT",
+      "volume_24h": 1101428266.8690739
+    },
+    {
+      "exchange": "mexc",
+      "symbol": "BTC/USDT",
+      "volume_24h": 308161501.04
+    },
+    {
+      "exchange": "mexc",
+      "symbol": "ETH/USDT",
+      "volume_24h": 220237664.88
+    },
+    {
+      "exchange": "kucoin",
+      "symbol": "ETH/USDT",
+      "volume_24h": 133168203.88162482
+    },
+    {
+      "exchange": "kucoin",
+      "symbol": "XRP/USDT",
+      "volume_24h": 95126105.63114862
+    },
+    {
+      "exchange": "mexc",
+      "symbol": "USDC/USDT",
+      "volume_24h": 58546226.47041
+    },
+    {
+      "exchange": "kucoin",
+      "symbol": "XMR/USDT",
+      "volume_24h": 52304608.67208
+    },
+    {
+      "exchange": "mexc",
+      "symbol": "SOL/USDT",
+      "volume_24h": 49605266.86
+    },
+    {
+      "exchange": "kucoin",
+      "symbol": "XLM/USDT",
+      "volume_24h": 48549522.099056
+    },
+    {
+      "exchange": "kucoin",
+      "symbol": "ZEC/USDT",
+      "volume_24h": 26030858.605234582
+    },
+    {
+      "exchange": "kucoin",
+      "symbol": "USDC/USDT",
+      "volume_24h": 25429817.36020291
+    },
+    {
+      "exchange": "kucoin",
+      "symbol": "SOL/USDT",
+      "volume_24h": 25409670.968720645
+    },
+    {
+      "exchange": "kucoin",
+      "symbol": "ASTER/USDT",
+      "volume_24h": 23489986.082552455
+    },
+    {
+      "exchange": "kucoin",
+      "symbol": "PEPE/USDT",
+      "volume_24h": 23355100.26820844
+    },
+    {
+      "exchange": "mexc",
+      "symbol": "XRP/USDT",
+      "volume_24h": 22466099.4255
+    },
+    {
+      "exchange": "kucoin",
+      "symbol": "PIEVERSE/USDT",
+      "volume_24h": 19687066.257542
+    },
+    {
+      "exchange": "kucoin",
+      "symbol": "TAO/USDT",
+      "volume_24h": 18806371.95657681
+    },
+    {
+      "exchange": "kucoin",
+      "symbol": "NEAR/USDT",
+      "volume_24h": 17859622.491348445
+    },
+    {
+      "exchange": "mexc",
+      "symbol": "ENA/USDT",
+      "volume_24h": 17444637.76608
+    },
+    {
+      "exchange": "kucoin",
+      "symbol": "LTC/USDT",
+      "volume_24h": 16815075.7789755
+    },
+    {
+      "exchange": "kucoin",
+      "symbol": "BNB/USDT",
+      "volume_24h": 16574538.0735738
+    },
+    {
+      "exchange": "kucoin",
+      "symbol": "DOT/USDT",
+      "volume_24h": 16369994.09731352
+    },
+    {
+      "exchange": "kucoin",
+      "symbol": "EVAA/USDT",
+      "volume_24h": 15766726.568608
+    },
+    {
+      "exchange": "mexc",
+      "symbol": "ZIG/USDT",
+      "volume_24h": 15032558.776723
+    },
+    {
+      "exchange": "kucoin",
+      "symbol": "SUI/USDT",
+      "volume_24h": 13696916.98124
+    },
+    {
+      "exchange": "mexc",
+      "symbol": "BNB/USDT",
+      "volume_24h": 12689314.64
+    },
+    {
+      "exchange": "kucoin",
+      "symbol": "AVAX/USDT",
+      "volume_24h": 10975057.934079297
+    },
+    {
+      "exchange": "kucoin",
+      "symbol": "ARB/USDT",
+      "volume_24h": 9938376.18680884
+    },
+    {
+      "exchange": "kucoin",
+      "symbol": "UNI/USDT",
+      "volume_24h": 9696853.38189682
+    },
+    {
+      "exchange": "kucoin",
+      "symbol": "LINK/USDT",
+      "volume_24h": 9465333.31317238
+    },
+    {
+      "exchange": "kucoin",
+      "symbol": "SHIB/USDT",
+      "volume_24h": 8737751.27453532
+    },
+    {
+      "exchange": "kucoin",
+      "symbol": "AAPLX/USDT",
+      "volume_24h": 8198626.00212
+    },
+    {
+      "exchange": "kucoin",
+      "symbol": "SEI/USDT",
+      "volume_24h": 7590620.838747263
+    },
+    {
+      "exchange": "kucoin",
+      "symbol": "AAVE/USDT",
+      "volume_24h": 7189938.2892646
+    },
+    {
+      "exchange": "kucoin",
+      "symbol": "DOGE/USDT",
+      "volume_24h": 6845631.514477872
+    },
+    {
+      "exchange": "mexc",
+      "symbol": "PUMP/USDT",
+      "volume_24h": 6842004.198697
+    },
+    {
+      "exchange": "kucoin",
+      "symbol": "MMT/USDT",
+      "volume_24h": 5956620.2482662825
+    },
+    {
+      "exchange": "mexc",
+      "symbol": "GOLD(XAUT)/USDT",
+      "volume_24h": 5727855.51
+    },
+    {
+      "exchange": "mexc",
+      "symbol": "LIT/USDT",
+      "volume_24h": 5408034.3383
+    },
+    {
+      "exchange": "mexc",
+      "symbol": "DOGE/USDT",
+      "volume_24h": 4429621.48542
+    },
+    {
+      "exchange": "kucoin",
+      "symbol": "ADI/USDT",
+      "volume_24h": 4169725.87308
+    },
+    {
+      "exchange": "kucoin",
+      "symbol": "WIF/USDT",
+      "volume_24h": 4085352.866379669
+    },
+    {
+      "exchange": "mexc",
+      "symbol": "GOLD(PAXG)/USDT",
+      "volume_24h": 3932353.7
+    },
+    {
+      "exchange": "mexc",
+      "symbol": "LTC/USDT",
+      "volume_24h": 3908069.58
+    },
+    {
+      "exchange": "mexc",
+      "symbol": "TRX/USDT",
+      "volume_24h": 3369888.8895
+    },
+    {
+      "exchange": "mexc",
+      "symbol": "INJ/USDT",
+      "volume_24h": 3033967.658
+    },
+    {
+      "exchange": "mexc",
+      "symbol": "ADA/USDT",
+      "volume_24h": 2875127.7979
+    },
+    {
+      "exchange": "mexc",
+      "symbol": "ETHFI/USDT",
+      "volume_24h": 2337915.1694
+    },
+    {
+      "exchange": "mexc",
+      "symbol": "UPC/USDT",
+      "volume_24h": 2250168.2592
+    },
+    {
+      "exchange": "mexc",
+      "symbol": "MEY/USDT",
+      "volume_24h": 2027477.84195
+    },
+    {
+      "exchange": "mexc",
+      "symbol": "CT/USDT",
+      "volume_24h": 1912396.5619
+    },
+    {
+      "exchange": "mexc",
+      "symbol": "FIL/USDT",
+      "volume_24h": 1693628.3372
+    },
+    {
+      "exchange": "mexc",
+      "symbol": "KII/USDT",
+      "volume_24h": 1620326.48422
+    },
+    {
+      "exchange": "mexc",
+      "symbol": "ZRO/USDT",
+      "volume_24h": 1507980.0281
+    },
+    {
+      "exchange": "mexc",
+      "symbol": "MX/USDT",
+      "volume_24h": 1360275.9446
+    },
+    {
+      "exchange": "mexc",
+      "symbol": "TRUMP/USDT",
+      "volume_24h": 1355788.369
+    },
+    {
+      "exchange": "mexc",
+      "symbol": "RDWON/USDT",
+      "volume_24h": 1289503.0
+    },
+    {
+      "exchange": "mexc",
+      "symbol": "BULLA/USDT",
+      "volume_24h": 1107949.992123
+    },
+    {
+      "exchange": "mexc",
+      "symbol": "FOXSY/USDT",
+      "volume_24h": 1045677.7733165
+    },
+    {
+      "exchange": "mexc",
+      "symbol": "ASTER/USDT",
+      "volume_24h": 1025105.4518
+    }
+  ],
+  "updated_at": "2026-11-19T06:47:44.493604+00:00"
 }
