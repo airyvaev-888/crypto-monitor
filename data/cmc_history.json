@@ -3,1003 +3,1003 @@
     {
       "symbol": "BTC",
       "name": "Bitcoin",
-      "price_usd": 63748.388312459734,
-      "market_cap_usd": 1282208563187.277,
-      "volume_24h_usd": 32474589194.313774,
-      "percent_change_24h": -0.585381834091,
+      "price_usd": 63640.665220548806,
+      "market_cap_usd": 1280041865729.387,
+      "volume_24h_usd": 33154777325.54181,
+      "percent_change_24h": -0.909370289623,
       "circulating_supply": 20113584,
-      "last_updated": "2026-11-19T12:03:48.018Z"
+      "last_updated": "2026-11-19T12:29:33.027Z"
     },
     {
       "symbol": "ETH",
       "name": "Ethereum",
-      "price_usd": 1802.9411655860745,
-      "market_cap_usd": 220379498329.4228,
-      "volume_24h_usd": 10695095539.035685,
-      "percent_change_24h": 0.302062982433,
+      "price_usd": 1796.6434256136242,
+      "market_cap_usd": 219609704615.55716,
+      "volume_24h_usd": 10796347580.519562,
+      "percent_change_24h": -0.196395297992,
       "circulating_supply": 122233327.70694432,
-      "last_updated": "2026-11-19T12:03:48.201Z"
+      "last_updated": "2026-11-19T12:29:33.175Z"
     },
     {
       "symbol": "USDT",
       "name": "Tether USDt",
-      "price_usd": 0.998876758524709,
-      "market_cap_usd": 175049210432.29776,
-      "volume_24h_usd": 56625913564.141396,
-      "percent_change_24h": -0.021613273655,
+      "price_usd": 0.998898768036992,
+      "market_cap_usd": 175053067512.47733,
+      "volume_24h_usd": 57217258064.37545,
+      "percent_change_24h": -0.001152163843,
       "circulating_supply": 175246054068.6087,
-      "last_updated": "2026-11-19T12:03:48.099Z"
+      "last_updated": "2026-11-19T12:29:33.101Z"
     },
     {
       "symbol": "BNB",
       "name": "BNB",
-      "price_usd": 591.0910719706206,
-      "market_cap_usd": 77734595931.94666,
-      "volume_24h_usd": 831839331.0754168,
-      "percent_change_24h": 0.335768075692,
-      "circulating_supply": 131510353.68,
-      "last_updated": "2026-11-19T12:03:48.099Z"
+      "price_usd": 589.2165675635188,
+      "market_cap_usd": 77488077143.92032,
+      "volume_24h_usd": 832563002.1891391,
+      "percent_change_24h": -0.043951825638,
+      "circulating_supply": 131510350.2,
+      "last_updated": "2026-11-19T12:29:33.101Z"
     },
     {
       "symbol": "USDC",
       "name": "USDC",
-      "price_usd": 0.999855706250412,
-      "market_cap_usd": 68200995212.15127,
-      "volume_24h_usd": 12529338918.484236,
-      "percent_change_24h": -0.017201184909,
-      "circulating_supply": 68210837609.67251,
-      "last_updated": "2026-11-19T12:03:48.174Z"
+      "price_usd": 0.9998034947150766,
+      "market_cap_usd": 68216326655.03947,
+      "volume_24h_usd": 12656808687.593016,
+      "percent_change_24h": -0.001359829686,
+      "circulating_supply": 68229734158.3905,
+      "last_updated": "2026-11-19T12:29:33.162Z"
     },
     {
       "symbol": "XRP",
       "name": "XRP",
-      "price_usd": 0.9873207918824525,
-      "market_cap_usd": 62711266674.522446,
-      "volume_24h_usd": 1706537101.0748253,
-      "percent_change_24h": 0.011081499056,
+      "price_usd": 0.9805613367085378,
+      "market_cap_usd": 62281929017.02448,
+      "volume_24h_usd": 1721574575.266843,
+      "percent_change_24h": -0.411300066913,
       "circulating_supply": 63516606953,
-      "last_updated": "2026-11-19T12:03:48.088Z"
+      "last_updated": "2026-11-19T12:29:33.091Z"
     },
     {
       "symbol": "SOL",
       "name": "Solana",
-      "price_usd": 74.68810782188285,
-      "market_cap_usd": 44204295452.95397,
-      "volume_24h_usd": 2131883569.355624,
-      "percent_change_24h": 0.403402732845,
-      "circulating_supply": 591851858.9113669,
-      "last_updated": "2026-11-19T12:03:48.064Z"
+      "price_usd": 74.33205670468156,
+      "market_cap_usd": 43993552806.36383,
+      "volume_24h_usd": 2146715370.1153564,
+      "percent_change_24h": -0.274335136843,
+      "circulating_supply": 591851682.2580135,
+      "last_updated": "2026-11-19T12:29:33.058Z"
     },
     {
       "symbol": "TRX",
       "name": "TRON",
-      "price_usd": 0.31238507367364915,
-      "market_cap_usd": 29691306663.719933,
-      "volume_24h_usd": 375276453.59014595,
-      "percent_change_24h": 0.857331189328,
-      "circulating_supply": 95047136262.14627,
-      "last_updated": "2026-11-19T12:03:48.163Z"
+      "price_usd": 0.3121622393228194,
+      "market_cap_usd": 29670130693.768066,
+      "volume_24h_usd": 372641925.77554595,
+      "percent_change_24h": 0.798302107728,
+      "circulating_supply": 95047148425.54997,
+      "last_updated": "2026-11-19T12:29:33.150Z"
     },
     {
       "symbol": "HYPE",
       "name": "Hyperliquid",
-      "price_usd": 68.44766591231186,
-      "market_cap_usd": 17280858844.27214,
-      "volume_24h_usd": 791316235.5684258,
-      "percent_change_24h": -0.10587508992,
-      "circulating_supply": 252468197.62138578,
-      "last_updated": "2026-11-19T12:03:48.201Z"
+      "price_usd": 68.07559870759454,
+      "market_cap_usd": 17186874556.218426,
+      "volume_24h_usd": 794127929.9173172,
+      "percent_change_24h": -1.323712469736,
+      "circulating_supply": 252467475.60812932,
+      "last_updated": "2026-11-19T12:29:33.175Z"
     },
     {
       "symbol": "ZEC",
       "name": "Zcash",
-      "price_usd": 952.0732319465058,
-      "market_cap_usd": 16159392129.47321,
-      "volume_24h_usd": 674284725.4121507,
-      "percent_change_24h": 1.569372670238,
-      "circulating_supply": 16972845.77199536,
-      "last_updated": "2026-11-19T12:03:48.064Z"
+      "price_usd": 940.7817487942613,
+      "market_cap_usd": 15967770247.434292,
+      "volume_24h_usd": 682096000.9991528,
+      "percent_change_24h": 0.431722244258,
+      "circulating_supply": 16972874.1739507,
+      "last_updated": "2026-11-19T12:29:33.058Z"
     },
     {
       "symbol": "XMR",
       "name": "Monero",
-      "price_usd": 501.0853391539509,
-      "market_cap_usd": 9436962708.95827,
-      "volume_24h_usd": 136012276.14068922,
-      "percent_change_24h": -0.960478366007,
-      "circulating_supply": 18833044.93580265,
-      "last_updated": "2026-11-19T12:03:48.018Z"
+      "price_usd": 500.5744684238026,
+      "market_cap_usd": 9427345061.386873,
+      "volume_24h_usd": 136294343.72063828,
+      "percent_change_24h": -0.840486951334,
+      "circulating_supply": 18833052.13522272,
+      "last_updated": "2026-11-19T12:29:33.027Z"
     },
     {
       "symbol": "DOGE",
       "name": "Dogecoin",
-      "price_usd": 0.05958510522660115,
-      "market_cap_usd": 9343715105.365055,
-      "volume_24h_usd": 432994777.0606339,
-      "percent_change_24h": 0.443680186933,
-      "circulating_supply": 156812932860.16806,
-      "last_updated": "2026-11-19T12:03:48.174Z"
+      "price_usd": 0.05919548010805941,
+      "market_cap_usd": 9282631054.72576,
+      "volume_24h_usd": 439181710.38848054,
+      "percent_change_24h": -0.226329050561,
+      "circulating_supply": 156813172860.16806,
+      "last_updated": "2026-11-19T12:29:33.162Z"
     },
     {
       "symbol": "LEO",
       "name": "UNUS SED LEO",
-      "price_usd": 9.290475920758903,
-      "market_cap_usd": 8545917223.5979595,
-      "volume_24h_usd": 934006.5992663319,
-      "percent_change_24h": 0.181015040368,
+      "price_usd": 9.309244781957998,
+      "market_cap_usd": 8563181907.943168,
+      "volume_24h_usd": 938446.9502712998,
+      "percent_change_24h": -0.115625019436,
       "circulating_supply": 919857851.9,
-      "last_updated": "2026-11-19T12:03:48.127Z"
+      "last_updated": "2026-11-19T12:29:33.134Z"
     },
     {
       "symbol": "LINK",
       "name": "Chainlink",
-      "price_usd": 9.195363591177593,
-      "market_cap_usd": 6879051230.606012,
-      "volume_24h_usd": 195202572.55395058,
-      "percent_change_24h": 0.504052160135,
+      "price_usd": 9.172480298518504,
+      "market_cap_usd": 6861932240.044523,
+      "volume_24h_usd": 197535517.67210117,
+      "percent_change_24h": 0.30735849462,
       "circulating_supply": 748099970.424884,
-      "last_updated": "2026-11-19T12:03:48.064Z"
+      "last_updated": "2026-11-19T12:29:33.058Z"
     },
     {
       "symbol": "ADA",
       "name": "Cardano",
-      "price_usd": 0.1539387179473881,
-      "market_cap_usd": 5668122647.407645,
-      "volume_24h_usd": 219504227.05079648,
-      "percent_change_24h": 0.548305145412,
+      "price_usd": 0.15325316308152953,
+      "market_cap_usd": 5642880076.123262,
+      "volume_24h_usd": 223333178.3894922,
+      "percent_change_24h": 0.123998823979,
       "circulating_supply": 36820643454.65609,
-      "last_updated": "2026-11-19T12:03:48.127Z"
+      "last_updated": "2026-11-19T12:29:33.134Z"
     },
     {
       "symbol": "USDe",
       "name": "Ethena USDe",
-      "price_usd": 0.9997336987971887,
-      "market_cap_usd": 4919366327.839334,
-      "volume_24h_usd": 32533693.307003558,
-      "percent_change_24h": 0.043883168493,
+      "price_usd": 0.9999037493272306,
+      "market_cap_usd": 4920203091.522028,
+      "volume_24h_usd": 33729259.3257681,
+      "percent_change_24h": 0.050888230801,
       "circulating_supply": 4920676709.965843,
-      "last_updated": "2026-11-19T12:03:48.018Z"
+      "last_updated": "2026-11-19T12:29:33.027Z"
     },
     {
       "symbol": "XLM",
       "name": "Stellar",
-      "price_usd": 0.1384466692773159,
-      "market_cap_usd": 4903538855.638909,
-      "volume_24h_usd": 129447970.26058328,
-      "percent_change_24h": -1.324589437974,
-      "circulating_supply": 35418250805.41927,
-      "last_updated": "2026-11-19T12:03:48.018Z"
-    },
-    {
-      "symbol": "NEAR",
-      "name": "NEAR Protocol",
-      "price_usd": 3.400429054131932,
-      "market_cap_usd": 4461748748.703722,
-      "volume_24h_usd": 585638903.3084564,
-      "percent_change_24h": 1.649691441135,
-      "circulating_supply": 1312113465,
-      "last_updated": "2026-11-19T12:03:48.163Z"
+      "price_usd": 0.13729172853750093,
+      "market_cap_usd": 4862632866.232445,
+      "volume_24h_usd": 130404439.58977166,
+      "percent_change_24h": -2.195969652993,
+      "circulating_supply": 35418250742.64563,
+      "last_updated": "2026-11-19T12:29:33.027Z"
     },
     {
       "symbol": "DAI",
       "name": "Dai",
-      "price_usd": 0.9997239165909972,
-      "market_cap_usd": 4420258471.585911,
-      "volume_24h_usd": 15067239.160390316,
-      "percent_change_24h": 0.00050966402,
+      "price_usd": 0.9997515775137805,
+      "market_cap_usd": 4420380773.779782,
+      "volume_24h_usd": 15227957.914546672,
+      "percent_change_24h": 0.00448613535,
       "circulating_supply": 4421479168.627621,
-      "last_updated": "2026-11-19T12:03:48.174Z"
+      "last_updated": "2026-11-19T12:29:33.162Z"
+    },
+    {
+      "symbol": "NEAR",
+      "name": "NEAR Protocol",
+      "price_usd": 3.3698070448794026,
+      "market_cap_usd": 4421569198.038123,
+      "volume_24h_usd": 589818945.89368,
+      "percent_change_24h": 0.776585133014,
+      "circulating_supply": 1312113465,
+      "last_updated": "2026-11-19T12:29:33.150Z"
     },
     {
       "symbol": "BCH",
       "name": "Bitcoin Cash",
-      "price_usd": 209.77069760733812,
-      "market_cap_usd": 4220334055.4890842,
-      "volume_24h_usd": 101390261.02881087,
-      "percent_change_24h": 0.768666659293,
+      "price_usd": 208.65672121322874,
+      "market_cap_usd": 4197922190.6924524,
+      "volume_24h_usd": 102174711.601665,
+      "percent_change_24h": 0.259055598407,
       "circulating_supply": 20118796.875,
-      "last_updated": "2026-11-19T12:03:48.072Z"
+      "last_updated": "2026-11-19T12:29:33.071Z"
     },
     {
       "symbol": "LTC",
       "name": "Litecoin",
-      "price_usd": 44.517681526794675,
-      "market_cap_usd": 3465543426.921526,
-      "volume_24h_usd": 182269881.4975724,
-      "percent_change_24h": 0.754424114954,
-      "circulating_supply": 77846449.0527355,
-      "last_updated": "2026-11-19T12:03:48.037Z"
+      "price_usd": 44.20762258402161,
+      "market_cap_usd": 3441408373.3286967,
+      "volume_24h_usd": 182675677.0501022,
+      "percent_change_24h": 0.24978220149,
+      "circulating_supply": 77846492.80308864,
+      "last_updated": "2026-11-19T12:29:33.042Z"
     },
     {
       "symbol": "CC",
       "name": "Canton",
-      "price_usd": 0.08317735163662325,
-      "market_cap_usd": 3334136216.829763,
-      "volume_24h_usd": 15339052.13374173,
-      "percent_change_24h": -0.242677366257,
+      "price_usd": 0.08281784155012344,
+      "market_cap_usd": 3319725375.7037897,
+      "volume_24h_usd": 15434215.253737837,
+      "percent_change_24h": -0.590866069727,
       "circulating_supply": 40084664289.33201,
-      "last_updated": "2026-11-19T12:03:48.127Z"
+      "last_updated": "2026-11-19T12:29:33.134Z"
     },
     {
       "symbol": "UNI",
       "name": "Uniswap",
-      "price_usd": 5.193848223148354,
-      "market_cap_usd": 3238210745.985182,
-      "volume_24h_usd": 244731682.94057527,
-      "percent_change_24h": -0.770724084084,
+      "price_usd": 5.13509496198412,
+      "market_cap_usd": 3201579825.425018,
+      "volume_24h_usd": 248256548.93976545,
+      "percent_change_24h": -1.78796537183,
       "circulating_supply": 623470422.480362,
-      "last_updated": "2026-11-19T12:03:48.037Z"
+      "last_updated": "2026-11-19T12:29:33.042Z"
     },
     {
       "symbol": "AVAX",
       "name": "Avalanche",
-      "price_usd": 7.117273294283768,
-      "market_cap_usd": 3178832227.8504467,
-      "volume_24h_usd": 232725650.975657,
-      "percent_change_24h": -0.020637968504,
+      "price_usd": 7.090769474266667,
+      "market_cap_usd": 3166994661.1661415,
+      "volume_24h_usd": 233109132.74466386,
+      "percent_change_24h": -0.309261585811,
       "circulating_supply": 446636246.2719428,
-      "last_updated": "2026-11-19T12:03:48.037Z"
+      "last_updated": "2026-11-19T12:29:33.042Z"
     },
     {
       "symbol": "SUI",
       "name": "Sui",
-      "price_usd": 0.7300246389987168,
-      "market_cap_usd": 3021603769.1037474,
-      "volume_24h_usd": 254075098.02995685,
-      "percent_change_24h": 0.6411268179,
+      "price_usd": 0.7251235523697118,
+      "market_cap_usd": 3001317958.1327405,
+      "volume_24h_usd": 255552205.30447415,
+      "percent_change_24h": -0.000541845142,
       "circulating_supply": 4139043544.1303763,
-      "last_updated": "2026-11-19T12:03:48.163Z"
+      "last_updated": "2026-11-19T12:29:33.150Z"
     },
     {
       "symbol": "GRAM",
       "name": "Gram (prev. Toncoin)",
-      "price_usd": 1.024115712671609,
-      "market_cap_usd": 2939544632.353344,
-      "volume_24h_usd": 61892054.78661101,
-      "percent_change_24h": -0.991808288469,
+      "price_usd": 1.0151776656006815,
+      "market_cap_usd": 2913889535.0181746,
+      "volume_24h_usd": 61641273.68893237,
+      "percent_change_24h": -1.11228160851,
       "circulating_supply": 2870324706.4581785,
-      "last_updated": "2026-11-19T12:03:48.099Z"
+      "last_updated": "2026-11-19T12:29:33.101Z"
     },
     {
       "symbol": "USD1",
       "name": "World Liberty Financial USD",
-      "price_usd": 0.9989515410374784,
-      "market_cap_usd": 2888519004.5737286,
-      "volume_24h_usd": 907955378.8030186,
-      "percent_change_24h": 0.021469647616,
+      "price_usd": 0.9990871748894679,
+      "market_cap_usd": 2888911196.730245,
+      "volume_24h_usd": 908988614.2406783,
+      "percent_change_24h": 0.026057367665,
       "circulating_supply": 2891550676.796401,
-      "last_updated": "2026-11-19T12:03:48.072Z"
+      "last_updated": "2026-11-19T12:29:33.071Z"
     },
     {
       "symbol": "RLUSD",
       "name": "Ripple USD",
-      "price_usd": 0.9999552865950632,
-      "market_cap_usd": 2797213239.399709,
-      "volume_24h_usd": 360984953.22889155,
-      "percent_change_24h": 0.002137843205,
-      "circulating_supply": 2797338317.920664,
-      "last_updated": "2026-11-19T12:03:48.018Z"
+      "price_usd": 0.9999572405402953,
+      "market_cap_usd": 2797218705.245579,
+      "volume_24h_usd": 361017930.9653847,
+      "percent_change_24h": -0.000928111493,
+      "circulating_supply": 2797338317.9206643,
+      "last_updated": "2026-11-19T12:29:33.027Z"
     },
     {
       "symbol": "XAUt",
       "name": "Tether Gold",
-      "price_usd": 3711.406711514645,
-      "market_cap_usd": 2781415647.1712933,
-      "volume_24h_usd": 222794198.0743793,
-      "percent_change_24h": -1.162445063282,
+      "price_usd": 3708.2951625034493,
+      "market_cap_usd": 2779083779.0201073,
+      "volume_24h_usd": 224234907.05932054,
+      "percent_change_24h": -1.377744349446,
       "circulating_supply": 749423.564532,
-      "last_updated": "2026-11-19T12:03:48.037Z"
+      "last_updated": "2026-11-19T12:29:33.042Z"
     },
     {
       "symbol": "USDG",
       "name": "Global Dollar",
-      "price_usd": 0.9999648519168043,
-      "market_cap_usd": 2615313041.1025405,
-      "volume_24h_usd": 413643497.21997106,
-      "percent_change_24h": 0.00417080727,
+      "price_usd": 0.9999139742228171,
+      "market_cap_usd": 2615179975.3289475,
+      "volume_24h_usd": 417765493.48801756,
+      "percent_change_24h": -0.007488925841,
       "circulating_supply": 2615404967.573931,
-      "last_updated": "2026-11-19T12:03:48.088Z"
+      "last_updated": "2026-11-19T12:29:33.091Z"
     },
     {
       "symbol": "HBAR",
       "name": "Hedera",
-      "price_usd": 0.05610715170290081,
-      "market_cap_usd": 2487096325.8587985,
-      "volume_24h_usd": 43486922.38628332,
-      "percent_change_24h": -1.973130842251,
+      "price_usd": 0.05529777611950133,
+      "market_cap_usd": 2451218635.0722136,
+      "volume_24h_usd": 44069263.07088867,
+      "percent_change_24h": -3.465387723206,
       "circulating_supply": 44327616896.83514,
-      "last_updated": "2026-11-19T12:03:48.201Z"
+      "last_updated": "2026-11-19T12:29:33.175Z"
     },
     {
       "symbol": "PYUSD",
       "name": "PayPal USD",
-      "price_usd": 0.9998265354663459,
-      "market_cap_usd": 2383555481.306208,
-      "volume_24h_usd": 103146927.11411561,
-      "percent_change_24h": 0.009167141253,
+      "price_usd": 0.9999298730992604,
+      "market_cap_usd": 2383801835.021199,
+      "volume_24h_usd": 103156222.88572116,
+      "percent_change_24h": 0.012893515353,
       "circulating_supply": 2383969015.379707,
-      "last_updated": "2026-11-19T12:03:48.099Z"
+      "last_updated": "2026-11-19T12:29:33.101Z"
     },
     {
       "symbol": "TAO",
       "name": "Bittensor",
-      "price_usd": 197.63767858101417,
-      "market_cap_usd": 2318918335.8370895,
-      "volume_24h_usd": 157243198.92575008,
-      "percent_change_24h": 1.129039021154,
+      "price_usd": 197.16950444861902,
+      "market_cap_usd": 2313425164.758728,
+      "volume_24h_usd": 167914181.41215792,
+      "percent_change_24h": 0.858167964057,
       "circulating_supply": 11733179.3840441,
-      "last_updated": "2026-11-19T12:03:48.088Z"
+      "last_updated": "2026-11-19T12:29:33.091Z"
     },
     {
       "symbol": "SHIB",
       "name": "Shiba Inu",
-      "price_usd": 3.872080455749552e-06,
-      "market_cap_usd": 2281576768.9450645,
-      "volume_24h_usd": 42438601.756754555,
-      "percent_change_24h": 1.150101513243,
+      "price_usd": 3.872777131539872e-06,
+      "market_cap_usd": 2281987276.7629795,
+      "volume_24h_usd": 42730009.06849651,
+      "percent_change_24h": 1.266092089057,
       "circulating_supply": 589237954897659.9,
-      "last_updated": "2026-11-19T12:03:48.018Z"
+      "last_updated": "2026-11-19T12:29:33.027Z"
     },
     {
       "symbol": "CRO",
       "name": "Cronos",
-      "price_usd": 0.04167783338116806,
-      "market_cap_usd": 2165218601.968498,
-      "volume_24h_usd": 7077109.665669563,
-      "percent_change_24h": -4.288394128495,
+      "price_usd": 0.04164985587473653,
+      "market_cap_usd": 2163765133.4830275,
+      "volume_24h_usd": 7107103.729197895,
+      "percent_change_24h": -3.901958669103,
       "circulating_supply": 51951323432.92208,
-      "last_updated": "2026-11-19T12:03:48.201Z"
+      "last_updated": "2026-11-19T12:29:33.175Z"
     },
     {
       "symbol": "M",
       "name": "MemeCore",
-      "price_usd": 0.8734800506580523,
-      "market_cap_usd": 2008580046.118363,
-      "volume_24h_usd": 2577044.798073389,
-      "percent_change_24h": -0.420905076378,
-      "circulating_supply": 2299514504.7733626,
-      "last_updated": "2026-11-19T12:03:48.201Z"
+      "price_usd": 0.86371204602281,
+      "market_cap_usd": 1986118377.8166487,
+      "volume_24h_usd": 2578841.2204398653,
+      "percent_change_24h": -1.43289813381,
+      "circulating_supply": 2299514504.819349,
+      "last_updated": "2026-11-19T12:29:33.175Z"
     },
     {
       "symbol": "QNT",
       "name": "Quant",
-      "price_usd": 153.98225344193526,
-      "market_cap_usd": 1858987402.4540825,
-      "volume_24h_usd": 61057841.13392502,
-      "percent_change_24h": -1.520211540015,
+      "price_usd": 153.65264465717033,
+      "market_cap_usd": 1855008121.9531171,
+      "volume_24h_usd": 61148955.97284574,
+      "percent_change_24h": -1.102777694163,
       "circulating_supply": 12072738,
-      "last_updated": "2026-11-19T12:03:48.127Z"
+      "last_updated": "2026-11-19T12:29:33.134Z"
     },
     {
       "symbol": "OKB",
       "name": "OKB",
-      "price_usd": 87.79224401503576,
-      "market_cap_usd": 1843637124.315751,
-      "volume_24h_usd": 18147898.123552524,
-      "percent_change_24h": 0.719508347535,
+      "price_usd": 87.65650767907641,
+      "market_cap_usd": 1840786661.2606046,
+      "volume_24h_usd": 17845236.164856434,
+      "percent_change_24h": 0.196023932723,
       "circulating_supply": 21000000,
-      "last_updated": "2026-11-19T12:03:48.127Z"
+      "last_updated": "2026-11-19T12:29:33.134Z"
     },
     {
       "symbol": "AAVE",
       "name": "Aave",
-      "price_usd": 109.77725671674919,
-      "market_cap_usd": 1695097728.594394,
-      "volume_24h_usd": 208487473.85968292,
-      "percent_change_24h": -1.640995301904,
-      "circulating_supply": 15441246.93303404,
-      "last_updated": "2026-11-19T12:03:48.113Z"
+      "price_usd": 108.7828129745576,
+      "market_cap_usd": 1679742282.6132333,
+      "volume_24h_usd": 209216357.34879276,
+      "percent_change_24h": -2.695712117519,
+      "circulating_supply": 15441246.98270209,
+      "last_updated": "2026-11-19T12:29:33.115Z"
     },
     {
       "symbol": "PAXG",
       "name": "PAX Gold",
-      "price_usd": 3710.5096564955325,
-      "market_cap_usd": 1660365123.3273528,
-      "volume_24h_usd": 131471051.95619503,
-      "percent_change_24h": -1.193330957275,
+      "price_usd": 3706.848335087237,
+      "market_cap_usd": 1658726768.7792158,
+      "volume_24h_usd": 132338551.05080713,
+      "percent_change_24h": -1.408978478181,
       "circulating_supply": 447476.297608,
-      "last_updated": "2026-11-19T12:03:48.099Z"
+      "last_updated": "2026-11-19T12:29:33.101Z"
     },
     {
       "symbol": "U",
       "name": "United Stables",
-      "price_usd": 0.9988644468887529,
-      "market_cap_usd": 1634786338.4948938,
-      "volume_24h_usd": 2013116496.0746696,
-      "percent_change_24h": -0.00555854671,
+      "price_usd": 0.9991479097400314,
+      "market_cap_usd": 1635250266.5065317,
+      "volume_24h_usd": 2070856388.7526152,
+      "percent_change_24h": 0.024366178925,
       "circulating_supply": 1636644835.63,
-      "last_updated": "2026-11-19T12:03:48.201Z"
+      "last_updated": "2026-11-19T12:29:33.175Z"
     },
     {
       "symbol": "PEPE",
       "name": "Pepe",
-      "price_usd": 3.932025044678121e-06,
-      "market_cap_usd": 1626963243.3713422,
-      "volume_24h_usd": 262658212.2249285,
-      "percent_change_24h": 4.96682972849,
+      "price_usd": 3.903268368120592e-06,
+      "market_cap_usd": 1615064525.7311935,
+      "volume_24h_usd": 274127931.9285286,
+      "percent_change_24h": 4.052943772058,
       "circulating_supply": 413772350095630.44,
-      "last_updated": "2026-11-19T12:03:48.174Z"
+      "last_updated": "2026-11-19T12:29:33.162Z"
     },
     {
       "symbol": "ENA",
       "name": "Ethena",
-      "price_usd": 0.1112633605248396,
-      "market_cap_usd": 1502055367.0853345,
-      "volume_24h_usd": 294038518.3069928,
-      "percent_change_24h": -0.502055166382,
+      "price_usd": 0.11030490939835878,
+      "market_cap_usd": 1489116276.8778436,
+      "volume_24h_usd": 294540237.5110172,
+      "percent_change_24h": -0.859022146878,
       "circulating_supply": 13500000000,
-      "last_updated": "2026-11-19T12:03:48.113Z"
+      "last_updated": "2026-11-19T12:29:33.115Z"
     },
     {
       "symbol": "ONDO",
       "name": "Ondo",
-      "price_usd": 0.30491689402706634,
-      "market_cap_usd": 1484741176.8740454,
-      "volume_24h_usd": 91641654.82690556,
-      "percent_change_24h": -0.534155707015,
+      "price_usd": 0.3023373558853829,
+      "market_cap_usd": 1472180552.7456408,
+      "volume_24h_usd": 91770083.90091912,
+      "percent_change_24h": -1.171569628665,
       "circulating_supply": 4869330647,
-      "last_updated": "2026-11-19T12:03:48.072Z"
+      "last_updated": "2026-11-19T12:29:33.071Z"
     },
     {
       "symbol": "WLFI",
       "name": "World Liberty Financial",
-      "price_usd": 0.04607948470731682,
-      "market_cap_usd": 1464431706.1228533,
-      "volume_24h_usd": 30471255.635062624,
-      "percent_change_24h": -0.028599414205,
+      "price_usd": 0.04616924878146119,
+      "market_cap_usd": 1467284458.4286294,
+      "volume_24h_usd": 30226502.78945349,
+      "percent_change_24h": 0.246486075304,
       "circulating_supply": 31780557344,
-      "last_updated": "2026-11-19T12:03:48.018Z"
+      "last_updated": "2026-11-19T12:29:33.027Z"
     },
     {
       "symbol": "ASTER",
       "name": "Aster",
-      "price_usd": 0.5197456823896579,
-      "market_cap_usd": 1439777912.8639116,
-      "volume_24h_usd": 105731718.96859276,
-      "percent_change_24h": -5.694354960673,
+      "price_usd": 0.515522262834727,
+      "market_cap_usd": 1428078371.3420098,
+      "volume_24h_usd": 105666021.4454264,
+      "percent_change_24h": -5.732292335725,
       "circulating_supply": 2770158486.443178,
-      "last_updated": "2026-11-19T12:03:48.072Z"
+      "last_updated": "2026-11-19T12:29:33.071Z"
     },
     {
       "symbol": "USDD",
       "name": "USDD",
-      "price_usd": 0.9985326222219989,
-      "market_cap_usd": 1418918139.3527224,
-      "volume_24h_usd": 5157992.206550811,
-      "percent_change_24h": 0.085012404929,
+      "price_usd": 0.9979540443932537,
+      "market_cap_usd": 1418095978.3557115,
+      "volume_24h_usd": 3982013.6577932662,
+      "percent_change_24h": 0.003879639931,
       "circulating_supply": 1421003288,
-      "last_updated": "2026-11-19T12:03:48.163Z"
+      "last_updated": "2026-11-19T12:29:33.150Z"
     },
     {
       "symbol": "MNT",
       "name": "Mantle",
-      "price_usd": 0.39749999804832414,
-      "market_cap_usd": 1316521338.094437,
-      "volume_24h_usd": 33959606.237858236,
-      "percent_change_24h": 2.531106495571,
+      "price_usd": 0.3990357618885823,
+      "market_cap_usd": 1321607793.1281497,
+      "volume_24h_usd": 33955096.850089155,
+      "percent_change_24h": 3.007911745881,
       "circulating_supply": 3312003382.53684,
-      "last_updated": "2026-11-19T12:03:48.217Z"
+      "last_updated": "2026-11-19T12:29:33.189Z"
     },
     {
       "symbol": "ICP",
       "name": "Internet Computer",
-      "price_usd": 2.2704822706522334,
-      "market_cap_usd": 1269327438.424293,
-      "volume_24h_usd": 42656350.515971854,
-      "percent_change_24h": 0.927207948927,
+      "price_usd": 2.247966341672263,
+      "market_cap_usd": 1256739766.2696548,
+      "volume_24h_usd": 42640547.18499064,
+      "percent_change_24h": 0.669820749924,
       "circulating_supply": 559056309.2393837,
-      "last_updated": "2026-11-19T12:03:48.113Z"
+      "last_updated": "2026-11-19T12:29:33.115Z"
     },
     {
       "symbol": "PUMP",
       "name": "Pump.fun",
-      "price_usd": 0.002727527219056119,
-      "market_cap_usd": 1247925473.1677067,
-      "volume_24h_usd": 102746023.7190924,
-      "percent_change_24h": 0.767833937511,
+      "price_usd": 0.0026995039738492714,
+      "market_cap_usd": 1235103998.3570714,
+      "volume_24h_usd": 103914038.57883555,
+      "percent_change_24h": 0.078217816448,
       "circulating_supply": 457529979700.6464,
-      "last_updated": "2026-11-19T12:03:48.201Z"
+      "last_updated": "2026-11-19T12:29:33.175Z"
     },
     {
       "symbol": "DOT",
       "name": "Polkadot",
-      "price_usd": 0.7188034584766785,
-      "market_cap_usd": 1231188420.493587,
-      "volume_24h_usd": 57544064.501193404,
-      "percent_change_24h": -0.870040019348,
+      "price_usd": 0.7139361032830321,
+      "market_cap_usd": 1222851466.5151706,
+      "volume_24h_usd": 57639009.93516055,
+      "percent_change_24h": -1.385581963971,
       "circulating_supply": 1712830407.2197683,
-      "last_updated": "2026-11-19T12:03:48.099Z"
+      "last_updated": "2026-11-19T12:29:33.101Z"
     },
     {
       "symbol": "JST",
       "name": "JUST",
-      "price_usd": 0.14484949650180695,
-      "market_cap_usd": 1161406144.347173,
-      "volume_24h_usd": 28663729.32576896,
-      "percent_change_24h": 0.175919446537,
+      "price_usd": 0.14469938403797658,
+      "market_cap_usd": 1160202539.6260927,
+      "volume_24h_usd": 28976729.22612011,
+      "percent_change_24h": 0.214459827355,
       "circulating_supply": 8018019892.341737,
-      "last_updated": "2026-11-19T12:03:48.018Z"
+      "last_updated": "2026-11-19T12:29:33.027Z"
     },
     {
       "symbol": "VVV",
       "name": "Venice Token",
-      "price_usd": 22.90306607947288,
-      "market_cap_usd": 1128998435.2288933,
-      "volume_24h_usd": 55425359.898606114,
-      "percent_change_24h": 8.544569331916,
-      "circulating_supply": 49294641.65676797,
-      "last_updated": "2026-11-19T12:03:48.064Z"
+      "price_usd": 22.732621502003433,
+      "market_cap_usd": 1120598399.1642706,
+      "volume_24h_usd": 55912902.76464617,
+      "percent_change_24h": 6.51519575495,
+      "circulating_supply": 49294728.24176974,
+      "last_updated": "2026-11-19T12:29:33.058Z"
     },
     {
       "symbol": "BGB",
       "name": "Bitget Token",
-      "price_usd": 1.5821500916714546,
-      "market_cap_usd": 1107492453.8770351,
-      "volume_24h_usd": 8466820.768174065,
-      "percent_change_24h": -1.101814332377,
+      "price_usd": 1.5796717874497277,
+      "market_cap_usd": 1105757660.674783,
+      "volume_24h_usd": 8504745.305013072,
+      "percent_change_24h": -1.362402240097,
       "circulating_supply": 699992029.6481038,
-      "last_updated": "2026-11-19T12:03:48.037Z"
+      "last_updated": "2026-11-19T12:29:33.042Z"
     },
     {
       "symbol": "SKY",
       "name": "Sky",
-      "price_usd": 0.04474149377104815,
-      "market_cap_usd": 1047538263.5229367,
-      "volume_24h_usd": 27189631.436596196,
-      "percent_change_24h": -13.804685895692,
+      "price_usd": 0.043055484166608426,
+      "market_cap_usd": 1008063506.9947885,
+      "volume_24h_usd": 30575574.524286143,
+      "percent_change_24h": -17.145707004896,
       "circulating_supply": 23413126724.901394,
-      "last_updated": "2026-11-19T12:03:48.174Z"
+      "last_updated": "2026-11-19T12:29:33.162Z"
     },
     {
       "symbol": "WLD",
       "name": "Worldcoin",
-      "price_usd": 0.2660230320596496,
-      "market_cap_usd": 1008848176.3622028,
-      "volume_24h_usd": 204968078.35124558,
-      "percent_change_24h": 0.911914071655,
-      "circulating_supply": 3792333951.50534,
-      "last_updated": "2026-11-19T12:03:48.099Z"
+      "price_usd": 0.26459964323340873,
+      "market_cap_usd": 1003450375.2853287,
+      "volume_24h_usd": 205072940.93047056,
+      "percent_change_24h": 0.499058922085,
+      "circulating_supply": 3792334573.936537,
+      "last_updated": "2026-11-19T12:29:33.101Z"
     },
     {
       "symbol": "MORPHO",
       "name": "Morpho",
-      "price_usd": 1.6894475593563494,
-      "market_cap_usd": 957486294.385077,
-      "volume_24h_usd": 13306003.753121803,
-      "percent_change_24h": -2.668606641685,
+      "price_usd": 1.6681342132008898,
+      "market_cap_usd": 945407057.7622415,
+      "volume_24h_usd": 13495429.265698213,
+      "percent_change_24h": -3.819634002485,
       "circulating_supply": 566745199.6851935,
-      "last_updated": "2026-11-19T12:03:48.018Z"
+      "last_updated": "2026-11-19T12:29:33.027Z"
     },
     {
       "symbol": "ETC",
       "name": "Ethereum Classic",
-      "price_usd": 5.9477456995746545,
-      "market_cap_usd": 946133552.9812249,
-      "volume_24h_usd": 24072880.866601083,
-      "percent_change_24h": -0.577916352897,
+      "price_usd": 5.912579914263134,
+      "market_cap_usd": 940539579.889446,
+      "volume_24h_usd": 24315534.054836925,
+      "percent_change_24h": -1.050243827286,
       "circulating_supply": 159074311.64195308,
-      "last_updated": "2026-11-19T12:03:48.064Z"
-    },
-    {
-      "symbol": "JUP",
-      "name": "Jupiter",
-      "price_usd": 0.2693853814935219,
-      "market_cap_usd": 894189539.4370607,
-      "volume_24h_usd": 34388160.20329533,
-      "percent_change_24h": 6.085431619673,
-      "circulating_supply": 3319369204.37,
-      "last_updated": "2026-11-19T12:03:48.201Z"
-    },
-    {
-      "symbol": "ARB",
-      "name": "Arbitrum",
-      "price_usd": 0.12774032052231324,
-      "market_cap_usd": 893884658.2726201,
-      "volume_24h_usd": 66318832.837782554,
-      "percent_change_24h": -1.081397767681,
-      "circulating_supply": 6997670388,
-      "last_updated": "2026-11-19T12:03:48.064Z"
+      "last_updated": "2026-11-19T12:29:33.058Z"
     },
     {
       "symbol": "PIEVERSE",
       "name": "Pieverse",
-      "price_usd": 2.949689116082026,
-      "market_cap_usd": 885945674.3250742,
-      "volume_24h_usd": 290794303.4937758,
-      "percent_change_24h": 20.244558173697,
+      "price_usd": 3.04431601699754,
+      "market_cap_usd": 914367074.0867689,
+      "volume_24h_usd": 283692023.7131019,
+      "percent_change_24h": 8.631127268697,
       "circulating_supply": 300352220,
-      "last_updated": "2026-11-19T12:03:48.064Z"
+      "last_updated": "2026-11-19T12:29:33.058Z"
     },
     {
-      "symbol": "POL",
-      "name": "Polygon (prev. MATIC)",
-      "price_usd": 0.08238656229890953,
-      "market_cap_usd": 877625914.0814623,
-      "volume_24h_usd": 72396405.07658641,
-      "percent_change_24h": 0.77633627036,
-      "circulating_supply": 10652537132.175966,
-      "last_updated": "2026-11-19T12:03:48.201Z"
+      "symbol": "ARB",
+      "name": "Arbitrum",
+      "price_usd": 0.12634428791388333,
+      "market_cap_usd": 884115682.2279277,
+      "volume_24h_usd": 66669891.63912282,
+      "percent_change_24h": -2.381196649331,
+      "circulating_supply": 6997670388,
+      "last_updated": "2026-11-19T12:29:33.058Z"
+    },
+    {
+      "symbol": "JUP",
+      "name": "Jupiter",
+      "price_usd": 0.26437239231489795,
+      "market_cap_usd": 877549577.5356963,
+      "volume_24h_usd": 34865422.673641965,
+      "percent_change_24h": 3.929310231615,
+      "circulating_supply": 3319369204.37,
+      "last_updated": "2026-11-19T12:29:33.175Z"
     },
     {
       "symbol": "KCS",
       "name": "KuCoin Token",
-      "price_usd": 6.266630538753307,
-      "market_cap_usd": 875166421.2271694,
-      "volume_24h_usd": 4188252.9035813645,
-      "percent_change_24h": 1.773954614308,
+      "price_usd": 6.241444959822809,
+      "market_cap_usd": 871649128.6657473,
+      "volume_24h_usd": 4165657.98976088,
+      "percent_change_24h": 0.920923439732,
       "circulating_supply": 139655021.2773955,
-      "last_updated": "2026-11-19T12:03:48.127Z"
+      "last_updated": "2026-11-19T12:29:33.134Z"
+    },
+    {
+      "symbol": "POL",
+      "name": "Polygon (prev. MATIC)",
+      "price_usd": 0.08156366151747446,
+      "market_cap_usd": 868859932.9511286,
+      "volume_24h_usd": 72718220.574459,
+      "percent_change_24h": -0.322991188702,
+      "circulating_supply": 10652537132.175966,
+      "last_updated": "2026-11-19T12:29:33.175Z"
     },
     {
       "symbol": "RENDER",
       "name": "Render",
-      "price_usd": 1.4382217309169696,
-      "market_cap_usd": 800234739.0963591,
-      "volume_24h_usd": 17627318.568878375,
-      "percent_change_24h": 0.63765628927,
+      "price_usd": 1.4281751561755256,
+      "market_cap_usd": 794644767.8532562,
+      "volume_24h_usd": 17973572.163007364,
+      "percent_change_24h": -0.469435324829,
       "circulating_supply": 556405679.2454054,
-      "last_updated": "2026-11-19T12:03:48.037Z"
+      "last_updated": "2026-11-19T12:29:33.042Z"
     },
     {
       "symbol": "KAS",
       "name": "Kaspa",
-      "price_usd": 0.02750744543438461,
-      "market_cap_usd": 765200117.2983212,
-      "volume_24h_usd": 6347194.738459571,
-      "percent_change_24h": 0.050032887063,
-      "circulating_supply": 27817927299.850704,
-      "last_updated": "2026-11-19T12:03:48.174Z"
+      "price_usd": 0.02718341412549941,
+      "market_cap_usd": 756187275.8546542,
+      "volume_24h_usd": 6425991.874884628,
+      "percent_change_24h": -0.834647747864,
+      "circulating_supply": 27817965483.052128,
+      "last_updated": "2026-11-19T12:29:33.162Z"
     },
     {
       "symbol": "GT",
       "name": "GateToken",
-      "price_usd": 7.146461019659521,
-      "market_cap_usd": 748348071.4754463,
-      "volume_24h_usd": 9334874.64473584,
-      "percent_change_24h": -1.562401747487,
+      "price_usd": 7.091364316124907,
+      "market_cap_usd": 742578570.7783381,
+      "volume_24h_usd": 9326425.640381502,
+      "percent_change_24h": -2.050765393898,
       "circulating_supply": 104715896.36,
-      "last_updated": "2026-11-19T12:03:48.127Z"
+      "last_updated": "2026-11-19T12:29:33.134Z"
     },
     {
       "symbol": "NIGHT",
       "name": "Midnight",
-      "price_usd": 0.04473572636393885,
-      "market_cap_usd": 742944075.219778,
-      "volume_24h_usd": 44301894.45910507,
-      "percent_change_24h": -4.683487535719,
+      "price_usd": 0.04448803765938938,
+      "market_cap_usd": 738830609.9762087,
+      "volume_24h_usd": 43793734.05124062,
+      "percent_change_24h": -3.916479780633,
       "circulating_supply": 16607399401,
-      "last_updated": "2026-11-19T12:03:48.037Z"
+      "last_updated": "2026-11-19T12:29:33.042Z"
     },
     {
       "symbol": "LIT",
       "name": "Lighter",
-      "price_usd": 2.961029341051266,
-      "market_cap_usd": 740257335.2628165,
-      "volume_24h_usd": 60895132.405340075,
-      "percent_change_24h": 4.089722987207,
+      "price_usd": 2.9217955836470786,
+      "market_cap_usd": 730448895.9117696,
+      "volume_24h_usd": 60988209.335689254,
+      "percent_change_24h": 2.783866993583,
       "circulating_supply": 250000000,
-      "last_updated": "2026-11-19T12:03:48.037Z"
+      "last_updated": "2026-11-19T12:29:33.042Z"
     },
     {
       "symbol": "INJ",
       "name": "Injective",
-      "price_usd": 7.326966986651247,
-      "market_cap_usd": 732483883.2455139,
-      "volume_24h_usd": 97158399.55042098,
-      "percent_change_24h": 0.214384034654,
+      "price_usd": 7.1860734613519375,
+      "market_cap_usd": 718398623.038472,
+      "volume_24h_usd": 97847819.11143804,
+      "percent_change_24h": -1.462296456949,
       "circulating_supply": 99970954.5,
-      "last_updated": "2026-11-19T12:03:48.174Z"
+      "last_updated": "2026-11-19T12:29:33.162Z"
     },
     {
       "symbol": "ALGO",
       "name": "Algorand",
-      "price_usd": 0.07842064330772193,
-      "market_cap_usd": 712181542.7191143,
-      "volume_24h_usd": 46841215.53909188,
-      "percent_change_24h": -1.150517284504,
-      "circulating_supply": 9081557006.928904,
-      "last_updated": "2026-11-19T12:03:48.127Z"
+      "price_usd": 0.07756718948403257,
+      "market_cap_usd": 704431173.0411586,
+      "volume_24h_usd": 46934068.36555272,
+      "percent_change_24h": -1.944880658266,
+      "circulating_supply": 9081561130.768671,
+      "last_updated": "2026-11-19T12:29:33.134Z"
     },
     {
       "symbol": "ATOM",
       "name": "Cosmos",
-      "price_usd": 1.3117266506252316,
-      "market_cap_usd": 708890606.1013929,
-      "volume_24h_usd": 14973046.715661747,
-      "percent_change_24h": 1.739261832162,
+      "price_usd": 1.2998585639304732,
+      "market_cap_usd": 702476788.7360897,
+      "volume_24h_usd": 15283687.852969533,
+      "percent_change_24h": 0.942620289246,
       "circulating_supply": 540425557.232905,
-      "last_updated": "2026-11-19T12:03:48.088Z"
+      "last_updated": "2026-11-19T12:29:33.091Z"
     },
     {
       "symbol": "PI",
       "name": "Pi",
-      "price_usd": 0.056382501545541155,
-      "market_cap_usd": 642842014.3847593,
-      "volume_24h_usd": 6420551.195801433,
-      "percent_change_24h": -5.505069570138,
+      "price_usd": 0.056750915415249806,
+      "market_cap_usd": 647042465.0146325,
+      "volume_24h_usd": 6459889.8759086095,
+      "percent_change_24h": -5.035145919314,
       "circulating_supply": 11401445426.565977,
-      "last_updated": "2026-11-19T12:03:48.072Z"
+      "last_updated": "2026-11-19T12:29:33.071Z"
     },
     {
       "symbol": "XDC",
       "name": "XDC Network",
-      "price_usd": 0.02935673073434995,
-      "market_cap_usd": 630783043.8234118,
-      "volume_24h_usd": 15301905.093422137,
-      "percent_change_24h": -3.930506602665,
+      "price_usd": 0.029254686682199747,
+      "market_cap_usd": 628590440.7572924,
+      "volume_24h_usd": 15502472.344999176,
+      "percent_change_24h": -3.790332181121,
       "circulating_supply": 21486828677.600002,
-      "last_updated": "2026-11-19T12:03:48.037Z"
+      "last_updated": "2026-11-19T12:29:33.042Z"
     },
     {
       "symbol": "ZRO",
       "name": "LayerZero",
-      "price_usd": 1.4512403944799632,
-      "market_cap_usd": 589170882.8939362,
-      "volume_24h_usd": 68932461.77149582,
-      "percent_change_24h": 6.259079217225,
+      "price_usd": 1.4323667492605305,
+      "market_cap_usd": 581508608.4288261,
+      "volume_24h_usd": 69167236.59990822,
+      "percent_change_24h": 4.992882326787,
       "circulating_supply": 405977455.65445024,
-      "last_updated": "2026-11-19T12:03:48.099Z"
+      "last_updated": "2026-11-19T12:29:33.101Z"
     },
     {
       "symbol": "CAKE",
       "name": "PancakeSwap",
-      "price_usd": 1.6189504685840408,
-      "market_cap_usd": 537850772.6637832,
-      "volume_24h_usd": 18646514.391120505,
-      "percent_change_24h": 0.231358070486,
+      "price_usd": 1.6112190913053372,
+      "market_cap_usd": 535282239.9484229,
+      "volume_24h_usd": 18530799.94498713,
+      "percent_change_24h": -0.166221517598,
       "circulating_supply": 332221882.69551927,
-      "last_updated": "2026-11-19T12:03:48.064Z"
+      "last_updated": "2026-11-19T12:29:33.058Z"
     },
     {
       "symbol": "STX",
       "name": "Stacks",
-      "price_usd": 0.27637820280740427,
-      "market_cap_usd": 520655633.96867514,
-      "volume_24h_usd": 11801552.84424326,
-      "percent_change_24h": 1.678825422298,
+      "price_usd": 0.27379600368557866,
+      "market_cap_usd": 515791152.9526221,
+      "volume_24h_usd": 11888908.513794787,
+      "percent_change_24h": 0.25196883237,
       "circulating_supply": 1883852013.942999,
-      "last_updated": "2026-11-19T12:03:48.099Z"
+      "last_updated": "2026-11-19T12:29:33.101Z"
     },
     {
       "symbol": "ETHFI",
       "name": "ether.fi",
-      "price_usd": 0.5226118905981307,
-      "market_cap_usd": 504503388.58890545,
-      "volume_24h_usd": 40836617.42547438,
-      "percent_change_24h": 11.095938624783,
+      "price_usd": 0.5176054826480116,
+      "market_cap_usd": 499670452.674258,
+      "volume_24h_usd": 41500633.9536857,
+      "percent_change_24h": 9.160503580972,
       "circulating_supply": 965350000,
-      "last_updated": "2026-11-19T12:03:48.174Z"
+      "last_updated": "2026-11-19T12:29:33.162Z"
     },
     {
       "symbol": "TUSD",
       "name": "TrueUSD",
-      "price_usd": 0.9986131853575575,
-      "market_cap_usd": 493829282.24198693,
-      "volume_24h_usd": 15263854.150272077,
-      "percent_change_24h": 0.009602648322,
+      "price_usd": 0.998668388621095,
+      "market_cap_usd": 493856581.088437,
+      "volume_24h_usd": 15297414.34849368,
+      "percent_change_24h": 0.009872061689,
       "circulating_supply": 494515083,
-      "last_updated": "2026-11-19T12:03:48.217Z"
+      "last_updated": "2026-11-19T12:29:33.189Z"
     },
     {
       "symbol": "FIL",
       "name": "Filecoin",
-      "price_usd": 0.5810614945017145,
-      "market_cap_usd": 492077279.93832576,
-      "volume_24h_usd": 71065482.27651902,
-      "percent_change_24h": -1.972570796731,
+      "price_usd": 0.5737216355549927,
+      "market_cap_usd": 485861452.76717395,
+      "volume_24h_usd": 71576846.10260081,
+      "percent_change_24h": -3.058231984628,
       "circulating_supply": 846859213,
-      "last_updated": "2026-11-19T12:03:48.064Z"
+      "last_updated": "2026-11-19T12:29:33.058Z"
     },
     {
       "symbol": "DASH",
       "name": "Dash",
-      "price_usd": 37.6516490717572,
-      "market_cap_usd": 485648426.5629923,
-      "volume_24h_usd": 42533876.45899981,
-      "percent_change_24h": 0.055748012935,
-      "circulating_supply": 12898463.64066112,
-      "last_updated": "2026-11-19T12:03:48.113Z"
+      "price_usd": 37.48499457680753,
+      "market_cap_usd": 483499490.3241012,
+      "volume_24h_usd": 43392841.66070508,
+      "percent_change_24h": -0.644154309988,
+      "circulating_supply": 12898480.99973446,
+      "last_updated": "2026-11-19T12:29:33.115Z"
     },
     {
       "symbol": "币安人生",
       "name": "币安人生",
-      "price_usd": 0.46785871016537545,
-      "market_cap_usd": 467858710.1653755,
-      "volume_24h_usd": 3164191.762031174,
-      "percent_change_24h": -3.318956808728,
+      "price_usd": 0.46263161385332274,
+      "market_cap_usd": 462631613.85332274,
+      "volume_24h_usd": 3160254.2680192837,
+      "percent_change_24h": -4.401705164929,
       "circulating_supply": 1000000000,
-      "last_updated": "2026-11-19T12:03:48.217Z"
+      "last_updated": "2026-11-19T12:29:33.189Z"
     },
     {
       "symbol": "FLR",
       "name": "Flare",
-      "price_usd": 0.005151230307279699,
-      "market_cap_usd": 452557879.65694046,
-      "volume_24h_usd": 2837207.8545742757,
-      "percent_change_24h": -0.710455372942,
+      "price_usd": 0.005127084161112424,
+      "market_cap_usd": 450436536.1992609,
+      "volume_24h_usd": 2854939.590622257,
+      "percent_change_24h": -1.082619473495,
       "circulating_supply": 87854328512.04253,
-      "last_updated": "2026-11-19T12:03:48.037Z"
+      "last_updated": "2026-11-19T12:29:33.042Z"
     },
     {
       "symbol": "EURC",
       "name": "EURC",
-      "price_usd": 1.099303620589317,
-      "market_cap_usd": 444922415.73221517,
-      "volume_24h_usd": 58253804.78977543,
-      "percent_change_24h": 0.289624516694,
+      "price_usd": 1.0986430910381477,
+      "market_cap_usd": 444655078.8490607,
+      "volume_24h_usd": 58125794.31784471,
+      "percent_change_24h": 0.226544557279,
       "circulating_supply": 404731147.4274052,
-      "last_updated": "2026-11-19T12:03:48.088Z"
+      "last_updated": "2026-11-19T12:29:33.091Z"
     },
     {
       "symbol": "PYTH",
       "name": "Pyth Network",
-      "price_usd": 0.05637997118146772,
-      "market_cap_usd": 443989945.45487654,
-      "volume_24h_usd": 26289215.527778804,
-      "percent_change_24h": 5.610461453412,
+      "price_usd": 0.056142747710707944,
+      "market_cap_usd": 442121820.4162127,
+      "volume_24h_usd": 26375615.410637055,
+      "percent_change_24h": 4.482708369528,
       "circulating_supply": 7874958715.850098,
-      "last_updated": "2026-11-19T12:03:48.088Z"
-    },
-    {
-      "symbol": "VET",
-      "name": "VeChain",
-      "price_usd": 0.00491153699955134,
-      "market_cap_usd": 422318711.148781,
-      "volume_24h_usd": 8994798.767733274,
-      "percent_change_24h": -0.741914414903,
-      "circulating_supply": 85985041177,
-      "last_updated": "2026-11-19T12:03:48.018Z"
+      "last_updated": "2026-11-19T12:29:33.091Z"
     },
     {
       "symbol": "NEXO",
       "name": "Nexo",
-      "price_usd": 0.6528359162363623,
-      "market_cap_usd": 421827211.2010529,
-      "volume_24h_usd": 7098129.517290244,
-      "percent_change_24h": -0.706344073248,
+      "price_usd": 0.6527697538643079,
+      "market_cap_usd": 421784460.65961355,
+      "volume_24h_usd": 6965694.666858978,
+      "percent_change_24h": -1.041610496903,
       "circulating_supply": 646145839.5746847,
-      "last_updated": "2026-11-19T12:03:48.018Z"
+      "last_updated": "2026-11-19T12:29:33.027Z"
+    },
+    {
+      "symbol": "VET",
+      "name": "VeChain",
+      "price_usd": 0.00486874676278586,
+      "market_cap_usd": 418639390.87852764,
+      "volume_24h_usd": 9035037.182445034,
+      "percent_change_24h": -1.188626226192,
+      "circulating_supply": 85985041177,
+      "last_updated": "2026-11-19T12:29:33.027Z"
     },
     {
       "symbol": "STABLE",
       "name": "Stable",
-      "price_usd": 0.022682067338056916,
-      "market_cap_usd": 408277212.0850245,
-      "volume_24h_usd": 9494111.793266082,
-      "percent_change_24h": -3.27166293544,
+      "price_usd": 0.022527349309591587,
+      "market_cap_usd": 405492287.5726486,
+      "volume_24h_usd": 9485995.935800212,
+      "percent_change_24h": -3.98040709377,
       "circulating_supply": 18000000000,
-      "last_updated": "2026-11-19T12:03:48.064Z"
-    },
-    {
-      "symbol": "APT",
-      "name": "Aptos",
-      "price_usd": 0.4337939532618295,
-      "market_cap_usd": 385739446.91715425,
-      "volume_24h_usd": 26686263.99982091,
-      "percent_change_24h": -1.446234283469,
-      "circulating_supply": 889222738.1609662,
-      "last_updated": "2026-11-19T12:03:48.072Z"
+      "last_updated": "2026-11-19T12:29:33.058Z"
     },
     {
       "symbol": "KITE",
       "name": "Kite",
-      "price_usd": 0.13418791083240034,
-      "market_cap_usd": 386068872.49470663,
-      "volume_24h_usd": 17210865.041950945,
-      "percent_change_24h": 0.175240284351,
+      "price_usd": 0.13426142586176262,
+      "market_cap_usd": 386280380.8513183,
+      "volume_24h_usd": 17257498.468299538,
+      "percent_change_24h": 0.340656174024,
       "circulating_supply": 2877076408,
-      "last_updated": "2026-11-19T12:03:48.072Z"
+      "last_updated": "2026-11-19T12:29:33.071Z"
+    },
+    {
+      "symbol": "APT",
+      "name": "Aptos",
+      "price_usd": 0.42922359457237974,
+      "market_cap_usd": 381677273.06630796,
+      "volume_24h_usd": 26848552.276815295,
+      "percent_change_24h": -2.039101790871,
+      "circulating_supply": 889227148.4901931,
+      "last_updated": "2026-11-19T12:29:33.071Z"
     },
     {
       "symbol": "RAY",
       "name": "Raydium",
-      "price_usd": 1.416904111259348,
-      "market_cap_usd": 382512482.271245,
-      "volume_24h_usd": 22859337.095684834,
-      "percent_change_24h": -1.258482464957,
+      "price_usd": 1.4031480278354722,
+      "market_cap_usd": 378798840.9775372,
+      "volume_24h_usd": 22887938.91259229,
+      "percent_change_24h": -2.213716746841,
       "circulating_supply": 269963562.976232,
-      "last_updated": "2026-11-19T12:03:48.072Z"
+      "last_updated": "2026-11-19T12:29:33.071Z"
     },
     {
       "symbol": "FF",
       "name": "Falcon Finance",
-      "price_usd": 0.10060742798168466,
-      "market_cap_usd": 356765118.11437684,
-      "volume_24h_usd": 8996098.403974302,
-      "percent_change_24h": 0.554324307244,
+      "price_usd": 0.10112194735586275,
+      "market_cap_usd": 358589660.98346,
+      "volume_24h_usd": 8931202.588700816,
+      "percent_change_24h": 0.842878135288,
       "circulating_supply": 3546111110,
-      "last_updated": "2026-11-19T12:03:48.099Z"
+      "last_updated": "2026-11-19T12:29:33.101Z"
     },
     {
       "symbol": "TIA",
       "name": "Celestia",
-      "price_usd": 0.3532285965074934,
-      "market_cap_usd": 350638558.009089,
-      "volume_24h_usd": 17493237.908737775,
-      "percent_change_24h": 0.401804518863,
+      "price_usd": 0.3499368702449335,
+      "market_cap_usd": 347370968.2344311,
+      "volume_24h_usd": 17542153.74952037,
+      "percent_change_24h": -0.559292434005,
       "circulating_supply": 992667528.835397,
-      "last_updated": "2026-11-19T12:03:48.037Z"
+      "last_updated": "2026-11-19T12:29:33.042Z"
     },
     {
       "symbol": "AERO",
       "name": "Aero",
-      "price_usd": 0.4328662440262473,
-      "market_cap_usd": 341330675.01994795,
-      "volume_24h_usd": 25469911.931587834,
-      "percent_change_24h": -0.988550805836,
+      "price_usd": 0.4303406906623871,
+      "market_cap_usd": 339339184.9317695,
+      "volume_24h_usd": 25812439.137386434,
+      "percent_change_24h": -1.932521816097,
       "circulating_supply": 788536134.9619375,
-      "last_updated": "2026-11-19T12:03:48.064Z"
+      "last_updated": "2026-11-19T12:29:33.058Z"
     },
     {
       "symbol": "FET",
       "name": "Artificial Superintelligence Alliance",
-      "price_usd": 0.12951766378046392,
-      "market_cap_usd": 317197894.8475297,
-      "volume_24h_usd": 102114973.81167947,
-      "percent_change_24h": -0.494280604877,
+      "price_usd": 0.1282640066158156,
+      "market_cap_usd": 314127600.01762134,
+      "volume_24h_usd": 103269547.68837576,
+      "percent_change_24h": -1.3730855853,
       "circulating_supply": 2449070540.564946,
-      "last_updated": "2026-11-19T12:03:48.037Z"
+      "last_updated": "2026-11-19T12:29:33.042Z"
     },
     {
       "symbol": "CRV",
       "name": "Curve DAO Token",
-      "price_usd": 0.19515801052546747,
-      "market_cap_usd": 309630411.9968836,
-      "volume_24h_usd": 25622460.891550057,
-      "percent_change_24h": -4.37200584442,
-      "circulating_supply": 1586562658.4488976,
-      "last_updated": "2026-11-19T12:03:48.217Z"
+      "price_usd": 0.19402247541474985,
+      "market_cap_usd": 307829889.34692484,
+      "volume_24h_usd": 26269249.085580844,
+      "percent_change_24h": -4.856450168974,
+      "circulating_supply": 1586568198.8073595,
+      "last_updated": "2026-11-19T12:29:33.189Z"
     },
     {
       "symbol": "BSV",
       "name": "Bitcoin SV",
-      "price_usd": 15.15260605695537,
-      "market_cap_usd": 304765265.309528,
-      "volume_24h_usd": 9215446.28567242,
-      "percent_change_24h": 0.837001211187,
-      "circulating_supply": 20113059.375,
-      "last_updated": "2026-11-19T12:03:48.113Z"
+      "price_usd": 15.105978524762467,
+      "market_cap_usd": 303827631.81075394,
+      "volume_24h_usd": 9302650.257300528,
+      "percent_change_24h": 0.441237953855,
+      "circulating_supply": 20113071.875,
+      "last_updated": "2026-11-19T12:29:33.115Z"
     },
     {
       "symbol": "PENGU",
       "name": "Pudgy Penguins",
-      "price_usd": 0.0048340150886389405,
-      "market_cap_usd": 303868103.1770736,
-      "volume_24h_usd": 77948031.38225994,
-      "percent_change_24h": 1.02195371639,
+      "price_usd": 0.004807313349509886,
+      "market_cap_usd": 302189621.2791283,
+      "volume_24h_usd": 78278581.7739294,
+      "percent_change_24h": 0.806903181531,
       "circulating_supply": 62860396090.04,
-      "last_updated": "2026-11-19T12:03:48.088Z"
+      "last_updated": "2026-11-19T12:29:33.091Z"
     },
     {
       "symbol": "SEI",
       "name": "Sei",
-      "price_usd": 0.03877453133719839,
-      "market_cap_usd": 303200678.98924273,
-      "volume_24h_usd": 21739964.83601099,
-      "percent_change_24h": -1.568584637669,
+      "price_usd": 0.03845923579995351,
+      "market_cap_usd": 300735199.2612334,
+      "volume_24h_usd": 22004786.966653965,
+      "percent_change_24h": -2.2438512749,
       "circulating_supply": 7819583333,
-      "last_updated": "2026-11-19T12:03:48.217Z"
+      "last_updated": "2026-11-19T12:29:33.189Z"
     },
     {
       "symbol": "BTT",
       "name": "BitTorrent [New]",
-      "price_usd": 3.0939764682200724e-07,
-      "market_cap_usd": 298697523.4813544,
-      "volume_24h_usd": 26322409.147523865,
-      "percent_change_24h": -0.132999922972,
+      "price_usd": 3.0980056780878615e-07,
+      "market_cap_usd": 299086509.95925987,
+      "volume_24h_usd": 26368630.99178944,
+      "percent_change_24h": -0.143896809328,
       "circulating_supply": 965416274329945.1,
-      "last_updated": "2026-11-19T12:03:48.037Z"
+      "last_updated": "2026-11-19T12:29:33.042Z"
     },
     {
       "symbol": "SPX",
       "name": "SPX6900",
-      "price_usd": 0.3158679099025767,
-      "market_cap_usd": 294070841.49415225,
-      "volume_24h_usd": 5749686.687313659,
-      "percent_change_24h": -0.980823656322,
+      "price_usd": 0.3133699482558436,
+      "market_cap_usd": 291745256.4617838,
+      "volume_24h_usd": 5797149.622867978,
+      "percent_change_24h": -2.254932669011,
       "circulating_supply": 930993090.07,
-      "last_updated": "2026-11-19T12:03:48.072Z"
+      "last_updated": "2026-11-19T12:29:33.071Z"
     }
   ],
-  "updated_at": "2026-11-19T12:03:53.518582+00:00"
+  "updated_at": "2026-11-19T12:29:41.833245+00:00"
 }
