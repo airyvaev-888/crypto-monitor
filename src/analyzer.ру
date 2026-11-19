@@ -1,1 +1,63 @@
+import json
+from datetime import datetime
 
+GROWTH_THRESHOLD = 15  # Рост в % для лонга
+DROP_THRESHOLD = -15   # Падение в % для шорта
+VOLUME_CONFIRM = 500000 # Подтверждающий объем в $
+
+def load_snapshot():
+    try:
+        with open('../data/market_snapshot.json', 'r') as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return []
+
+def analyze_signals():
+    data = load_snapshot()
+    signals = []
+    
+    for coin in data:
+        change = coin['price_change_24h']
+        volume = coin['total_volume']
+        
+        # Сигнал на рост: импульс + объем
+        if change >= GROWTH_THRESHOLD and volume >= VOLUME_CONFIRM:
+            signals.append({
+                'symbol': coin['symbol'],
+                'type': 'LONG',
+                'reason': f"Импульс {change:.2f}% | Объем {volume/1e6:.1f}M$",
+                'exchanges': list(coin['liquid_exchanges'].keys())
+            })
+            
+        # Сигнал на падение: дамп + объем
+        if change <= DROP_THRESHOLD and volume >= VOLUME_CONFIRM:
+            signals.append({
+                'symbol': coin['symbol'],
+                'type': 'SHORT',
+                'reason': f"Дамп {change:.2f}% | Объем {volume/1e6:.1f}M$",
+                'exchanges': list(coin['liquid_exchanges'].keys())
+            })
+            
+    return signals
+
+def main():
+    signals = analyze_signals()
+    
+    if not signals:
+        print("[INFO] Сигналов не найдено.")
+        return
+
+    from notifier import send_ntfy
+    time_label = datetime.utcnow().strftime('%H:%M UTC')
+    title = f"🚀 Торговые сигналы ({time_label})"
+    
+    msg_lines = []
+    for s in signals:
+        line = f"• {s['type']} {s['symbol']}: {s['reason']} (Биржи: {', '.join(s['exchanges'])})"
+        msg_lines.append(line)
+        
+    message = "\n".join(msg_lines)
+    send_ntfy(title, message)
+
+if __name__ == '__main__':
+    main()
