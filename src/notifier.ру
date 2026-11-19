@@ -1,5 +1,6 @@
 import os
 import requests
+from datetime import datetime
 
 def send_ntfy(title: str, message: str):
     url = os.getenv('NTFY_URL')
