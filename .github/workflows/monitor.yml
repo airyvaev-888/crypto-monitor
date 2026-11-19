@@ -1,78 +1,36 @@
-name: Crypto Monitor - Market Data
-
-# Когда запускать:
-# 1. По расписанию: каждые 15 минут.
-# 2. Вручную через вкладку Actions (workflow_dispatch).
+name: Crypto Monitor - Exchanges
 on:
   schedule:
-    - cron: '*/15 * * * *' # Каждые 15 минут
+    - cron: '0 2-14 * * *'  # 08:00–20:00 Оренбург (UTC+5)
   workflow_dispatch:
-
 jobs:
-  monitor-market:
+  monitor:
     runs-on: ubuntu-latest
-    # Настраиваем часовой пояс (опционально, но полезно для логов)
-    env:
-      TZ: Europe/Moscow
-
     steps:
-      # 1. Качаем код репозитория
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          # Важно: сохраняем токен, чтобы мы могли делать git push позже
-          persist-credentials: true
-          # Качаем всю историю, чтобы git pull работал корректно
-          fetch-depth: 0
-
-      # 2. Настраиваем Python
-      - name: Set up Python 3.11
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-          cache: 'pip' # Ускоряет установку, если библиотеки не менялись
-
-      # 3. Устанавливаем зависимости
       - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-
-      # 4. Запускаем бота (основная логика)
-      - name: Run Crypto Monitor
+        run: pip install -r requirements.txt
+      - name: Run monitor
         env:
-          CMC_API_KEY: ${{ secrets.CMC_API_KEY }}
-          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
-          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+          BINANCE_API_KEY: ${{ secrets.BINANCE_API_KEY }}
+          BINANCE_API_SECRET: ${{ secrets.BINANCE_API_SECRET }}
+          KUCOIN_API_KEY: ${{ secrets.KUCOIN_API_KEY }}
+          KUCOIN_API_SECRET: ${{ secrets.KUCOIN_API_SECRET }}
+          BYBIT_API_KEY: ${{ secrets.BYBIT_API_KEY }}
+          BYBIT_API_SECRET: ${{ secrets.BYBIT_API_SECRET }}
+          GATEIO_API_KEY: ${{ secrets.GATEIO_API_KEY }}
+          GATEIO_API_SECRET: ${{ secrets.GATEIO_API_SECRET }}
+          MEXC_API_KEY: ${{ secrets.MEXC_API_KEY }}
+          MEXC_API_SECRET: ${{ secrets.MEXC_API_SECRET }}
+          NTFY_URL: ${{ secrets.NTFY_URL }}
+        run: python src/monitor.py
+      - name: Commit results
         run: |
-          echo "Запуск бота мониторинга..."
-          python src/crypto_monitor.py
-
-      # 5. Синхронизируем репозиторий (РЕШЕНИЕ ТВОЕЙ ОШИБКИ)
-      # Перед тем как коммитить, забираем свежие данные с GitHub
-      - name: Sync with remote repository (git pull)
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          
-          echo "Пытаемся забрать свежие изменения с сервера..."
-          git pull origin main --rebase --verbose
-          
-      # 6. Фиксируем состояние портфеля (monitor_state.json)
-      - name: Commit monitor_state.json if changed
-        run: |
-          # Проверяем, есть ли изменения в нужном файле
-          if git diff --quiet HEAD -- data/monitor_state.json; then
-            echo "✅ Файл monitor_state.json не изменился. Завершаем работу."
-            exit 0
-          fi
-          
-          echo "🔄 Обнаружены изменения в monitor_state.json. Создаем коммит..."
-          git add data/monitor_state.json
-          git commit -m "🤖 Auto-update: monitor_state.json [skip ci]"
-          
-          echo "📤 Отправляем изменения на GitHub..."
-          git push origin main
-        env:
-          # Используем стандартный токен GitHub для записи
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/signals.json
+          git commit -m "📈 Auto-update: signals.json [skip ci]" || echo "No changes"
+          git push
