@@ -1,5 +1,4 @@
-"""Бэктестинг торговой стратегии на исторических данных.
-Читает историю с бирж и CoinMarketCap, симулирует торговлю по сигналам."""
+"""Бэктестинг торговой стратегии на исторических данных."""
 
 import asyncio
 import json
@@ -14,12 +13,9 @@ from indicators import (
     generate_signal, detect_divergence
 )
 
-# Настройки
 HISTORY_FILE = 'data/history.json'
-CMC_HISTORY_FILE = 'data/cmc_history.json'
 REPORT_FILE = 'data/backtest_report.json'
 
-# Параметры стратегии (должны совпадать с теми, что в monitor.py)
 RSI_LOW = 30
 RSI_HIGH = 70
 ADX_THRESHOLD = 25
@@ -27,13 +23,13 @@ VOLUME_SPIKE = 1.5
 VOLATILITY_THRESHOLD = 0.02
 
 
-def load_json(path):
-    if os.path.exists(path):
+def load_history():
+    if os.path.exists(HISTORY_FILE):
         try:
-            with open(path, 'r') as f:
+            with open(HISTORY_FILE, 'r') as f:
                 return json.load(f)
         except Exception as e:
-            print(f"❌ Ошибка чтения {path}: {e}")
+            print(f"❌ Ошибка чтения {HISTORY_FILE}: {e}")
     return {}
 
 
@@ -47,17 +43,14 @@ def save_report(data):
 
 
 async def analyze_symbol_ohlcv(ohlcv):
-    """Анализирует OHLCV данные и возвращает сигнал."""
     if not ohlcv or len(ohlcv) < 30:
         return None
-    
     df = pd.DataFrame(ohlcv, columns=['ts', 'open', 'high', 'low', 'close', 'volume'])
     close = df['close']
     volume = df['volume']
     high = df['high']
     low = df['low']
 
-    # Индикаторы
     rsi = compute_rsi(close, 14)
     _, upper, lower = compute_bollinger(close, 20, 2)
     avg_vol = compute_avg_volume(volume, 20)
@@ -72,11 +65,9 @@ async def analyze_symbol_ohlcv(ohlcv):
     adx, _, _ = compute_adx(high, low, close)
     ema_50 = compute_ema(close, 50)
 
-    # Дивергенции
     rsi_divergence = detect_divergence(close, rsi, lookback=10)
     macd_divergence = detect_divergence(close, macd_line, lookback=10)
 
-    # Сигнал
     signal = generate_signal(
         close=close,
         volume=volume,
@@ -108,33 +99,18 @@ async def analyze_symbol_ohlcv(ohlcv):
 
 async def run_backtest():
     print(f"🚀 Запуск бэктестинга: {datetime.now().isoformat()}")
-    
-    # Загрузка истории
-    history = load_json(HISTORY_FILE)
-    cmc_history = load_json(CMC_HISTORY_FILE)
-    
-    if not history or not history.get('liquid_symbols'):
-        print("❌ Нет данных в history.json")
-        return
-        
+    history = load_history()
     pairs = history.get('liquid_symbols', [])
     print(f"📊 Проверяю {len(pairs)} пар")
-    
-    # Симуляция торговли
+
     results = []
     for item in pairs:
         ex_id = item.get('exchange')
         sym = item.get('symbol')
-        
-        # Загрузка исторических данных для этой пары
-        # Здесь нужно реализовать чтение свечей из API или локального файла
-        # Для примера возьмём последние 100 свечей
         try:
-            # TODO: Реализовать загрузку исторических данных
-            # Например, через ccxt.async_support
+            # TODO: Реализовать загрузку исторических данных через ccxt
             ohlcv = []  # Заглушка
             analysis = await analyze_symbol_ohlcv(ohlcv)
-            
             if analysis:
                 results.append({
                     'symbol': sym,
@@ -150,25 +126,21 @@ async def run_backtest():
         except Exception as e:
             print(f"❌ Ошибка анализа {ex_id} {sym}: {e}")
             continue
-    
-    # Статистика
+
     total_trades = len(results)
     buy_signals = len([r for r in results if r['signal'] == 'BUY'])
     sell_signals = len([r for r in results if r['signal'] == 'SELL'])
-    
-    # Средний PnL (заглушка, нужно реализовать расчёт)
-    avg_pnl = 0.0
-    
+    avg_pnl = 0.0  # TODO: реализовать расчёт PnL
+
     report = {
         'generated_at': pd.Timestamp.now().isoformat(),
         'total_trades': total_trades,
         'buy_signals': buy_signals,
         'sell_signals': sell_signals,
         'avg_pnl': avg_pnl,
-        'results': results,
-        'cmc_data': cmc_history.get('cmc_data', [])
+        'results': results
     }
-    
+
     save_report(report)
     print(f"✅ Бэктестинг завершён. Всего сделок: {total_trades}")
 
