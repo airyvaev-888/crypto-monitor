@@ -15,6 +15,10 @@ jobs:
     permissions:
       contents: write
     steps:
+      - name: 🧪 Test ntfy notification
+        run: |
+          curl -d "Test message from GitHub Actions" https://ntfy.sh/ваш_топик
+          
       - name: 📥 Checkout repository
         uses: actions/checkout@v4
 
