@@ -2,24 +2,27 @@ import os
 import time
 import ccxt
 import requests
-from datetime import datetime, timedelta
+from datetime import datetime, timezone
 
 TARGET_EXCHANGES = ['binance', 'kucoin', 'gateio', 'bybit', 'mexc']
-LIQUIDITY_THRESHOLD = 100000  # Объем 24h в USD
+LIQUIDITY_THRESHOLD = 100000       # quoteVolume 24h в USDT
+MIN_MARKET_CAP = 50000000          # 50 млн $
 COINGECKO_API = os.getenv('COINGECKO_API')
 
+
 def fetch_coingecko_watchlist():
-    """Получает все монеты с кап. > 50 млн $"""
+    """Возвращает монеты с капитализацией > 50 млн $ (все страницы)."""
     if not COINGECKO_API:
         raise ValueError("COINGECKO_API не задан")
-    
+
     headers = {'Accepts': 'application/json', 'X-Cg-Pro-API-Key': COINGECKO_API}
     url = 'https://pro-api.coingecko.com/api/v3/coins/markets'
-    
+
     coins = []
     page = 1
     per_page = 250
-    
+    retries_429 = 0
+
     while True:
         params = {
             'vs_currency': 'usd',
@@ -27,99 +30,126 @@ def fetch_coingecko_watchlist():
             'per_page': per_page,
             'page': page,
             'sparkline': 'false',
-            'price_change_percentage': '24h'
+            'price_change_percentage': '24h',
         }
-        
         try:
             response = requests.get(url, headers=headers, params=params, timeout=30)
-            time.sleep(1.1) # Уважение к лимитам (1 запрос в секунду)
-            
-            if response.status_code == 429:
-                print("[WARN] Лимит CoinGecko. Ждем 60 секунд...")
-                time.sleep(60)
-                continue
-                
-            data = response.json()
-            if not data:
-                break
-                
-            for coin in data:
-                if coin['market_cap'] and coin['market_cap'] > 50000000:
-                    coins.append({
-                        'id': coin['id'],
-                        'symbol': coin['symbol'].upper(),
-                        'name': coin['name'],
-                        'market_cap': coin['market_cap'],
-                        'price_change_24h': coin['price_change_percentage_24h_in_currency'] or 0
-                    })
-            page += 1
         except Exception as e:
-            print(f"[ERROR] CoinGecko fetch failed: {e}")
+            print(f"[ERROR] CoinGecko request failed: {e}")
             break
-            
+
+        time.sleep(1.1)  # лимит 1 rps
+
+        if response.status_code == 429:
+            retries_429 += 1
+            if retries_429 > 3:
+                print("[ERROR] Слишком много 429 от CoinGecko, прекращаем")
+                break
+            print(f"[WARN] 429 от CoinGecko (попытка {retries_429}). Ждём 60 сек...")
+            time.sleep(60)
+            continue
+
+        if response.status_code != 200:
+            print(f"[WARN] CoinGecko HTTP {response.status_code}: {response.text[:200]}")
+            break
+
+        try:
+            data = response.json()
+        except Exception as e:
+            print(f"[ERROR] CoinGecko JSON parse failed: {e}")
+            break
+
+        if not isinstance(data, list) or not data:
+            break
+
+        for coin in data:
+            mc = coin.get('market_cap')
+            if mc and mc > MIN_MARKET_CAP:
+                coins.append({
+                    'id': coin['id'],
+                    'symbol': coin['symbol'].upper(),
+                    'name': coin['name'],
+                    'market_cap': mc,
+                    'price_change_24h': coin.get('price_change_percentage_24h_in_currency') or 0,
+                })
+
+        if len(data) < per_page:
+            break
+        page += 1
+
     return coins
 
+
 def check_liquidity_on_exchanges(symbols):
-    """Проверяет объем торгов на целевых биржах через CCXT"""
+    """Проверяет ликвидность пар SYMBOL/USDT одним bulk-запросом на биржу."""
     results = []
-    exchanges = {name: getattr(ccxt, name)() for name in TARGET_EXCHANGES}
-    
-    for symbol in symbols:
-        symbol_ccxt = f"{symbol}/USDT"
-        exchange_volumes = {}
-        
-        for name, exchange in exchanges.items():
-            try:
-                # Устанавливаем тип счета на spot, чтобы не лезть в деривативы
-                exchange.options['defaultType'] = 'spot'
-                ticker = exchange.fetch_ticker(symbol_ccxt)
-                
-                # Объем в CCXT обычно в базовой валюте (USDT). 
-                # Если биржа отдает в квотируемой, это тоже подойдет для оценки ликвидности.
-                volume = ticker.get('quoteVolume') or ticker.get('baseVolume') or 0
-                
-                if volume and volume > LIQUIDITY_THRESHOLD:
-                    exchange_volumes[name] = volume
-                    
-                time.sleep(0.5) # Задержка для защиты от бана IP
-            except Exception as e:
-                print(f"[WARN] {name} failed for {symbol}: {e}")
-                continue
-                
-        if exchange_volumes:
-            results.append({
-                'symbol': symbol,
-                'liquid_exchanges': exchange_volumes,
-                'total_volume': sum(exchange_volumes.values())
-            })
-            
+    wanted = {f"{s}/USDT" for s in symbols}
+
+    exchanges = {
+        name: getattr(ccxt, name)({'defaultType': 'spot', 'enableRateLimit': True})
+        for name in TARGET_EXCHANGES
+    }
+
+    per_exchange_volumes = {}
+    for name, ex in exchanges.items():
+        try:
+            ex.load_markets()
+            tickers = ex.fetch_tickers()
+            vol_map = {}
+            for sym, t in tickers.items():
+                if sym not in wanted:
+                    continue
+                quote_vol = t.get('quoteVolume') or 0  # только USDT-объём
+                if quote_vol >= LIQUIDITY_THRESHOLD:
+                    vol_map[sym] = quote_vol
+            per_exchange_volumes[name] = vol_map
+            print(f"[INFO] {name}: ликвидных пар — {len(vol_map)}")
+        except Exception as e:
+            print(f"[WARN] {name} bulk fetch failed: {e}")
+            per_exchange_volumes[name] = {}
+
+    by_symbol = {}
+    for name, vol_map in per_exchange_volumes.items():
+        for sym, v in vol_map.items():
+            by_symbol.setdefault(sym, {})[name] = v
+
+    for sym, ex_vols in by_symbol.items():
+        results.append({
+            'symbol': sym.split('/')[0],
+            'liquid_exchanges': ex_vols,
+            'total_volume': sum(ex_vols.values()),
+        })
+
     return results
 
+
 def build_snapshot():
-    print("[INFO] Шаг 1: Получение вочлиста с CoinGecko...")
+    print("[INFO] Шаг 1: получение монет с CoinGecko...")
     watchlist = fetch_coingecko_watchlist()
-    symbols = [coin['symbol'] for coin in watchlist]
-    
-    print(f"[INFO] Найдено {len(symbols)} монет с кап. > 50 млн $. Проверка ликвидности...")
+    symbols = [c['symbol'] for c in watchlist]
+
+    print(f"[INFO] Найдено {len(symbols)} монет с кап. > ${MIN_MARKET_CAP / 1e6:.0f}M. Проверка ликвидности...")
     liquid_coins = check_liquidity_on_exchanges(symbols)
-    
-    liquid_symbols = [c['symbol'] for c in liquid_coins]
-    print(f"[INFO] Ликвидных монет: {len(liquid_symbols)}")
-    
-    # Собираем финальные данные для анализа
+    print(f"[INFO] Ликвидных монет: {len(liquid_coins)}")
+
+    # Первое вхождение символа выигрывает (защита от дублей)
+    coin_map = {}
+    for c in watchlist:
+        coin_map.setdefault(c['symbol'], c)
+
     snapshot = []
-    coin_map = {c['symbol']: c for c in watchlist}
-    
     for coin in liquid_coins:
-        symbol = coin['symbol']
+        meta = coin_map.get(coin['symbol'])
+        if not meta:
+            continue
         snapshot.append({
-            'symbol': symbol,
-            'name': coin_map[symbol]['name'],
-            'market_cap': coin_map[symbol]['market_cap'],
-            'price_change_24h': coin_map[symbol]['price_change_24h'],
+            'symbol': coin['symbol'],
+            'name': meta['name'],
+            'market_cap': meta['market_cap'],
+            'price_change_24h': meta['price_change_24h'],
             'liquid_exchanges': coin['liquid_exchanges'],
             'total_volume': coin['total_volume'],
-            'timestamp': datetime.utcnow().isoformat()
+            'timestamp': datetime.now(timezone.utc).isoformat(),
         })
-        
+
     return snapshot
