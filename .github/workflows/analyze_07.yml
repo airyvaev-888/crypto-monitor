@@ -20,6 +20,8 @@ jobs:
         with:
           python-version: '3.11'
       - run: pip install -r src/requirements.txt
+      - name: Debug — список файлов
+        run: ls -R
       - env:
           NTFY_URL: ${{ secrets.NTFY_URL }}
           COINGECKO_API: ${{ secrets.COINGECKO_API }}
