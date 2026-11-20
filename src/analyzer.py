@@ -1,71 +1,56 @@
-import json
-from datetime import datetime, timezone
+# src/analyzer.py
+import time
 
-GROWTH_THRESHOLD = 15
-DROP_THRESHOLD = -15
-VOLUME_CONFIRM = 500000
-SNAPSHOT_PATH = 'data/market_snapshot.json'
-
-
-def load_snapshot():
-    try:
-        with open(SNAPSHOT_PATH, 'r', encoding='utf-8') as f:
-            return json.load(f)
-    except FileNotFoundError:
-        print(f"[WARN] {SNAPSHOT_PATH} не найден — сигналов нет")
-        return []
-    except Exception as e:
-        print(f"[ERROR] Ошибка чтения snapshot: {e}")
-        return []
+CHANGE_THRESHOLD = 15.0
+VOLUME_CONFIRM = 500_000
+MIN_EXCHANGES = 2
+RSI_LONG_MAX = 75
+RSI_SHORT_MIN = 25
+COOLDOWN_HOURS = 4
 
 
-def analyze_signals():
-    data = load_snapshot()
+def _is_on_cooldown(symbol, history):
+    last = history.get(symbol)
+    if not last:
+        return False
+    return (time.time() - last) < COOLDOWN_HOURS * 3600
+
+
+def analyze(coins, history=None):
+    history = history or {}
     signals = []
+    for c in coins:
+        change = c["change_24h"]
+        if abs(change) < CHANGE_THRESHOLD:
+            continue
+        if c["volume"] < VOLUME_CONFIRM:
+            continue
+        if c["exchange_count"] < MIN_EXCHANGES:
+            continue
 
-    for coin in data:
-        change = coin.get('price_change_24h') or 0
-        volume = coin.get('total_volume') or 0
+        side = "LONG" if change > 0 else "SHORT"
+        rsi = c.get("rsi")
 
-        if change >= GROWTH_THRESHOLD and volume >= VOLUME_CONFIRM:
-            signals.append({
-                'symbol': coin['symbol'],
-                'type': 'LONG',
-                'reason': f"Импульс {change:.2f}% | Объём {volume / 1e6:.1f}M$",
-                'exchanges': list(coin['liquid_exchanges'].keys()),
-            })
+        # RSI-фильтры: не LONGим на пике, не SHORTим на дне.
+        # Если RSI не удалось посчитать — сигнал не блокируем (но отмечаем в сообщении).
+        if rsi is not None:
+            if side == "LONG" and rsi > RSI_LONG_MAX:
+                continue
+            if side == "SHORT" and rsi < RSI_SHORT_MIN:
+                continue
 
-        if change <= DROP_THRESHOLD and volume >= VOLUME_CONFIRM:
-            signals.append({
-                'symbol': coin['symbol'],
-                'type': 'SHORT',
-                'reason': f"Дамп {change:.2f}% | Объём {volume / 1e6:.1f}M$",
-                'exchanges': list(coin['liquid_exchanges'].keys()),
-            })
+        if _is_on_cooldown(c["symbol"], history):
+            continue
 
+        signals.append({
+            "symbol": c["symbol"],
+            "name": c["name"],
+            "side": side,
+            "price": c["price"],
+            "change_24h": change,
+            "volume": c["volume"],
+            "exchanges": sorted(c["exchanges"]),
+            "rsi": rsi,
+            "timestamp": int(time.time()),
+        })
     return signals
-
-
-def main():
-    signals = analyze_signals()
-
-    if not signals:
-        print("[INFO] Сигналов не найдено.")
-        return
-
-    from notifier import send_ntfy
-    time_label = datetime.now(timezone.utc).strftime('%H:%M UTC')
-    title = f"Торговые сигналы ({time_label})"
-
-    msg_lines = []
-    for s in signals:
-        msg_lines.append(
-            f"• {s['type']} {s['symbol']}: {s['reason']} "
-            f"(Биржи: {', '.join(s['exchanges'])})"
-        )
-
-    send_ntfy(title, "\n".join(msg_lines))
-
-
-if __name__ == '__main__':
-    main()
