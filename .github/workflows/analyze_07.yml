@@ -15,26 +15,39 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Debug — Check files
+
+      - name: 📦 Install dependencies
+        run: pip install -r src/requirements.txt
+
+      - name: 🔍 DEBUG - Проверка структуры файлов
         run: |
-          echo "Current directory:"
+          echo "=== Текущая рабочая директория ==="
           pwd
-          echo "All files:"
+          echo "=== Содержимое корневой папки ==="
           ls -la
-          echo "Check specific file:"
-          ls -la src/main.py || echo "FILE NOT FOUND: src/main.py"
-      - run: pip install -r src/requirements.txt
-      - name: Debug — список файлов
-        run: ls -R
-      - env:
+          echo "=== Содержимое папки src ==="
+          ls -la src/ || echo "ОШИБКА: Папки src не существует!"
+          echo "=== Проверка наличия main.py ==="
+          ls -la src/main.py || echo "ОШИБКА: Файла src/main.py не существует!"
+          echo "=== Информация о последнем коммите ==="
+          git log -1
+          echo "=== Git Status ==="
+          git status
+
+      - name: 🚀 Run analysis script
+        env:
           NTFY_URL: ${{ secrets.NTFY_URL }}
           COINGECKO_API: ${{ secrets.COINGECKO_API }}
         run: python src/main.py
-      - name: Commit snapshot
+
+      - name: 💾 Commit snapshot
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
