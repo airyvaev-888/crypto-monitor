@@ -1,23 +1,23 @@
-from fetcher import build_snapshot
-from analyzer import main as run_analyzer
 import json
 import os
+from fetcher import build_snapshot
+from analyzer import main as run_analyzer
+
+SNAPSHOT_PATH = 'data/market_snapshot.json'
 
 
 def main():
-    # Этот скрипт запускается в 07:00, 11:00 и 15:00 UTC
+    os.makedirs('data', exist_ok=True)
+
     snapshot = build_snapshot()
-    
-    # main.py
-import os
-os.makedirs('data', exist_ok=True)
-with open('data/market_snapshot.json', 'w', encoding='utf-8') as f:
-    json.dump(snapshot, f, indent=2, ensure_ascii=False)
-        
-    print(f"[INFO] Snapshot сохранен. Найдено монет для анализа: {len(snapshot)}")
-    
-    # Запускаем трейдинговую логику
+
+    with open(SNAPSHOT_PATH, 'w', encoding='utf-8') as f:
+        json.dump(snapshot, f, indent=2, ensure_ascii=False)
+
+    print(f"[INFO] Snapshot сохранён. Монет для анализа: {len(snapshot)}")
+
     run_analyzer()
+
 
 if __name__ == '__main__':
     main()
