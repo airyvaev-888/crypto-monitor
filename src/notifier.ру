@@ -1,6 +1,6 @@
 import os
 import requests
-from datetime import datetime
+
 
 def send_ntfy(title: str, message: str):
     url = os.getenv('NTFY_URL')
@@ -10,9 +10,14 @@ def send_ntfy(title: str, message: str):
 
     try:
         response = requests.post(
-            url, 
-            data=message.encode('utf-8'), 
-            headers={'Title': title}
+            url,
+            data=message.encode('utf-8'),
+            headers={
+                'Title': title,
+                'Priority': 'high',
+                'Tags': 'chart_with_upwards_trend',
+            },
+            timeout=30,
         )
         response.raise_for_status()
         print(f"[INFO] Уведомление отправлено: {title}")
