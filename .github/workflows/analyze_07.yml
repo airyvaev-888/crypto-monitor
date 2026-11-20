@@ -19,6 +19,14 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - name: Debug — Check files
+        run: |
+          echo "Current directory:"
+          pwd
+          echo "All files:"
+          ls -la
+          echo "Check specific file:"
+          ls -la src/main.py || echo "FILE NOT FOUND: src/main.py"
       - run: pip install -r src/requirements.txt
       - name: Debug — список файлов
         run: ls -R
