@@ -3,6 +3,12 @@ from analyzer import main as run_analyzer
 import json
 import os
 
+# main.py
+import os
+os.makedirs('data', exist_ok=True)
+with open('data/market_snapshot.json', 'w', encoding='utf-8') as f:
+    json.dump(snapshot, f, indent=2, ensure_ascii=False)
+
 def main():
     # Этот скрипт запускается в 07:00, 11:00 и 15:00 UTC
     snapshot = build_snapshot()
