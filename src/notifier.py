@@ -1,44 +1,60 @@
-# src/notifier.py
 import requests
+import logging
+import json
 
-NTFY_TOPIC = "your_topic_here"  # как у тебя сейчас
+NTFY_TOPIC = "air-crypto-alerts-888" # Убедитесь, что тут ваш топик
 NTFY_URL = f"https://ntfy.sh/{NTFY_TOPIC}"
 
-
-def _tradingview_url(signal):
-    return f"https://www.tradingview.com/chart/?symbol=BINANCE:{signal['symbol']}USDT"
-
-
-def format_message(s):
-    rsi_str = f"{s['rsi']}" if s["rsi"] is not None else "N/A"
-    ex_str = ", ".join(s["exchanges"])
-    return (
-        f"{s['symbol']}/USDT | {ex_str}\n"
-        f"Change 24h: {s['change_24h']:+.2f}%\n"
-        f"Price: ${s['price']:,.6g}\n"
-        f"Volume: ${s['volume']:,.0f}\n"
-        f"RSI(1h): {rsi_str}\n"
-        f"{_tradingview_url(s)}"
+def send_signal(signal):
+    """Форматирует и отправляет сигнал в ntfy"""
+    symbol = signal['symbol']
+    signal_type = signal['type']
+    price = signal['price']
+    change = signal['change_24h']
+    rsi = signal['rsi']
+    exchanges = ", ".join(signal['exchanges'])
+    
+    # Эмодзи для тегов (чтобы не было проблем с кодировкой в заголовке)
+    emoji = "🚀" if signal_type == "LONG" else "🔻"
+    
+    # Формируем заголовок (ТОЛЬКО ASCII символы)
+    title = f"{signal_type} {symbol} | Crypto Alert"
+    
+    # Универсальная ссылка на TradingView (или можно использовать OKX)
+    # Ссылка на поиск на TradingView по тикеру
+    tv_link = f"https://www.tradingview.com/chart/?symbol=OKX:{symbol}USDT"
+    
+    # Текст сообщения
+    message = (
+        f"Монета: {symbol}\n"
+        f"Тип: {signal_type}\n"
+        f"Цена: ${price}\n"
+        f"Изм. 24ч: {change:.2f}%\n"
+        f"RSI (1h): {rsi if rsi else 'N/A'}\n"
+        f"Биржи: {exchanges}\n\n"
+        f"📈 График: {tv_link}"
     )
-
-
-def send(signal):
-    title = f"{signal['side']} {signal['symbol']}/USDT {signal['change_24h']:+.1f}%"
+    
+    # Заголовки для ntfy
     headers = {
         "Title": title,
-        "Priority": "high",
-        "Tags": "chart_with_upwards_trend" if signal["side"] == "LONG"
-                else "chart_with_downwards_trend",
-        "Click": _tradingview_url(signal),
+        "Tags": f"{emoji},chart_with_upwards_trend",
+        "Click": tv_link, # При клике на пуш откроется график
+        "Priority": "high"
     }
+    
     try:
-        r = requests.post(
-            NTFY_URL,
-            data=format_message(signal).encode("utf-8"),
-            headers=headers,
-            timeout=30,
+        # Отправляем POST запрос
+        response = requests.post(
+            NTFY_URL, 
+            data=message.encode('utf-8'), 
+            headers=headers, 
+            timeout=10
         )
-        if r.status_code != 200:
-            print(f"[ntfy] {r.status_code} {r.text}")
-    except Exception as e:
-        print(f"[ntfy] error: {e}")
+        response.raise_for_status() # Вызовет исключение при ошибке 4xx/5xx
+        logging.info(f"Уведомление по {symbol} успешно отправлено (Status: {response.status_code})")
+        
+    except requests.exceptions.RequestException as e:
+        logging.error(f"Ошибка при отправке уведомления в ntfy: {e}")
+        if hasattr(e, 'response') and e.response is not None:
+            logging.error(f"Ответ сервера: {e.response.text}")
