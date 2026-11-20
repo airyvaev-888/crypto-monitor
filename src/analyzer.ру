@@ -5,9 +5,10 @@ GROWTH_THRESHOLD = 15  # Рост в % для лонга
 DROP_THRESHOLD = -15   # Падение в % для шорта
 VOLUME_CONFIRM = 500000 # Подтверждающий объем в $
 
+# analyzer.py
 def load_snapshot():
     try:
-        with open('../data/market_snapshot.json', 'r') as f:
+        with open('data/market_snapshot.json', 'r', encoding='utf-8') as f:
             return json.load(f)
     except FileNotFoundError:
         return []
