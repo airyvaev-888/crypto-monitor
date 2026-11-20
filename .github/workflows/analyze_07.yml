@@ -51,7 +51,12 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/market_snapshot.json
-          git commit -m "Update market snapshot [skip ci]" || exit 0
+          
+          # Добавляем ВСЕ файлы из папки data (и snapshot, и history)
+          git add data/
+          
+          # Коммитим только если есть изменения, иначе пишем в лог и идем дальше
+          git commit -m "Update market data [skip ci]" || echo "No changes to commit"
+          
           git pull --rebase origin ${{ github.ref_name }}
           git push
