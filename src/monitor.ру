@@ -2,11 +2,11 @@ from fetcher import fetch_coingecko_watchlist
 import json
 
 def main():
-    # Этот скрипт запускается только в 03:30 UTC
-    watchlist = fetch_coingecko_watchlist()
-    
-    with open('../data/watchlist.json', 'w') as f:
-        json.dump(watchlist, f, indent=2, ensure_ascii=False)
+# monitor.py
+import os
+os.makedirs('data', exist_ok=True)
+with open('data/watchlist.json', 'w', encoding='utf-8') as f:
+    json.dump(watchlist, f, indent=2, ensure_ascii=False)
         
     print(f"[INFO] Watchlist обновлен. Всего монет: {len(watchlist)}")
 
