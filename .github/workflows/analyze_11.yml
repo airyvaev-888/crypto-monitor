@@ -2,7 +2,7 @@ name: 📊 Анализ рынка (16:00 +05)
 
 on:
   schedule:
-    - cron: '0 11 * * *'
+    - cron: '0 11 * * *' # 11:00 UTC = 16:00 +05
   workflow_dispatch:
 
 concurrency:
@@ -25,7 +25,7 @@ jobs:
 
       - name: 🧪 Test ntfy notification
         run: |
-          curl -d "Test message from GitHub Actions" https://ntfy.sh/air-crypto-alerts-888
+          curl -d "Test message from GitHub Actions" ${{ secrets.NTFY_URL }}
 
       - name: 📦 Install dependencies
         run: |
@@ -42,12 +42,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          
-          # Добавляем ВСЕ файлы из папки data (и snapshot, и history)
           git add data/
-          
-          # Коммитим только если есть изменения
-          git commit -m "Update market data [skip ci]" || echo "No changes to commit"
-          
+          git commit -m "Update market data (16:00 +05) [skip ci]" || echo "No changes to commit"
           git pull --rebase origin ${{ github.ref_name }}
           git push
