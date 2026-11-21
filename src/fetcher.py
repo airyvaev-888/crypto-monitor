@@ -110,7 +110,7 @@ def fetch_market_data():
             logging.error(f"Ошибка при загрузке страницы {page} с CoinGecko: {e}")
         
         # Безопасная пауза между страницами (4 секунды), чтобы не получить бан
-        time.sleep(4) 
+        time.sleep(15) 
 
     # Фильтрация по капитализации (> 50 млн $)
     candidates = []
