@@ -1,4 +1,3 @@
-# src/main.py
 import json
 import os
 import time
@@ -37,7 +36,14 @@ def save_snapshot(coins):
     snapshot = load_json(SNAPSHOT_PATH, [])
     for c in coins:
         c = dict(c)
-        c["exchanges"] = sorted(c["exchanges"])
+        
+        # ИСПРАВЛЕНИЕ: берем ключи из exchange_tickers, а не ищем exchanges
+        if "exchange_tickers" in c:
+            c["exchanges"] = sorted(c["exchange_tickers"].keys())
+            del c["exchange_tickers"] # Удаляем тяжелый словарь, чтобы не раздувать JSON
+        else:
+            c["exchanges"] = []
+            
         c["timestamp"] = int(time.time())
         snapshot.append(c)
     save_json(SNAPSHOT_PATH, snapshot)
