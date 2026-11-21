@@ -2,39 +2,47 @@ name: 📊 Анализ рынка (08:00 +05)
 
 on:
   schedule:
-    # 08:00 по Оренбургу (UTC+5) = 03:00 UTC
-    - cron: '0 3 * * *' 
-  workflow_dispatch: # Позволяет запускать вручную для теста
+    - cron: '0 3 * * *' # 03:00 UTC = 08:00 +05
+  workflow_dispatch:
+
+concurrency:
+  group: market-snapshot-write
+  cancel-in-progress: false
 
 jobs:
   analyze:
     runs-on: ubuntu-latest
     permissions:
-      contents: write # Нужно для пуша изменений в папку data/
-
+      contents: write
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      - name: Install dependencies
+      - name: 🧪 Test ntfy notification
+        run: |
+          curl -d "Test message from GitHub Actions" ${{ secrets.NTFY_URL }}
+
+      - name: 📦 Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r src/requirements.txt
 
-      - name: Run analysis script
+      - name: 🚀 Run analysis script
         env:
           NTFY_URL: ${{ secrets.NTFY_URL }}
+          COINGECKO_API: ${{ secrets.COINGECKO_API }}
         run: python src/main.py
 
-      - name: Commit and push changes
+      - name: 💾 Commit snapshot
         run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/
-          git diff --quiet && git diff --staged --quiet || git commit -m "Update market data (08:00 +05) [skip ci]"
+          git commit -m "Update market data (08:00 +05) [skip ci]" || echo "No changes to commit"
+          git pull --rebase origin ${{ github.ref_name }}
           git push
