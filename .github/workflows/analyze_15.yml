@@ -15,16 +15,30 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - run: pip install -r src/requirements.txt
-      - env:
+
+      - name: 🧪 Test ntfy notification
+        run: |
+          curl -d "Test message from GitHub Actions" https://ntfy.sh/air-crypto-alerts-888
+
+      - name: 📦 Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r src/requirements.txt
+
+      - name: 🚀 Run analysis script
+        env:
           NTFY_URL: ${{ secrets.NTFY_URL }}
           COINGECKO_API: ${{ secrets.COINGECKO_API }}
         run: python src/main.py
-      - name: Commit snapshot
+
+      - name: 💾 Commit snapshot
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -32,7 +46,7 @@ jobs:
           # Добавляем ВСЕ файлы из папки data (и snapshot, и history)
           git add data/
           
-          # Коммитим только если есть изменения, иначе пишем в лог и идем дальше
+          # Коммитим только если есть изменения
           git commit -m "Update market data [skip ci]" || echo "No changes to commit"
           
           git pull --rebase origin ${{ github.ref_name }}
