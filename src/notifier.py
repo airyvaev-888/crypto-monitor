@@ -1,139 +1,63 @@
-import logging
-import json
 import os
-import time
 import requests
-from datetime import datetime
+import logging
 
-# Импортируем наши модули
-from fetcher import fetch_exchange_tickers
-from analyzer import analyze_market, update_cooldown
-from notifier import send_signal
-
-# Настройка логирования
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s'
-)
-
-# Константы
-COINGECKO_URL = "https://api.coingecko.com/api/v3/coins/markets"
-DATA_DIR = "data"
-SNAPSHOT_FILE = os.path.join(DATA_DIR, "market_snapshot.json")
-
-def fetch_coingecko_data(pages=2):
+def send(signal):
     """
-    Загружает данные о монетах с CoinGecko.
-    По умолчанию берет 2 страницы по 250 монет (топ-500 по капитализации).
+    Отправляет уведомление в ntfy на основе данных сигнала.
     """
-    all_coins = []
-    headers = {
-        "Accept": "application/json",
-        "User-Agent": "CryptoMonitorBot/1.0"
-    }
+    # Берем URL топика из переменной окружения (передается из GitHub Secrets)
+    ntfy_url = os.environ.get("NTFY_URL")
     
-    for page in range(1, pages + 1):
-        params = {
-            "vs_currency": "usd",
-            "order": "market_cap_desc",
-            "per_page": 250,
-            "page": page,
-            "sparkline": "false",
-            "price_change_percentage": "24h"
-        }
-        
-        try:
-            logging.info(f"Запрос к CoinGecko (страница {page})...")
-            response = requests.get(COINGECKO_URL, params=params, headers=headers, timeout=15)
-            
-            # Обработка лимитов CoinGecko (429)
-            if response.status_code == 429:
-                logging.warning("Превышен лимит CoinGecko (429). Ждем 30 секунд...")
-                time.sleep(30)
-                response = requests.get(COINGECKO_URL, params=params, headers=headers, timeout=15)
-                
-            response.raise_for_status()
-            data = response.json()
-            
-            if not data:
-                break
-                
-            all_coins.extend(data)
-            time.sleep(2) # Пауза между страницами, чтобы не получить бан
-            
-        except Exception as e:
-            logging.error(f"Ошибка при получении данных с CoinGecko (страница {page}): {e}")
-            break
-            
-    logging.info(f"Всего получено монет с CoinGecko: {len(all_coins)}")
-    return all_coins
-
-def save_snapshot(coins_data):
-    """Сохраняет снимок рынка в JSON для истории (нужно для коммита в GitHub Actions)"""
-    os.makedirs(DATA_DIR, exist_ok=True)
-    
-    snapshot = {
-        "timestamp": datetime.now().isoformat(),
-        "total_coins": len(coins_data),
-        # Сохраняем только самое важное, чтобы файл не разрастался до гигабайт
-        "coins": [
-            {
-                "symbol": c.get("symbol", "").upper(),
-                "name": c.get("name", ""),
-                "price": c.get("current_price", 0),
-                "market_cap": c.get("market_cap", 0),
-                "change_24h": c.get("price_change_percentage_24h", 0)
-            } 
-            for c in coins_data if c.get("market_cap", 0) > 50000000
-        ]
-    }
-    
-    try:
-        with open(SNAPSHOT_FILE, 'w', encoding='utf-8') as f:
-            json.dump(snapshot, f, indent=4, ensure_ascii=False)
-        logging.info(f"Снимок рынка сохранен в {SNAPSHOT_FILE}")
-    except Exception as e:
-        logging.error(f"Не удалось сохранить снимок рынка: {e}")
-
-def main():
-    logging.info("=== Запуск Crypto Monitor Bot ===")
-    
-    # 1. Получаем данные с CoinGecko
-    coins_data = fetch_coingecko_data(pages=2)
-    if not coins_data:
-        logging.error("Нет данных с CoinGecko. Завершаем работу.")
+    if not ntfy_url:
+        logging.warning("NTFY_URL не задан. Уведомление не отправлено.")
         return
-        
-    # 2. Сохраняем снимок для GitHub Actions
-    save_snapshot(coins_data)
-    
-    # 3. Загружаем данные с бирж (CCXT)
-    # Передаем список тикеров для оптимизации (хотя в fetcher.py мы загружаем всё разом, 
-    # это хорошая практика на будущее)
-    symbols = [c.get('symbol', '').upper() for c in coins_data]
-    logging.info("Загрузка тикеров с целевых бирж (OKX, Bitget, MEXC, Gate, KuCoin)...")
-    exchange_tickers = fetch_exchange_tickers(symbols)
-    
-    # 4. Анализируем рынок
-    logging.info("Анализ данных и поиск сигналов...")
-    signals = analyze_market(coins_data, exchange_tickers)
-    
-    # 5. Отправляем сигналы и обновляем историю
-    if signals:
-        logging.info(f"🔥 Найдено {len(signals)} сигналов!")
-        for signal in signals:
-            symbol = signal['symbol']
-            logging.info(f"Отправка сигнала: {signal['type']} по {symbol}")
-            
-            # Отправляем в ntfy
-            send_signal(signal)
-            
-            # Записываем в историю (кулдаун), чтобы завтра не отправить то же самое
-            update_cooldown(symbol)
-    else:
-        logging.info("Сигналов не найдено. Рынок спокоен или фильтры слишком строгие.")
-        
-    logging.info("=== Работа бота завершена ===")
 
-if __name__ == "__main__":
-    main()
+    symbol = signal["symbol"]
+    signal_type = signal["type"]
+    price = signal["price"]
+    change = signal["change"]
+    rsi = signal.get("rsi", "N/A")
+    exchanges = ", ".join([ex.upper() for ex in signal["exchanges"]])
+
+    # Формируем ссылку на TradingView (используем OKX, как договаривались)
+    # Формат: OKX:BTCUSDT
+    tv_link = f"https://www.tradingview.com/chart/?symbol=OKX:{symbol}USDT"
+
+    # Текст сообщения
+    message = (
+        f"Монета: {symbol}\n"
+        f"Цена: {price}$\n"
+        f"Изменение (24ч): {change}%\n"
+        f"RSI (1h): {rsi}\n"
+        f"Биржи: {exchanges}"
+    )
+
+    # Эмодзи для тегов
+    if signal_type == "LONG":
+        tags = "chart_with_upwards_trend,moneybag"
+        title = f"LONG: {symbol}"
+    else:
+        tags = "chart_with_downwards_trend,drop_of_blood"
+        title = f"SHORT: {symbol}"
+
+    headers = {
+        "Title": title,           # Заголовок (без эмодзи, чтобы не ломалось кодирование)
+        "Tags": tags,             # Эмодзи через теги
+        "Click": tv_link,         # Ссылка при клике на уведомление
+        "Priority": "high" if abs(change) > 20 else "default" # Если изменение > 20%, делаем приоритетным
+    }
+
+    try:
+        # Отправляем запрос в ntfy
+        response = requests.post(
+            ntfy_url,
+            data=message.encode('utf-8'),
+            headers=headers,
+            timeout=10
+        )
+        response.raise_for_status()
+        logging.info(f"Уведомление для {symbol} ({signal_type}) успешно отправлено.")
+        
+    except Exception as e:
+        logging.error(f"Ошибка при отправке уведомления в ntfy для {symbol}: {e}")
