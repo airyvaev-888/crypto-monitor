@@ -1,6 +1,6 @@
 import time
 import logging
-from fetcher import compute_rsi
+from fetcher import compute_rsi, compute_ema200_4h
 
 # Настройки фильтрации (из документации проекта)
 COOLDOWN_HOURS = 4
@@ -8,6 +8,7 @@ VOLATILITY_THRESHOLD = 15.0      # 15% изменения за 24ч
 MIN_TOTAL_VOLUME = 500_000       # Общий объем > 500k $
 MIN_EXCHANGE_VOLUME = 50_000     # Мин. объем на одной бирже > 50k $
 MIN_EXCHANGES = 2                # Минимум 2 биржи
+
 
 def analyze(coins, history):
     """
@@ -72,6 +73,21 @@ def analyze(coins, history):
                 logging.info(f"Пропуск SHORT {sym}: RSI слишком низкий ({rsi})")
                 continue
 
+        # 5.5. EMA 200 (4h) — фильтр тренда (ЭТАП E)
+        ema200, last_close = compute_ema200_4h(best_exchange, symbol_ccxt)
+
+        if ema200 is None:
+            logging.info(f"Пропуск {signal_type} {sym}: <200 свечей 4h, EMA200 недоступна")
+            continue
+
+        if signal_type == "LONG" and last_close < ema200:
+            logging.info(f"Пропуск LONG {sym}: close {last_close:.6g} < EMA200 {ema200:.6g}")
+            continue
+
+        if signal_type == "SHORT" and last_close > ema200:
+            logging.info(f"Пропуск SHORT {sym}: close {last_close:.6g} > EMA200 {ema200:.6g}")
+            continue
+
         # 6. Формирование сигнала
         signal = {
             "symbol": sym,
@@ -80,6 +96,7 @@ def analyze(coins, history):
             "price": coin["price"],
             "change": round(change, 2),
             "rsi": rsi,
+            "ema200": round(ema200, 6), # Добавили EMA в сигнал
             "exchanges": list(valid_exchanges.keys()),
             "timestamp": current_time
         }
