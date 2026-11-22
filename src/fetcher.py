@@ -55,7 +55,7 @@ def fetch_exchange_tickers(symbols=None):
                 if base_coin not in exchange_data: exchange_data[base_coin] = {}
                 exchange_data[base_coin][ex_id] = {'quoteVolume': quote_volume, 'price': ticker.get('last', 0)}
         except Exception as e:
-            logging.error(f"[{ex_id}] Ошибка: {e}")
+            logging.error(f"[{ex_id}] Ошибка тикеров: {e}")
     return exchange_data
 
 def fetch_market_data():
@@ -103,22 +103,19 @@ def fetch_indicators(exchange_id, symbol):
         df_4h = df_1h.resample('4h').agg({'o': 'first', 'h': 'max', 'l': 'min', 'c': 'last', 'v': 'sum'}).dropna()
         if len(df_4h) < 200: return None
 
-        # --- EMA 200 (4h) ---
         ema200 = df_4h['c'].ewm(span=200, adjust=False).mean().iloc[-1]
         last_close_4h = df_4h['c'].iloc[-1]
 
-        # --- MACD (4h) ---
         exp1 = df_4h['c'].ewm(span=12, adjust=False).mean()
         exp2 = df_4h['c'].ewm(span=26, adjust=False).mean()
         macd_line = exp1 - exp2
         signal_line = macd_line.ewm(span=9, adjust=False).mean()
         macd_hist = macd_line - signal_line
         
-        # НОВАЯ ЛОГИКА: Ищем не пересечение нуля, а рост импульса (2 зеленых бара подряд)
-        macd_bullish = macd_hist.iloc[-2] > macd_hist.iloc[-3] and macd_hist.iloc[-3] > macd_hist.iloc[-4]
-        macd_bearish = macd_hist.iloc[-2] < macd_hist.iloc[-3] and macd_hist.iloc[-3] < macd_hist.iloc[-4]
+        # УПРОЩЕННЫЙ MACD: гистограмма просто растет/падает по сравнению с прошлым закрытым баром
+        macd_bullish = macd_hist.iloc[-2] > macd_hist.iloc[-3]
+        macd_bearish = macd_hist.iloc[-2] < macd_hist.iloc[-3]
 
-        # --- RSI (1h) ---
         delta = df_1h['c'].diff()
         gain = (delta.where(delta > 0, 0)).rolling(window=config.RSI_PERIOD).mean()
         loss = (-delta.where(delta < 0, 0)).rolling(window=config.RSI_PERIOD).mean()
@@ -127,7 +124,6 @@ def fetch_indicators(exchange_id, symbol):
         current_rsi = rsi_series.iloc[-1]
         prev_rsi = rsi_series.iloc[-2]
 
-        # --- ATR (1h) ---
         high_low = df_1h['h'] - df_1h['l']
         high_close = (df_1h['h'] - df_1h['c'].shift()).abs()
         low_close = (df_1h['l'] - df_1h['c'].shift()).abs()
@@ -145,4 +141,6 @@ def fetch_indicators(exchange_id, symbol):
             "atr": atr
         }
     except Exception as e:
+        # ВОЗВРАЩАЕМ ЛОГ ОШИБКИ, чтобы видеть, если биржа не отдает свечи
+        logging.warning(f"Ошибка индикаторов {symbol}@{exchange_id}: {e}")
         return None
