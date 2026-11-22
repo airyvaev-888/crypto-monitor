@@ -55,14 +55,20 @@ jobs:
           COINGECKO_API: ${{ secrets.COINGECKO_API }}
         run: python src/main.py
 
-      - name: 💾 Commit snapshot
+      - name: Commit snapshot
         run: |
           git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
           
-          git add data/
+          # Добавляем файл и коммитим изменения
+          git add data/market_snapshot.json
+          git commit -m "Update market data ($(date +%H:%M) +05) [skip ci]" || echo "Нет изменений для коммита"
           
-          git commit -m "Update market data (12:00 +05) [skip ci]" || echo "No changes to commit"
+          # Пытаемся сделать rebase. Если возникает конфликт — разрешаем его в пользу НАШЕГО файла.
+          if ! git pull --rebase origin main; then
+            echo "⚠️ Обнаружен конфликт при rebase. Автоматически разрешаем в пользу свежих данных..."
+            git checkout --theirs data/market_snapshot.json
+            git add data/market_snapshot.json
+            git rebase --continue
+          fi
           
-          git pull --rebase origin ${{ github.ref_name }}
-          git push
