@@ -78,6 +78,12 @@ def fetch_exchange_tickers(symbols=None):
     for ex_id in TARGET_EXCHANGES:
         try:
             exchange = get_exchange_instance(ex_id)
+            
+            # КРИТИЧЕСКИ ВАЖНО: загружаем метаданные рынков перед запросом тикеров,
+            # иначе некоторые биржи (MEXC, Gate) вернут неполный список.
+            logging.info(f"[{ex_id}] Загрузка списка рынков (load_markets)...")
+            exchange.load_markets()
+            
             # Загружаем все тикеры разом (защита от таймаутов и бан-лимитов)
             tickers = exchange.fetch_tickers()
             logging.info(f"[{ex_id}] Успешно загружено {len(tickers)} тикеров.")
@@ -232,9 +238,6 @@ def compute_ema200_4h(exchange_id, symbol, limit=250):
     """
     Возвращает (ema200, last_close) по 4h-свечам с указанной биржи.
     (None, None) — если свечей <200 или биржа/пара недоступна.
-
-    Сравнивать EMA нужно с последним 4h-close именно с этой биржи
-    (а не с ценой CoinGecko), чтобы избежать расхождения источников.
     """
     try:
         exchange = get_exchange_instance(exchange_id)
@@ -248,7 +251,7 @@ def compute_ema200_4h(exchange_id, symbol, limit=250):
 
         closes = [c[4] for c in ohlcv]
 
-        # EMA(200) без pandas — проще и без лишних аллокаций
+        # EMA(200) без pandas
         k = 2.0 / (200 + 1)
         ema = closes[0]
         for price in closes[1:]:
