@@ -1,4 +1,3 @@
-# src/analyzer.py
 import time
 import logging
 import config
@@ -38,15 +37,13 @@ def analyze(coins, history):
         signal_type = None
         reason = ""
 
-        # === ЛОГИКА LONG (Покупка на откате) ===
-        # Условия: Глобальный тренд вверх (цена > EMA200), MACD развернулся вверх, RSI выходил из перепроданности
+        # === ЛОГИКА LONG ===
         if ind["macd_bullish"] and ind["rsi"] > ind["prev_rsi"] and ind["prev_rsi"] < config.RSI_LONG_THRESHOLD:
             if not config.USE_EMA_FILTER or ind["price_4h"] > ind["ema200"]:
                 signal_type = "LONG"
                 reason = f"MACD Cross UP + RSI {ind['prev_rsi']:.1f}->{ind['rsi']:.1f}"
         
-        # === ЛОГИКА SHORT (Продажа на отскоке) ===
-        # Условия: Глобальный тренд вниз (цена < EMA200), MACD развернулся вниз, RSI выходил из перекупленности
+        # === ЛОГИКА SHORT ===
         elif ind["macd_bearish"] and ind["rsi"] < ind["prev_rsi"] and ind["prev_rsi"] > config.RSI_SHORT_THRESHOLD:
             if not config.USE_EMA_FILTER or ind["price_4h"] < ind["ema200"]:
                 signal_type = "SHORT"
@@ -78,5 +75,8 @@ def analyze(coins, history):
             "exchange": best_exchange,
             "timestamp": current_time
         })
+        
+        # Логируем найденный сигнал
+        logging.info(f"!!! СИГНАЛ {signal_type}: {sym} @ {entry_price} (Причина: {reason})")
 
     return signals
