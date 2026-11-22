@@ -1,6 +1,7 @@
 import json
 import os
 import time
+import logging
 
 from fetcher import fetch_market_data
 from analyzer import analyze
@@ -33,11 +34,11 @@ def clean_history(history):
 
 
 def save_snapshot(coins):
-    snapshot = load_json(SNAPSHOT_PATH, [])
+    # ИСПРАВЛЕНИЕ: Теперь снапшот перезаписывается, а не дополняется
+    snapshot = []
     for c in coins:
         c = dict(c)
         
-        # ИСПРАВЛЕНИЕ: берем ключи из exchange_tickers, а не ищем exchanges
         if "exchange_tickers" in c:
             c["exchanges"] = sorted(c["exchange_tickers"].keys())
             del c["exchange_tickers"] # Удаляем тяжелый словарь, чтобы не раздувать JSON
@@ -46,10 +47,18 @@ def save_snapshot(coins):
             
         c["timestamp"] = int(time.time())
         snapshot.append(c)
+        
     save_json(SNAPSHOT_PATH, snapshot)
 
 
 def main():
+    # ВКЛЮЧАЕМ ЛОГИ, чтобы видеть диагностику в GitHub Actions
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s [%(levelname)s] %(message)s',
+        datefmt='%H:%M:%S'
+    )
+
     coins = fetch_market_data()
     print(f"Coins fetched: {len(coins)}")
 
