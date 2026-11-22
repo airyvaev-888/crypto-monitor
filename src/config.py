@@ -1,23 +1,22 @@
 # src/config.py
 
 # === НАСТРОЙКИ БАЗЫ ===
-MIN_MARKET_CAP = 50_000_000      # Мин. капитализация ($)
-MIN_TOTAL_VOLUME = 500_000       # Общий объем на биржах ($)
-MIN_EXCHANGE_VOLUME = 50_000     # Объем на одной бирже ($)
-MIN_EXCHANGES = 2                # Мин. количество бирж для подтверждения
-COOLDOWN_HOURS = 4               # Пауза между сигналами по одной монете
+MIN_MARKET_CAP = 50_000_000      
+MIN_TOTAL_VOLUME = 500_000       
+MIN_EXCHANGE_VOLUME = 50_000     
+MIN_EXCHANGES = 2                
+COOLDOWN_HOURS = 4               
 
 # === НАСТРОЙКИ СТРАТЕГИИ (Разворот тренда) ===
-# Работаем на 1h свечах для поиска входа
 TIMEFRAME = '1h'                 
 RSI_PERIOD = 14
-RSI_LONG_THRESHOLD = 35          # Если RSI был ниже 35 (перепродан) и пошел вверх - сигнал LONG
-RSI_SHORT_THRESHOLD = 65         # Если RSI был выше 65 (перекуплен) и пошел вниз - сигнал SHORT
+# Слегка поднимаем порог RSI, чтобы не ждать экстремальных падений
+RSI_LONG_THRESHOLD = 45          # Если RSI был ниже 45 и пошел вверх
+RSI_SHORT_THRESHOLD = 55         # Если RSI был выше 55 и пошел вниз
 
-# Фильтр глобального тренда (EMA 200 на 4h)
-USE_EMA_FILTER = True            # Если True - не лонговать под EMA 200, не шортить над EMA 200
+USE_EMA_FILTER = True            
 
-# === НАСТРОЙКИ УПРАВЛЕНИЯ РИСКАМИ (Для максимизации прибыли) ===
-ATR_PERIOD = 14                  # Период ATR (волатильность)
-SL_ATR_MULTIPLIER = 2.0          # Стоп-лосс = 2 * ATR от цены входа
-TP_ATR_MULTIPLIER = 4.0          # Тейк-профит = 4 * ATR (соотношение риск/прибыль 1:2)
+# === НАСТРОЙКИ УПРАВЛЕНИЯ РИСКАМИ ===
+ATR_PERIOD = 14                  
+SL_ATR_MULTIPLIER = 2.0          
+TP_ATR_MULTIPLIER = 4.0          
