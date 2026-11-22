@@ -1,4 +1,3 @@
-# src/fetcher.py
 import ccxt
 import time
 import random
@@ -10,9 +9,19 @@ import config
 
 TARGET_EXCHANGES = ['kucoin', 'gateio', 'mexc', 'okx', 'bitget']
 
+# Кеш для подключений к биржам (чтобы не создавать их 270 раз)
+_EXCHANGES = {}
+
 def get_exchange_instance(exchange_id):
+    if exchange_id in _EXCHANGES:
+        return _EXCHANGES[exchange_id]
+    
     exchange_class = getattr(ccxt, exchange_id)
-    exchange = exchange_class({'enableRateLimit': True, 'options': {'defaultType': 'spot'}})
+    exchange = exchange_class({
+        'enableRateLimit': True, 
+        'options': {'defaultType': 'spot'}
+    })
+    _EXCHANGES[exchange_id] = exchange
     return exchange
 
 def _cg_get_json(url, params, headers, max_retries=6, base_delay=15.0, timeout=30):
@@ -34,7 +43,7 @@ def _cg_get_json(url, params, headers, max_retries=6, base_delay=15.0, timeout=3
                 delay = min(delay * 1.8, 120)
                 continue
             r.raise_for_status()
-        except requests.RequestException as e:
+        except requests.RequestException:
             time.sleep(delay)
             delay = min(delay * 1.8, 120)
     raise RuntimeError(f"CoinGecko недоступен после {max_retries} попыток")
@@ -88,23 +97,25 @@ def fetch_market_data():
 
 def fetch_indicators(exchange_id, symbol):
     """
-    Загружает свечи и рассчитывает RSI, MACD, ATR, EMA200
+    Загружает 1000 часовых свечей (1h) и пересчитывает их в 4h для MACD и EMA.
+    Это в 2 раза быстрее и экономит лимиты API.
     """
     try:
         exchange = get_exchange_instance(exchange_id)
         if not exchange.has.get('fetchOHLCV'): return None
 
-        # 1. Загружаем 4h свечи для EMA 200 и MACD
-        ohlcv_4h = exchange.fetch_ohlcv(symbol, timeframe='4h', limit=250)
-        if not ohlcv_4h or len(ohlcv_4h) < 200: return None
-        
-        # 2. Загружаем 1h свечи для RSI и ATR
-        ohlcv_1h = exchange.fetch_ohlcv(symbol, timeframe=config.TIMEFRAME, limit=100)
-        if not ohlcv_1h or len(ohlcv_1h) < 50: return None
+        # Запрашиваем 1000 часовых свечей (это 41 день, достаточно для EMA 200 на 4h)
+        ohlcv_1h = exchange.fetch_ohlcv(symbol, timeframe='1h', limit=1000)
+        if not ohlcv_1h or len(ohlcv_1h) < 800: return None
 
-        df_4h = pd.DataFrame(ohlcv_4h, columns=['ts', 'o', 'h', 'l', 'c', 'v'])
         df_1h = pd.DataFrame(ohlcv_1h, columns=['ts', 'o', 'h', 'l', 'c', 'v'])
+        df_1h['dt'] = pd.to_datetime(df_1h['ts'], unit='ms')
+        df_1h.set_index('dt', inplace=True)
         
+        # Конвертируем 1h свечи в 4h (группируем по 4 часа)
+        df_4h = df_1h.resample('4h').agg({'o': 'first', 'h': 'max', 'l': 'min', 'c': 'last', 'v': 'sum'}).dropna()
+        if len(df_4h) < 200: return None
+
         # --- EMA 200 (4h) ---
         ema200 = df_4h['c'].ewm(span=200, adjust=False).mean().iloc[-1]
         last_close_4h = df_4h['c'].iloc[-1]
@@ -116,9 +127,9 @@ def fetch_indicators(exchange_id, symbol):
         signal_line = macd_line.ewm(span=9, adjust=False).mean()
         macd_hist = macd_line - signal_line
         
-        # Проверяем, был ли MACD отрицательным в прошлой свече и стал положительным
-        macd_bullish_cross = macd_hist.iloc[-2] < 0 and macd_hist.iloc[-1] > 0
-        macd_bearish_cross = macd_hist.iloc[-2] > 0 and macd_hist.iloc[-1] < 0
+        # Берем iloc[-2] (последнюю ЗАКРЫТУЮ 4h свечу), чтобы сигнал не исчезал
+        macd_bullish_cross = macd_hist.iloc[-3] < 0 and macd_hist.iloc[-2] > 0
+        macd_bearish_cross = macd_hist.iloc[-3] > 0 and macd_hist.iloc[-2] < 0
 
         # --- RSI (1h) ---
         delta = df_1h['c'].diff()
@@ -147,5 +158,5 @@ def fetch_indicators(exchange_id, symbol):
             "atr": atr
         }
     except Exception as e:
-        logging.warning(f"Ошибка индикаторов {symbol}@{exchange_id}: {e}")
+        logging.debug(f"Ошибка индикаторов {symbol}@{exchange_id}: {e}")
         return None
