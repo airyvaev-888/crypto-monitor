@@ -1,105 +1,82 @@
+# src/analyzer.py
 import time
 import logging
-from fetcher import compute_rsi, compute_ema200_4h
-
-# Настройки фильтрации (из документации проекта)
-COOLDOWN_HOURS = 4
-VOLATILITY_THRESHOLD = 15.0      # 15% изменения за 24ч
-MIN_TOTAL_VOLUME = 500_000       # Общий объем > 500k $
-MIN_EXCHANGE_VOLUME = 50_000     # Мин. объем на одной бирже > 50k $
-MIN_EXCHANGES = 2                # Минимум 2 биржи
-
+import config
+from fetcher import fetch_indicators
 
 def analyze(coins, history):
-    """
-    Анализирует список монет и возвращает список торговых сигналов.
-    """
     signals = []
     current_time = int(time.time())
-    cooldown_seconds = COOLDOWN_HOURS * 3600
+    cooldown_seconds = config.COOLDOWN_HOURS * 3600
 
     for coin in coins:
         sym = coin["symbol"]
         
-        # 1. Проверка кулдауна (антидубль)
-        if sym in history:
-            last_signal_time = history[sym]
-            if current_time - last_signal_time < cooldown_seconds:
-                continue
-
-        # 2. Проверка на волатильность (изменение за 24ч)
-        change = coin["price_change_24h"]
-        
-        signal_type = None
-        if change >= VOLATILITY_THRESHOLD:
-            signal_type = "LONG"
-        elif change <= -VOLATILITY_THRESHOLD:
-            signal_type = "SHORT"
-            
-        if not signal_type:
+        # 1. Кулдаун
+        if sym in history and (current_time - history[sym] < cooldown_seconds):
             continue
 
-        # 3. Проверка объемов и количества бирж
+        # 2. Фильтр объемов и бирж
         exchange_tickers = coin.get("exchange_tickers", {})
-        
-        # Отбираем только биржи, где объем > 50k $
         valid_exchanges = {
             ex: data for ex, data in exchange_tickers.items() 
-            if data.get("quoteVolume", 0) > MIN_EXCHANGE_VOLUME
+            if data.get("quoteVolume", 0) > config.MIN_EXCHANGE_VOLUME
         }
         
-        # Монета должна торговаться минимум на 2 биржах
-        if len(valid_exchanges) < MIN_EXCHANGES:
-            continue
-            
-        # Общий объем должен быть > 500k $
+        if len(valid_exchanges) < config.MIN_EXCHANGES: continue
         total_volume = sum(data.get("quoteVolume", 0) for data in valid_exchanges.values())
-        if total_volume < MIN_TOTAL_VOLUME:
-            continue
+        if total_volume < config.MIN_TOTAL_VOLUME: continue
 
-        # 4. Расчет RSI
-        # Берем биржу с самым большим объемом для запроса свечей
+        # Берем лучшую биржу
         best_exchange = max(valid_exchanges.items(), key=lambda x: x[1].get("quoteVolume", 0))[0]
         symbol_ccxt = f"{sym}/USDT"
         
-        rsi = compute_rsi(best_exchange, symbol_ccxt)
+        # 3. Загружаем индикаторы
+        ind = fetch_indicators(best_exchange, symbol_ccxt)
+        if not ind: continue
+
+        signal_type = None
+        reason = ""
+
+        # === ЛОГИКА LONG (Покупка на откате) ===
+        # Условия: Глобальный тренд вверх (цена > EMA200), MACD развернулся вверх, RSI выходил из перепроданности
+        if ind["macd_bullish"] and ind["rsi"] > ind["prev_rsi"] and ind["prev_rsi"] < config.RSI_LONG_THRESHOLD:
+            if not config.USE_EMA_FILTER or ind["price_4h"] > ind["ema200"]:
+                signal_type = "LONG"
+                reason = f"MACD Cross UP + RSI {ind['prev_rsi']:.1f}->{ind['rsi']:.1f}"
         
-        # 5. RSI-фильтр
-        if rsi is not None:
-            if signal_type == "LONG" and rsi > 75:
-                logging.info(f"Пропуск LONG {sym}: RSI слишком высокий ({rsi})")
-                continue
-            if signal_type == "SHORT" and rsi < 25:
-                logging.info(f"Пропуск SHORT {sym}: RSI слишком низкий ({rsi})")
-                continue
+        # === ЛОГИКА SHORT (Продажа на отскоке) ===
+        # Условия: Глобальный тренд вниз (цена < EMA200), MACD развернулся вниз, RSI выходил из перекупленности
+        elif ind["macd_bearish"] and ind["rsi"] < ind["prev_rsi"] and ind["prev_rsi"] > config.RSI_SHORT_THRESHOLD:
+            if not config.USE_EMA_FILTER or ind["price_4h"] < ind["ema200"]:
+                signal_type = "SHORT"
+                reason = f"MACD Cross DOWN + RSI {ind['prev_rsi']:.1f}->{ind['rsi']:.1f}"
 
-        # 5.5. EMA 200 (4h) — фильтр тренда (ЭТАП E)
-        ema200, last_close = compute_ema200_4h(best_exchange, symbol_ccxt)
+        if not signal_type: continue
 
-        if ema200 is None:
-            logging.info(f"Пропуск {signal_type} {sym}: <200 свечей 4h, EMA200 недоступна")
-            continue
+        # 4. Расчет Take Profit и Stop Loss на основе волатильности (ATR)
+        entry_price = coin["price"]
+        atr = ind["atr"]
+        
+        if signal_type == "LONG":
+            sl = entry_price - (atr * config.SL_ATR_MULTIPLIER)
+            tp = entry_price + (atr * config.TP_ATR_MULTIPLIER)
+        else: # SHORT
+            sl = entry_price + (atr * config.SL_ATR_MULTIPLIER)
+            tp = entry_price - (atr * config.TP_ATR_MULTIPLIER)
 
-        if signal_type == "LONG" and last_close < ema200:
-            logging.info(f"Пропуск LONG {sym}: close {last_close:.6g} < EMA200 {ema200:.6g}")
-            continue
-
-        if signal_type == "SHORT" and last_close > ema200:
-            logging.info(f"Пропуск SHORT {sym}: close {last_close:.6g} > EMA200 {ema200:.6g}")
-            continue
-
-        # 6. Формирование сигнала
-        signal = {
+        # 5. Формируем сигнал
+        signals.append({
             "symbol": sym,
             "name": coin["name"],
             "type": signal_type,
-            "price": coin["price"],
-            "change": round(change, 2),
-            "rsi": rsi,
-            "ema200": round(ema200, 6), # Добавили EMA в сигнал
-            "exchanges": list(valid_exchanges.keys()),
+            "price": entry_price,
+            "tp": tp,
+            "sl": sl,
+            "rsi": round(ind["rsi"], 2),
+            "reason": reason,
+            "exchange": best_exchange,
             "timestamp": current_time
-        }
-        signals.append(signal)
+        })
 
     return signals
