@@ -2,8 +2,8 @@
   {
     "symbol": "BTC",
     "name": "Bitcoin",
-    "price": 59033,
-    "market_cap": 1187925612073,
+    "price": 61278,
+    "market_cap": 1232680224994,
     "exchanges": [
       "bitget",
       "gateio",
@@ -11,13 +11,13 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "ETH",
     "name": "Ethereum",
-    "price": 1662.27,
-    "market_cap": 203236723284,
+    "price": 1717.83,
+    "market_cap": 209995582081,
     "exchanges": [
       "bitget",
       "gateio",
@@ -25,13 +25,13 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "BNB",
     "name": "BNB",
-    "price": 539.54,
-    "market_cap": 70960891516,
+    "price": 555.97,
+    "market_cap": 73115739696,
     "exchanges": [
       "bitget",
       "gateio",
@@ -39,13 +39,13 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "USDC",
     "name": "USDC",
-    "price": 0.999243,
-    "market_cap": 68421882944,
+    "price": 0.999474,
+    "market_cap": 68416545236,
     "exchanges": [
       "bitget",
       "gateio",
@@ -53,13 +53,13 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "XRP",
     "name": "XRP",
-    "price": 0.914848,
-    "market_cap": 58100245029,
+    "price": 0.935925,
+    "market_cap": 59446781721,
     "exchanges": [
       "bitget",
       "gateio",
@@ -67,13 +67,13 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "SOL",
     "name": "Solana",
-    "price": 69.2,
-    "market_cap": 40965509670,
+    "price": 72.08,
+    "market_cap": 42672113364,
     "exchanges": [
       "bitget",
       "gateio",
@@ -81,13 +81,13 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "TRX",
     "name": "TRON",
-    "price": 0.303377,
-    "market_cap": 28832255964,
+    "price": 0.305044,
+    "market_cap": 28995475855,
     "exchanges": [
       "bitget",
       "gateio",
@@ -95,13 +95,13 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "HYPE",
     "name": "Hyperliquid",
-    "price": 60.17,
-    "market_cap": 14297266820,
+    "price": 63.13,
+    "market_cap": 15004593997,
     "exchanges": [
       "bitget",
       "gateio",
@@ -109,13 +109,13 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "ZEC",
     "name": "Zcash",
-    "price": 784.75,
-    "market_cap": 13393603629,
+    "price": 787.22,
+    "market_cap": 13427084771,
     "exchanges": [
       "bitget",
       "gateio",
@@ -123,23 +123,23 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "XMR",
     "name": "Monero",
-    "price": 483.7,
-    "market_cap": 9107629393,
+    "price": 496.78,
+    "market_cap": 9356730397,
     "exchanges": [
       "kucoin"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "DOGE",
     "name": "Dogecoin",
-    "price": 0.054175,
-    "market_cap": 8496089330,
+    "price": 0.055529,
+    "market_cap": 8710264676,
     "exchanges": [
       "bitget",
       "gateio",
@@ -147,34 +147,34 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "LEO",
     "name": "LEO Token",
-    "price": 9.13,
-    "market_cap": 8398771756,
+    "price": 9.15,
+    "market_cap": 8420318748,
     "exchanges": [
       "gateio",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "WBT",
     "name": "WhiteBIT Coin",
-    "price": 56.74,
-    "market_cap": 6734490088,
+    "price": 58.7,
+    "market_cap": 6963690802,
     "exchanges": [
       "mexc"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "LINK",
     "name": "Chainlink",
-    "price": 8.55,
-    "market_cap": 6554220623,
+    "price": 8.92,
+    "market_cap": 6838553217,
     "exchanges": [
       "bitget",
       "gateio",
@@ -182,13 +182,13 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "USDS",
     "name": "USDS",
     "price": 1.0,
-    "market_cap": 6345845070,
+    "market_cap": 6469424921,
     "exchanges": [
       "bitget",
       "gateio",
@@ -196,13 +196,13 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "ADA",
     "name": "Cardano",
-    "price": 0.141498,
-    "market_cap": 5315902229,
+    "price": 0.145833,
+    "market_cap": 5480279140,
     "exchanges": [
       "bitget",
       "gateio",
@@ -210,26 +210,26 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "USDE",
     "name": "Ethena USDe",
-    "price": 0.998648,
-    "market_cap": 4849670959,
+    "price": 0.999346,
+    "market_cap": 4853182445,
     "exchanges": [
       "bitget",
       "gateio",
       "kucoin",
       "mexc"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "XLM",
     "name": "Stellar",
-    "price": 0.127083,
-    "market_cap": 4504553584,
+    "price": 0.128699,
+    "market_cap": 4561815275,
     "exchanges": [
       "bitget",
       "gateio",
@@ -237,13 +237,13 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "BCH",
     "name": "Bitcoin Cash",
-    "price": 195.04,
-    "market_cap": 3923379541,
+    "price": 199.24,
+    "market_cap": 4008781829,
     "exchanges": [
       "bitget",
       "gateio",
@@ -251,13 +251,13 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "NEAR",
     "name": "NEAR Protocol",
-    "price": 2.87,
-    "market_cap": 3763392715,
+    "price": 3.01,
+    "market_cap": 3947179891,
     "exchanges": [
       "bitget",
       "gateio",
@@ -265,13 +265,13 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "LTC",
     "name": "Litecoin",
-    "price": 39.02,
-    "market_cap": 3036926462,
+    "price": 40.51,
+    "market_cap": 3154144451,
     "exchanges": [
       "bitget",
       "gateio",
@@ -279,13 +279,13 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "CC",
     "name": "Canton",
-    "price": 0.072844,
-    "market_cap": 2921158352,
+    "price": 0.075982,
+    "market_cap": 3047377983,
     "exchanges": [
       "bitget",
       "gateio",
@@ -293,13 +293,13 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "AVAX",
     "name": "Avalanche",
-    "price": 6.52,
-    "market_cap": 2909166950,
+    "price": 6.72,
+    "market_cap": 3000638176,
     "exchanges": [
       "bitget",
       "gateio",
@@ -307,38 +307,66 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "GRAM",
+    "name": "Gram (prev. Toncoin)",
+    "price": 1.013,
+    "market_cap": 2912018495,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "kucoin",
+      "mexc",
+      "okx"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "XAUT",
+    "name": "Tether Gold",
+    "price": 3592.64,
+    "market_cap": 2906423850,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "kucoin",
+      "okx"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "UNI",
+    "name": "Uniswap",
+    "price": 4.74,
+    "market_cap": 2877761165,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "kucoin",
+      "mexc",
+      "okx"
+    ],
+    "timestamp": 1795421965
   },
   {
     "symbol": "RLUSD",
     "name": "Ripple USD",
     "price": 1.0,
-    "market_cap": 2874215214,
+    "market_cap": 2869160733,
     "exchanges": [
       "bitget",
       "gateio",
       "okx"
     ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "XAUT",
-    "name": "Tether Gold",
-    "price": 3530.24,
-    "market_cap": 2855862290,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "kucoin",
-      "okx"
-    ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "USD1",
     "name": "USD1",
-    "price": 0.999152,
-    "market_cap": 2855733102,
+    "price": 0.999444,
+    "market_cap": 2847423790,
     "exchanges": [
       "bitget",
       "gateio",
@@ -346,41 +374,13 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "UNI",
-    "name": "Uniswap",
-    "price": 4.59,
-    "market_cap": 2788201101,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "kucoin",
-      "mexc",
-      "okx"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "GRAM",
-    "name": "Gram (prev. Toncoin)",
-    "price": 0.942359,
-    "market_cap": 2708274902,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "kucoin",
-      "mexc",
-      "okx"
-    ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "SUI",
     "name": "Sui",
-    "price": 0.638331,
-    "market_cap": 2641327783,
+    "price": 0.666952,
+    "market_cap": 2760543298,
     "exchanges": [
       "bitget",
       "gateio",
@@ -388,61 +388,48 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "USDG",
     "name": "Global Dollar",
     "price": 1.0,
-    "market_cap": 2600501666,
+    "market_cap": 2600517674,
     "exchanges": [
       "gateio",
       "kucoin",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "USDY",
     "name": "Ondo US Dollar Yield",
     "price": 1.15,
-    "market_cap": 2378128242,
+    "market_cap": 2369369832,
     "exchanges": [
       "gateio"
     ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "RAIN",
-    "name": "Rain",
-    "price": 0.00325974,
-    "market_cap": 2328389851,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "kucoin",
-      "mexc"
-    ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "PYUSD",
     "name": "PayPal USD",
-    "price": 1.0,
-    "market_cap": 2324445111,
+    "price": 0.999891,
+    "market_cap": 2323852087,
     "exchanges": [
       "bitget",
       "gateio",
       "kucoin",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "HBAR",
     "name": "Hedera",
-    "price": 0.050549,
-    "market_cap": 2240541034,
+    "price": 0.052228,
+    "market_cap": 2315140218,
     "exchanges": [
       "bitget",
       "gateio",
@@ -450,13 +437,26 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "RAIN",
+    "name": "Rain",
+    "price": 0.00319654,
+    "market_cap": 2283636741,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "kucoin",
+      "mexc"
+    ],
+    "timestamp": 1795421965
   },
   {
     "symbol": "TAO",
     "name": "Bittensor",
-    "price": 185.95,
-    "market_cap": 2181188630,
+    "price": 192.38,
+    "market_cap": 2257157344,
     "exchanges": [
       "bitget",
       "gateio",
@@ -464,114 +464,114 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "SHIB",
-    "name": "Shiba Inu",
-    "price": 3.58e-06,
-    "market_cap": 2110360039,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "kucoin",
-      "mexc",
-      "okx"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "CRO",
-    "name": "Cronos",
-    "price": 0.04042915,
-    "market_cap": 2100353289,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "kucoin",
-      "mexc",
-      "okx"
-    ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "QNT",
     "name": "Quant",
-    "price": 137.62,
-    "market_cap": 2003422451,
+    "price": 146.21,
+    "market_cap": 2128323088,
     "exchanges": [
       "bitget",
       "gateio",
       "kucoin",
       "mexc"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "SHIB",
+    "name": "Shiba Inu",
+    "price": 3.61e-06,
+    "market_cap": 2127050768,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "kucoin",
+      "mexc",
+      "okx"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "CRO",
+    "name": "Cronos",
+    "price": 0.04078351,
+    "market_cap": 2119031191,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "kucoin",
+      "mexc",
+      "okx"
+    ],
+    "timestamp": 1795421965
   },
   {
     "symbol": "M",
     "name": "MemeCore",
-    "price": 0.760853,
-    "market_cap": 1750557801,
+    "price": 0.75989,
+    "market_cap": 1748455619,
     "exchanges": [
       "bitget",
       "gateio",
       "mexc"
     ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "USDF",
-    "name": "Falcon USD",
-    "price": 0.995355,
-    "market_cap": 1710864281,
-    "exchanges": [
-      "mexc"
-    ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "OKB",
     "name": "OKB",
-    "price": 79.0,
-    "market_cap": 1658536660,
+    "price": 82.73,
+    "market_cap": 1737323301,
     "exchanges": [
       "gateio",
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "USDF",
+    "name": "Falcon USD",
+    "price": 0.994309,
+    "market_cap": 1709003930,
+    "exchanges": [
+      "mexc"
+    ],
+    "timestamp": 1795421965
   },
   {
     "symbol": "U",
     "name": "United Stables",
-    "price": 0.999985,
-    "market_cap": 1640988272,
+    "price": 1.0,
+    "market_cap": 1643278253,
     "exchanges": [
       "bitget",
       "gateio",
       "kucoin",
       "mexc"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "PAXG",
     "name": "PAX Gold",
-    "price": 3531.2,
-    "market_cap": 1579539892,
+    "price": 3594.49,
+    "market_cap": 1607996007,
     "exchanges": [
       "bitget",
       "gateio",
       "kucoin",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "AAVE",
     "name": "Aave",
-    "price": 95.42,
-    "market_cap": 1473483121,
+    "price": 97.89,
+    "market_cap": 1511549812,
     "exchanges": [
       "bitget",
       "gateio",
@@ -579,25 +579,25 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "USDD",
     "name": "USDD",
-    "price": 0.997295,
-    "market_cap": 1453142905,
+    "price": 0.998493,
+    "market_cap": 1473290465,
     "exchanges": [
       "gateio",
       "kucoin",
       "mexc"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "PEPE",
     "name": "Pepe",
-    "price": 3.33e-06,
-    "market_cap": 1400006868,
+    "price": 3.42e-06,
+    "market_cap": 1438252114,
     "exchanges": [
       "bitget",
       "gateio",
@@ -605,27 +605,13 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "WLFI",
-    "name": "World Liberty Financial",
-    "price": 0.04343862,
-    "market_cap": 1375788210,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "kucoin",
-      "mexc",
-      "okx"
-    ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "ONDO",
     "name": "Ondo",
-    "price": 0.276824,
-    "market_cap": 1347720871,
+    "price": 0.288404,
+    "market_cap": 1404335951,
     "exchanges": [
       "bitget",
       "gateio",
@@ -633,13 +619,13 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "ENA",
     "name": "Ethena",
-    "price": 0.097459,
-    "market_cap": 1315430591,
+    "price": 0.103152,
+    "market_cap": 1392554121,
     "exchanges": [
       "bitget",
       "gateio",
@@ -647,78 +633,92 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "WLFI",
+    "name": "World Liberty Financial",
+    "price": 0.04316743,
+    "market_cap": 1367572466,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "kucoin",
+      "mexc",
+      "okx"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "ASTER",
+    "name": "Aster",
+    "price": 0.509899,
+    "market_cap": 1311387375,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "kucoin",
+      "mexc",
+      "okx"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "MNT",
+    "name": "Mantle",
+    "price": 0.394017,
+    "market_cap": 1304985437,
+    "exchanges": [
+      "gateio",
+      "kucoin",
+      "mexc"
+    ],
+    "timestamp": 1795421965
   },
   {
     "symbol": "HTX",
     "name": "HTX DAO",
     "price": 1.46e-06,
-    "market_cap": 1293003719,
+    "market_cap": 1301886837,
     "exchanges": [
       "bitget",
       "gateio",
       "kucoin",
       "mexc"
     ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "MNT",
-    "name": "Mantle",
-    "price": 0.384797,
-    "market_cap": 1274258069,
-    "exchanges": [
-      "gateio",
-      "kucoin",
-      "mexc"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "ASTER",
-    "name": "Aster",
-    "price": 0.492113,
-    "market_cap": 1264328038,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "kucoin",
-      "mexc",
-      "okx"
-    ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "VVV",
     "name": "Venice Token",
-    "price": 24.82,
-    "market_cap": 1219184555,
+    "price": 26.0,
+    "market_cap": 1277836557,
     "exchanges": [
       "gateio",
       "kucoin",
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "JST",
     "name": "JUST",
-    "price": 0.146225,
-    "market_cap": 1172691970,
+    "price": 0.146518,
+    "market_cap": 1174787158,
     "exchanges": [
       "bitget",
       "gateio",
       "kucoin",
       "mexc"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "DOT",
     "name": "Polkadot",
-    "price": 0.643849,
-    "market_cap": 1102825341,
+    "price": 0.671492,
+    "market_cap": 1150542972,
     "exchanges": [
       "bitget",
       "gateio",
@@ -726,38 +726,13 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "MORPHO",
-    "name": "Morpho",
-    "price": 1.54,
-    "market_cap": 1090172770,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "kucoin",
-      "mexc",
-      "okx"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "BGB",
-    "name": "Bitget Token",
-    "price": 1.54,
-    "market_cap": 1076681615,
-    "exchanges": [
-      "bitget",
-      "mexc"
-    ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "ICP",
     "name": "Internet Computer",
-    "price": 1.88,
-    "market_cap": 1051915832,
+    "price": 2.02,
+    "market_cap": 1126981670,
     "exchanges": [
       "bitget",
       "gateio",
@@ -765,61 +740,86 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
-    "symbol": "BTW",
-    "name": "Bitway",
-    "price": 0.698801,
-    "market_cap": 1050949324,
+    "symbol": "MORPHO",
+    "name": "Morpho",
+    "price": 1.57,
+    "market_cap": 1110736193,
     "exchanges": [
       "bitget",
       "gateio",
+      "kucoin",
+      "mexc",
+      "okx"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "BGB",
+    "name": "Bitget Token",
+    "price": 1.55,
+    "market_cap": 1083096486,
+    "exchanges": [
+      "bitget",
       "mexc"
     ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "SKY",
-    "name": "Sky",
-    "price": 0.04404777,
-    "market_cap": 1029131918,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "kucoin",
-      "mexc",
-      "okx"
-    ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "PIEVERSE",
     "name": "Pieverse",
-    "price": 3.66,
-    "market_cap": 1002092867,
+    "price": 3.67,
+    "market_cap": 1007160835,
     "exchanges": [
       "gateio",
       "kucoin",
       "mexc"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "BTW",
+    "name": "Bitway",
+    "price": 0.666001,
+    "market_cap": 1002856018,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "mexc"
+    ],
+    "timestamp": 1795421965
   },
   {
     "symbol": "USDGO",
     "name": "USDGO",
-    "price": 1.0,
-    "market_cap": 984091290,
+    "price": 0.999917,
+    "market_cap": 964002005,
     "exchanges": [
       "bitget"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "SKY",
+    "name": "Sky",
+    "price": 0.04031886,
+    "market_cap": 941538921,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "kucoin",
+      "mexc",
+      "okx"
+    ],
+    "timestamp": 1795421965
   },
   {
     "symbol": "ETC",
     "name": "Ethereum Classic",
-    "price": 5.43,
-    "market_cap": 863661263,
+    "price": 5.83,
+    "market_cap": 928412579,
     "exchanges": [
       "bitget",
       "gateio",
@@ -827,27 +827,13 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "WLD",
-    "name": "Worldcoin",
-    "price": 0.224144,
-    "market_cap": 850664245,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "kucoin",
-      "mexc",
-      "okx"
-    ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "PUMP",
     "name": "Pump.fun",
-    "price": 0.00231872,
-    "market_cap": 819331256,
+    "price": 0.00258168,
+    "market_cap": 911825671,
     "exchanges": [
       "bitget",
       "gateio",
@@ -855,24 +841,13 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
-    "symbol": "KCS",
-    "name": "KuCoin",
-    "price": 5.76,
-    "market_cap": 804334757,
-    "exchanges": [
-      "kucoin",
-      "mexc"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "POL",
-    "name": "POL (ex-MATIC)",
-    "price": 0.074,
-    "market_cap": 788233803,
+    "symbol": "WLD",
+    "name": "Worldcoin",
+    "price": 0.23669,
+    "market_cap": 899023280,
     "exchanges": [
       "bitget",
       "gateio",
@@ -880,37 +855,48 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "ARB",
-    "name": "Arbitrum",
-    "price": 0.110384,
-    "market_cap": 772365654,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "kucoin",
-      "mexc",
-      "okx"
-    ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "PEARL",
     "name": "Pearl",
-    "price": 1.95,
-    "market_cap": 754522823,
+    "price": 2.18,
+    "market_cap": 846811861,
     "exchanges": [
       "gateio"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "KCS",
+    "name": "KuCoin",
+    "price": 5.98,
+    "market_cap": 834464255,
+    "exchanges": [
+      "kucoin",
+      "mexc"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "POL",
+    "name": "POL (ex-MATIC)",
+    "price": 0.077973,
+    "market_cap": 830790298,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "kucoin",
+      "mexc",
+      "okx"
+    ],
+    "timestamp": 1795421965
   },
   {
     "symbol": "NIGHT",
     "name": "Midnight",
-    "price": 0.04414117,
-    "market_cap": 732261939,
+    "price": 0.04992619,
+    "market_cap": 829144112,
     "exchanges": [
       "bitget",
       "gateio",
@@ -918,27 +904,13 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "RENDER",
-    "name": "Render",
-    "price": 1.31,
-    "market_cap": 730418772,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "kucoin",
-      "mexc",
-      "okx"
-    ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "JUP",
     "name": "Jupiter",
-    "price": 0.214818,
-    "market_cap": 712732156,
+    "price": 0.243394,
+    "market_cap": 807913573,
     "exchanges": [
       "bitget",
       "gateio",
@@ -946,37 +918,54 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
-    "symbol": "GHO",
-    "name": "GHO",
-    "price": 0.997704,
-    "market_cap": 697374691,
+    "symbol": "ARB",
+    "name": "Arbitrum",
+    "price": 0.115131,
+    "market_cap": 805649685,
     "exchanges": [
       "bitget",
-      "gateio"
+      "gateio",
+      "kucoin",
+      "mexc",
+      "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "KAS",
     "name": "Kaspa",
-    "price": 0.02494539,
-    "market_cap": 693817873,
+    "price": 0.02722594,
+    "market_cap": 757526935,
     "exchanges": [
       "bitget",
       "gateio",
       "kucoin",
       "mexc"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "RENDER",
+    "name": "Render",
+    "price": 1.34,
+    "market_cap": 743985623,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "kucoin",
+      "mexc",
+      "okx"
+    ],
+    "timestamp": 1795421965
   },
   {
     "symbol": "ALGO",
     "name": "Algorand",
-    "price": 0.073917,
-    "market_cap": 671560931,
+    "price": 0.078101,
+    "market_cap": 709331499,
     "exchanges": [
       "bitget",
       "gateio",
@@ -984,34 +973,34 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "GT",
     "name": "Gate",
-    "price": 6.35,
-    "market_cap": 665096333,
+    "price": 6.72,
+    "market_cap": 704029589,
     "exchanges": [
       "gateio"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
-    "symbol": "NEXO",
-    "name": "NEXO",
-    "price": 0.623424,
-    "market_cap": 623428962,
+    "symbol": "GHO",
+    "name": "GHO",
+    "price": 0.998199,
+    "market_cap": 697741037,
     "exchanges": [
-      "gateio",
-      "mexc"
+      "bitget",
+      "gateio"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "ATOM",
     "name": "Cosmos Hub",
-    "price": 1.14,
-    "market_cap": 619450421,
+    "price": 1.19,
+    "market_cap": 647600609,
     "exchanges": [
       "bitget",
       "gateio",
@@ -1019,26 +1008,24 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
-    "symbol": "PI",
-    "name": "Pi Network",
-    "price": 0.05304,
-    "market_cap": 604785296,
+    "symbol": "NEXO",
+    "name": "NEXO",
+    "price": 0.630792,
+    "market_cap": 630792290,
     "exchanges": [
-      "bitget",
       "gateio",
-      "mexc",
-      "okx"
+      "mexc"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "INJ",
     "name": "Injective",
-    "price": 5.91,
-    "market_cap": 590709628,
+    "price": 6.28,
+    "market_cap": 627948313,
     "exchanges": [
       "bitget",
       "gateio",
@@ -1046,13 +1033,26 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "PI",
+    "name": "Pi Network",
+    "price": 0.054913,
+    "market_cap": 626201119,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "mexc",
+      "okx"
+    ],
+    "timestamp": 1795421965
   },
   {
     "symbol": "LIT",
     "name": "Lighter",
-    "price": 2.31,
-    "market_cap": 577581972,
+    "price": 2.42,
+    "market_cap": 604788204,
     "exchanges": [
       "bitget",
       "gateio",
@@ -1060,63 +1060,50 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "BDX",
     "name": "Beldex",
-    "price": 0.06916,
-    "market_cap": 543924645,
+    "price": 0.07163,
+    "market_cap": 563875532,
     "exchanges": [
       "gateio",
-      "kucoin",
-      "mexc"
+      "kucoin"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "XDC",
     "name": "XDC Network",
-    "price": 0.02601368,
-    "market_cap": 518871188,
+    "price": 0.02669113,
+    "market_cap": 532399669,
     "exchanges": [
       "bitget",
       "gateio",
       "kucoin",
       "mexc"
     ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "TUSD",
-    "name": "TrueUSD",
-    "price": 0.997938,
-    "market_cap": 493401343,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "kucoin"
-    ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "CAKE",
     "name": "PancakeSwap",
-    "price": 1.46,
-    "market_cap": 483925166,
+    "price": 1.54,
+    "market_cap": 510447758,
     "exchanges": [
       "bitget",
       "gateio",
       "kucoin",
       "mexc"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "ETHFI",
     "name": "Ether.fi",
-    "price": 0.47712,
-    "market_cap": 476238232,
+    "price": 0.502728,
+    "market_cap": 501991752,
     "exchanges": [
       "bitget",
       "gateio",
@@ -1124,13 +1111,25 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "TUSD",
+    "name": "TrueUSD",
+    "price": 0.998459,
+    "market_cap": 493753234,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "kucoin"
+    ],
+    "timestamp": 1795421965
   },
   {
     "symbol": "STX",
     "name": "Stacks",
-    "price": 0.247523,
-    "market_cap": 466487393,
+    "price": 0.257995,
+    "market_cap": 486300904,
     "exchanges": [
       "bitget",
       "gateio",
@@ -1138,13 +1137,13 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "ZRO",
     "name": "LayerZero",
-    "price": 1.15,
-    "market_cap": 461634314,
+    "price": 1.21,
+    "market_cap": 483945291,
     "exchanges": [
       "bitget",
       "gateio",
@@ -1152,35 +1151,25 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "DASH",
     "name": "Dash",
-    "price": 34.61,
-    "market_cap": 446654725,
+    "price": 35.76,
+    "market_cap": 459996347,
     "exchanges": [
       "gateio",
       "kucoin",
       "okx"
     ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "币安人生",
-    "name": "币安人生 (BinanceLife)",
-    "price": 0.439617,
-    "market_cap": 439615593,
-    "exchanges": [
-      "mexc"
-    ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "FIL",
     "name": "Filecoin",
-    "price": 0.512119,
-    "market_cap": 437291496,
+    "price": 0.538004,
+    "market_cap": 459630253,
     "exchanges": [
       "bitget",
       "gateio",
@@ -1188,52 +1177,36 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "FLR",
     "name": "Flare",
-    "price": 0.00494969,
-    "market_cap": 434987869,
+    "price": 0.00514788,
+    "market_cap": 452491770,
     "exchanges": [
       "gateio",
       "kucoin",
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
-    "symbol": "STABLE",
-    "name": "​​Stable",
-    "price": 0.02267162,
-    "market_cap": 408143048,
+    "symbol": "币安人生",
+    "name": "币安人生 (BinanceLife)",
+    "price": 0.447346,
+    "market_cap": 447346037,
     "exchanges": [
-      "bitget",
-      "gateio",
-      "kucoin",
       "mexc"
     ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "VET",
-    "name": "VeChain",
-    "price": 0.00449639,
-    "market_cap": 386612553,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "kucoin",
-      "mexc"
-    ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "PYTH",
     "name": "Pyth Network",
-    "price": 0.04809208,
-    "market_cap": 378741859,
+    "price": 0.051427,
+    "market_cap": 404984054,
     "exchanges": [
       "bitget",
       "gateio",
@@ -1241,51 +1214,77 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
-    "symbol": "FF",
-    "name": "Falcon Finance",
-    "price": 0.099901,
-    "market_cap": 354250249,
+    "symbol": "VET",
+    "name": "VeChain",
+    "price": 0.00469617,
+    "market_cap": 403800074,
     "exchanges": [
       "bitget",
       "gateio",
       "kucoin",
       "mexc"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
-    "symbol": "RAY",
-    "name": "Raydium",
-    "price": 1.3,
-    "market_cap": 349567102,
+    "symbol": "STABLE",
+    "name": "​​Stable",
+    "price": 0.02237798,
+    "market_cap": 402779063,
     "exchanges": [
       "bitget",
       "gateio",
       "kucoin",
-      "mexc",
-      "okx"
+      "mexc"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "DRV",
     "name": "Derive",
-    "price": 0.317266,
-    "market_cap": 337006216,
+    "price": 0.362524,
+    "market_cap": 385092751,
     "exchanges": [
       "gateio",
       "mexc"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "FF",
+    "name": "Falcon Finance",
+    "price": 0.102278,
+    "market_cap": 362690054,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "kucoin",
+      "mexc"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "RAY",
+    "name": "Raydium",
+    "price": 1.31,
+    "market_cap": 354427891,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "kucoin",
+      "mexc",
+      "okx"
+    ],
+    "timestamp": 1795421965
   },
   {
     "symbol": "APT",
     "name": "Aptos",
-    "price": 0.365399,
-    "market_cap": 324929871,
+    "price": 0.384602,
+    "market_cap": 342067207,
     "exchanges": [
       "bitget",
       "gateio",
@@ -1293,38 +1292,13 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "KITE",
-    "name": "Kite",
-    "price": 0.135886,
-    "market_cap": 324892526,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "kucoin",
-      "mexc",
-      "okx"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "APEPE",
-    "name": "Ape and Pepe",
-    "price": 1.53e-06,
-    "market_cap": 321175022,
-    "exchanges": [
-      "gateio",
-      "mexc"
-    ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "TIA",
     "name": "Celestia",
-    "price": 0.320226,
-    "market_cap": 318013481,
+    "price": 0.338172,
+    "market_cap": 336037934,
     "exchanges": [
       "bitget",
       "gateio",
@@ -1332,13 +1306,27 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "KITE",
+    "name": "Kite",
+    "price": 0.140251,
+    "market_cap": 335368228,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "kucoin",
+      "mexc",
+      "okx"
+    ],
+    "timestamp": 1795421965
   },
   {
     "symbol": "AERO",
     "name": "Aero",
-    "price": 0.396418,
-    "market_cap": 304839167,
+    "price": 0.421458,
+    "market_cap": 324464525,
     "exchanges": [
       "bitget",
       "gateio",
@@ -1346,26 +1334,24 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
-    "symbol": "BTT",
-    "name": "BitTorrent",
-    "price": 2.98058e-07,
-    "market_cap": 288566425,
+    "symbol": "APEPE",
+    "name": "Ape and Pepe",
+    "price": 1.4e-06,
+    "market_cap": 293043486,
     "exchanges": [
-      "bitget",
       "gateio",
-      "kucoin",
       "mexc"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "CRV",
     "name": "Curve DAO",
-    "price": 0.177417,
-    "market_cap": 281796032,
+    "price": 0.183573,
+    "market_cap": 291682721,
     "exchanges": [
       "bitget",
       "gateio",
@@ -1373,50 +1359,63 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "BTT",
+    "name": "BitTorrent",
+    "price": 3.00825e-07,
+    "market_cap": 291310458,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "kucoin",
+      "mexc"
+    ],
+    "timestamp": 1795421965
   },
   {
     "symbol": "BSV",
     "name": "Bitcoin SV",
-    "price": 13.95,
-    "market_cap": 280561781,
+    "price": 14.08,
+    "market_cap": 283166506,
     "exchanges": [
       "bitget",
       "gateio",
       "kucoin",
       "mexc"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "SUN",
     "name": "Sun Token",
-    "price": 0.01457567,
-    "market_cap": 279883048,
+    "price": 0.01464212,
+    "market_cap": 281347508,
     "exchanges": [
       "bitget",
       "gateio",
       "kucoin",
       "mexc"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "FDUSD",
     "name": "First Digital USD",
-    "price": 0.994523,
-    "market_cap": 276300783,
+    "price": 0.995549,
+    "market_cap": 276594388,
     "exchanges": [
       "gateio",
       "mexc"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "GRASS",
     "name": "Grass",
-    "price": 0.373893,
-    "market_cap": 269899222,
+    "price": 0.377948,
+    "market_cap": 272864200,
     "exchanges": [
       "bitget",
       "gateio",
@@ -1424,13 +1423,13 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "PENGU",
     "name": "Pudgy Penguins",
-    "price": 0.00419513,
-    "market_cap": 263679241,
+    "price": 0.00433361,
+    "market_cap": 272412560,
     "exchanges": [
       "bitget",
       "gateio",
@@ -1438,79 +1437,79 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "SPX",
     "name": "SPX6900",
-    "price": 0.280228,
-    "market_cap": 260803329,
+    "price": 0.283594,
+    "market_cap": 264022237,
     "exchanges": [
       "gateio",
       "kucoin",
       "mexc"
     ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "TRUMP",
-    "name": "Official Trump",
-    "price": 0.880372,
-    "market_cap": 247985525,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "kucoin",
-      "mexc",
-      "okx"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "FET",
-    "name": "Artificial Superintelligence Alliance",
-    "price": 0.106275,
-    "market_cap": 245798160,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "kucoin",
-      "mexc",
-      "okx"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "VIRTUAL",
-    "name": "Virtuals Protocol",
-    "price": 0.370089,
-    "market_cap": 243594101,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "kucoin",
-      "mexc",
-      "okx"
-    ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "UB",
     "name": "Unibase",
-    "price": 0.095962,
-    "market_cap": 239784243,
+    "price": 0.104862,
+    "market_cap": 262154168,
     "exchanges": [
       "gateio",
       "kucoin",
       "mexc"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "TRUMP",
+    "name": "Official Trump",
+    "price": 0.900048,
+    "market_cap": 253694749,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "kucoin",
+      "mexc",
+      "okx"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "VIRTUAL",
+    "name": "Virtuals Protocol",
+    "price": 0.38258,
+    "market_cap": 251885165,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "kucoin",
+      "mexc",
+      "okx"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "FET",
+    "name": "Artificial Superintelligence Alliance",
+    "price": 0.108785,
+    "market_cap": 251457040,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "kucoin",
+      "mexc",
+      "okx"
+    ],
+    "timestamp": 1795421965
   },
   {
     "symbol": "STRK",
     "name": "Starknet",
-    "price": 0.03003217,
-    "market_cap": 235195597,
+    "price": 0.0319942,
+    "market_cap": 250646355,
     "exchanges": [
       "bitget",
       "gateio",
@@ -1518,38 +1517,13 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "GNO",
-    "name": "Gnosis",
-    "price": 87.1,
-    "market_cap": 229897907,
-    "exchanges": [
-      "gateio",
-      "mexc"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "SEI",
-    "name": "Sei",
-    "price": 0.03363118,
-    "market_cap": 226194288,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "kucoin",
-      "mexc",
-      "okx"
-    ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "XTZ",
     "name": "Tezos",
-    "price": 0.204304,
-    "market_cap": 225155758,
+    "price": 0.212228,
+    "market_cap": 233906634,
     "exchanges": [
       "bitget",
       "gateio",
@@ -1557,13 +1531,24 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "GNO",
+    "name": "Gnosis",
+    "price": 88.51,
+    "market_cap": 233637932,
+    "exchanges": [
+      "gateio",
+      "mexc"
+    ],
+    "timestamp": 1795421965
   },
   {
     "symbol": "PENDLE",
     "name": "Pendle",
-    "price": 1.25,
-    "market_cap": 217824762,
+    "price": 1.33,
+    "market_cap": 231124063,
     "exchanges": [
       "bitget",
       "gateio",
@@ -1571,48 +1556,62 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
-    "symbol": "FRAX",
-    "name": "Legacy Frax Dollar",
-    "price": 0.992851,
-    "market_cap": 217498820,
+    "symbol": "SEI",
+    "name": "Sei",
+    "price": 0.03430556,
+    "market_cap": 230990784,
     "exchanges": [
+      "bitget",
       "gateio",
       "kucoin",
-      "mexc"
+      "mexc",
+      "okx"
     ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "OZO",
-    "name": "Ozone Chain",
-    "price": 0.225226,
-    "market_cap": 216433034,
-    "exchanges": [
-      "mexc"
-    ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "LUNC",
     "name": "Terra Luna Classic",
-    "price": 3.894e-05,
-    "market_cap": 215550864,
+    "price": 4.029e-05,
+    "market_cap": 222235503,
     "exchanges": [
       "bitget",
       "gateio",
       "kucoin",
       "mexc"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "OZO",
+    "name": "Ozone Chain",
+    "price": 0.229172,
+    "market_cap": 220218917,
+    "exchanges": [
+      "mexc"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "FRAX",
+    "name": "Legacy Frax Dollar",
+    "price": 0.99375,
+    "market_cap": 217702400,
+    "exchanges": [
+      "gateio",
+      "kucoin",
+      "mexc"
+    ],
+    "timestamp": 1795421965
   },
   {
     "symbol": "XPL",
     "name": "Plasma",
-    "price": 0.04461213,
-    "market_cap": 212543325,
+    "price": 0.04571115,
+    "market_cap": 217635848,
     "exchanges": [
       "bitget",
       "gateio",
@@ -1620,23 +1619,23 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "BP",
     "name": "Backpack",
-    "price": 0.799714,
-    "market_cap": 199956249,
+    "price": 0.864591,
+    "market_cap": 216146430,
     "exchanges": [
       "mexc"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "LDO",
     "name": "Lido DAO",
-    "price": 0.229909,
-    "market_cap": 189168817,
+    "price": 0.240968,
+    "market_cap": 198311297,
     "exchanges": [
       "bitget",
       "gateio",
@@ -1644,66 +1643,13 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "USAT",
-    "name": "USAT",
-    "price": 0.99833,
-    "market_cap": 188995764,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "mexc",
-      "okx"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "NFT",
-    "name": "AINFT",
-    "price": 1.88794e-07,
-    "market_cap": 186918684,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "kucoin",
-      "mexc",
-      "okx"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "ZBCN",
-    "name": "Zebec Network",
-    "price": 0.00182377,
-    "market_cap": 182364440,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "kucoin",
-      "mexc",
-      "okx"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "DCR",
-    "name": "Decred",
-    "price": 10.04,
-    "market_cap": 177648997,
-    "exchanges": [
-      "gateio",
-      "kucoin",
-      "mexc"
-    ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "BONK",
     "name": "Bonk",
-    "price": 2.02e-06,
-    "market_cap": 177629563,
+    "price": 2.16e-06,
+    "market_cap": 189705564,
     "exchanges": [
       "bitget",
       "gateio",
@@ -1711,13 +1657,40 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "USAT",
+    "name": "USAT",
+    "price": 0.998634,
+    "market_cap": 189058922,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "mexc",
+      "okx"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "ZBCN",
+    "name": "Zebec Network",
+    "price": 0.00183601,
+    "market_cap": 183598722,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "kucoin",
+      "mexc",
+      "okx"
+    ],
+    "timestamp": 1795421965
   },
   {
     "symbol": "KAIA",
     "name": "Kaia",
-    "price": 0.0273802,
-    "market_cap": 177195748,
+    "price": 0.02832001,
+    "market_cap": 183283472,
     "exchanges": [
       "bitget",
       "gateio",
@@ -1725,24 +1698,25 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
-    "symbol": "BEAM",
-    "name": "Beam",
-    "price": 0.00344224,
-    "market_cap": 173426811,
+    "symbol": "DCR",
+    "name": "Decred",
+    "price": 10.29,
+    "market_cap": 182096545,
     "exchanges": [
-      "bitget",
+      "gateio",
+      "kucoin",
       "mexc"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
-    "symbol": "COMP",
-    "name": "Compound",
-    "price": 16.92,
-    "market_cap": 169140652,
+    "symbol": "NFT",
+    "name": "AINFT",
+    "price": 1.81372e-07,
+    "market_cap": 179577359,
     "exchanges": [
       "bitget",
       "gateio",
@@ -1750,26 +1724,37 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "GRT",
     "name": "The Graph",
-    "price": 0.01540384,
-    "market_cap": 168461802,
+    "price": 0.01639203,
+    "market_cap": 179350502,
     "exchanges": [
       "gateio",
       "kucoin",
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
-    "symbol": "OP",
-    "name": "Optimism",
-    "price": 0.069816,
-    "market_cap": 159874460,
+    "symbol": "BEAM",
+    "name": "Beam",
+    "price": 0.00349856,
+    "market_cap": 176033277,
+    "exchanges": [
+      "bitget",
+      "mexc"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "COMP",
+    "name": "Compound",
+    "price": 17.34,
+    "market_cap": 173413664,
     "exchanges": [
       "bitget",
       "gateio",
@@ -1777,25 +1762,25 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "RUNE",
     "name": "THORChain",
-    "price": 0.485355,
-    "market_cap": 159720103,
+    "price": 0.512285,
+    "market_cap": 168580264,
     "exchanges": [
       "gateio",
       "kucoin",
       "mexc"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "CFX",
     "name": "Conflux",
-    "price": 0.03002961,
-    "market_cap": 157881559,
+    "price": 0.03159958,
+    "market_cap": 166121426,
     "exchanges": [
       "bitget",
       "gateio",
@@ -1803,24 +1788,13 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
-    "symbol": "GEOD",
-    "name": "Geodnet",
-    "price": 0.207081,
-    "market_cap": 155826414,
-    "exchanges": [
-      "gateio",
-      "mexc"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "MON",
-    "name": "Monad",
-    "price": 0.01301506,
-    "market_cap": 153893483,
+    "symbol": "OP",
+    "name": "Optimism",
+    "price": 0.07139,
+    "market_cap": 163538312,
     "exchanges": [
       "bitget",
       "gateio",
@@ -1828,13 +1802,13 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "FLOKI",
     "name": "FLOKI",
-    "price": 1.594e-05,
-    "market_cap": 153658349,
+    "price": 1.647e-05,
+    "market_cap": 158770931,
     "exchanges": [
       "bitget",
       "gateio",
@@ -1842,61 +1816,13 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "ZAMA",
-    "name": "Zama",
-    "price": 0.060016,
-    "market_cap": 152934701,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "kucoin",
-      "mexc",
-      "okx"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "AKT",
-    "name": "Akash Network",
-    "price": 0.49889,
-    "market_cap": 149708619,
-    "exchanges": [
-      "gateio",
-      "kucoin"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "GUSD",
-    "name": "GUSD",
-    "price": 0.996754,
-    "market_cap": 149299288,
-    "exchanges": [
-      "gateio"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "JASMY",
-    "name": "JasmyCoin",
-    "price": 0.00300366,
-    "market_cap": 148533344,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "kucoin",
-      "mexc"
-    ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "ENS",
     "name": "Ethereum Name Service",
-    "price": 3.51,
-    "market_cap": 148374649,
+    "price": 3.68,
+    "market_cap": 155915850,
     "exchanges": [
       "bitget",
       "gateio",
@@ -1904,13 +1830,40 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "JASMY",
+    "name": "JasmyCoin",
+    "price": 0.00312638,
+    "market_cap": 154583958,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "kucoin",
+      "mexc"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "ZAMA",
+    "name": "Zama",
+    "price": 0.060372,
+    "market_cap": 153905786,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "kucoin",
+      "mexc",
+      "okx"
+    ],
+    "timestamp": 1795421965
   },
   {
     "symbol": "AR",
     "name": "Arweave",
-    "price": 2.25,
-    "market_cap": 147588196,
+    "price": 2.33,
+    "market_cap": 153285521,
     "exchanges": [
       "bitget",
       "gateio",
@@ -1918,273 +1871,199 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
-    "symbol": "SENT",
-    "name": "Sentient",
-    "price": 0.02005107,
-    "market_cap": 145090709,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "kucoin",
-      "mexc",
-      "okx"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "GOMINING",
-    "name": "GoMining Token",
-    "price": 0.357712,
-    "market_cap": 143932681,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "kucoin",
-      "mexc"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "CAP",
-    "name": "Cap",
-    "price": 0.090087,
-    "market_cap": 140388977,
-    "exchanges": [
-      "kucoin",
-      "mexc"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "KMNO",
-    "name": "Kamino",
-    "price": 0.02320249,
-    "market_cap": 140197416,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "kucoin",
-      "mexc",
-      "okx"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "IOTA",
-    "name": "IOTA",
-    "price": 0.02926022,
-    "market_cap": 138950445,
+    "symbol": "AKT",
+    "name": "Akash Network",
+    "price": 0.50836,
+    "market_cap": 152568665,
     "exchanges": [
       "gateio",
-      "kucoin",
-      "mexc",
-      "okx"
+      "kucoin"
     ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "CRVUSD",
-    "name": "crvUSD",
-    "price": 0.997821,
-    "market_cap": 136400989,
-    "exchanges": [
-      "gateio"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "CARDS",
-    "name": "Collector Crypt",
-    "price": 0.151961,
-    "market_cap": 135373637,
-    "exchanges": [
-      "gateio",
-      "kucoin",
-      "mexc",
-      "okx"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "FLUID",
-    "name": "Fluid",
-    "price": 1.61,
-    "market_cap": 134325082,
-    "exchanges": [
-      "gateio",
-      "mexc",
-      "okx"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "TWT",
-    "name": "Trust Wallet",
-    "price": 0.312389,
-    "market_cap": 130134241,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "kucoin",
-      "mexc"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "MX",
-    "name": "MX",
-    "price": 1.42,
-    "market_cap": 130039121,
-    "exchanges": [
-      "bitget",
-      "mexc"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "MET",
-    "name": "Meteora",
-    "price": 0.22736,
-    "market_cap": 128758023,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "kucoin",
-      "mexc",
-      "okx"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "THETA",
-    "name": "Theta Network",
-    "price": 0.122791,
-    "market_cap": 122838435,
-    "exchanges": [
-      "gateio",
-      "kucoin",
-      "okx"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "JTO",
-    "name": "Jito",
-    "price": 0.224748,
-    "market_cap": 122831965,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "kucoin",
-      "mexc",
-      "okx"
-    ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "DGAI",
     "name": "DGrid AI",
-    "price": 0.81491,
-    "market_cap": 122232936,
+    "price": 0.996226,
+    "market_cap": 149433891,
     "exchanges": [
       "bitget",
       "gateio",
       "kucoin",
       "mexc"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
-    "symbol": "USDF",
-    "name": "Aster USDF",
-    "price": 0.99708,
-    "market_cap": 121682531,
+    "symbol": "GUSD",
+    "name": "GUSD",
+    "price": 0.997297,
+    "market_cap": 149385128,
     "exchanges": [
-      "mexc"
+      "gateio"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
-    "symbol": "TRAC",
-    "name": "OriginTrail",
-    "price": 0.270622,
-    "market_cap": 121039369,
+    "symbol": "IOTA",
+    "name": "IOTA",
+    "price": 0.03111019,
+    "market_cap": 147757078,
     "exchanges": [
+      "gateio",
       "kucoin",
-      "mexc"
+      "mexc",
+      "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
-    "symbol": "Q",
-    "name": "Quack AI",
-    "price": 0.02445219,
-    "market_cap": 120696832,
+    "symbol": "GOMINING",
+    "name": "GoMining Token",
+    "price": 0.364168,
+    "market_cap": 146539481,
     "exchanges": [
       "bitget",
       "gateio",
       "kucoin",
       "mexc"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "MON",
+    "name": "Monad",
+    "price": 0.01232737,
+    "market_cap": 145773128,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "kucoin",
+      "mexc",
+      "okx"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "CAP",
+    "name": "Cap",
+    "price": 0.093083,
+    "market_cap": 145209735,
+    "exchanges": [
+      "kucoin",
+      "mexc"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "CARDS",
+    "name": "Collector Crypt",
+    "price": 0.161394,
+    "market_cap": 143787858,
+    "exchanges": [
+      "gateio",
+      "kucoin",
+      "mexc",
+      "okx"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "KMNO",
+    "name": "Kamino",
+    "price": 0.02317275,
+    "market_cap": 140242732,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "kucoin",
+      "mexc",
+      "okx"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "GEOD",
+    "name": "Geodnet",
+    "price": 0.184747,
+    "market_cap": 139335251,
+    "exchanges": [
+      "gateio",
+      "mexc"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "CRVUSD",
+    "name": "crvUSD",
+    "price": 0.997116,
+    "market_cap": 139150364,
+    "exchanges": [
+      "gateio"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "SENT",
+    "name": "Sentient",
+    "price": 0.01889171,
+    "market_cap": 136735960,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "kucoin",
+      "mexc",
+      "okx"
+    ],
+    "timestamp": 1795421965
   },
   {
     "symbol": "BR",
     "name": "Bedrock",
-    "price": 0.400591,
-    "market_cap": 118801570,
+    "price": 0.452071,
+    "market_cap": 134114413,
     "exchanges": [
       "bitget",
       "gateio",
       "kucoin",
       "mexc"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
-    "symbol": "XCN",
-    "name": "Onyxcoin",
-    "price": 0.0029844,
-    "market_cap": 118148183,
-    "exchanges": [
-      "gateio",
-      "kucoin",
-      "mexc"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "S",
-    "name": "Sonic",
-    "price": 0.02683928,
-    "market_cap": 117449358,
+    "symbol": "Q",
+    "name": "Quack AI",
+    "price": 0.02714837,
+    "market_cap": 133910819,
     "exchanges": [
       "bitget",
       "gateio",
       "kucoin",
-      "mexc",
-      "okx"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "SN51",
-    "name": "lium",
-    "price": 22.98,
-    "market_cap": 116892680,
-    "exchanges": [
       "mexc"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
-    "symbol": "EIGEN",
-    "name": "EigenCloud (prev. EigenLayer)",
-    "price": 0.114072,
-    "market_cap": 116756040,
+    "symbol": "TWT",
+    "name": "Trust Wallet",
+    "price": 0.316347,
+    "market_cap": 131805944,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "kucoin",
+      "mexc"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "JTO",
+    "name": "Jito",
+    "price": 0.238589,
+    "market_cap": 130515559,
     "exchanges": [
       "bitget",
       "gateio",
@@ -2192,13 +2071,73 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "MET",
+    "name": "Meteora",
+    "price": 0.229322,
+    "market_cap": 129873043,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "kucoin",
+      "mexc",
+      "okx"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "MX",
+    "name": "MX",
+    "price": 1.41,
+    "market_cap": 129455850,
+    "exchanges": [
+      "bitget",
+      "mexc"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "THETA",
+    "name": "Theta Network",
+    "price": 0.127845,
+    "market_cap": 127845015,
+    "exchanges": [
+      "gateio",
+      "kucoin",
+      "okx"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "FLUID",
+    "name": "Fluid",
+    "price": 1.49,
+    "market_cap": 124292542,
+    "exchanges": [
+      "gateio",
+      "mexc",
+      "okx"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "TRAC",
+    "name": "OriginTrail",
+    "price": 0.276262,
+    "market_cap": 123564775,
+    "exchanges": [
+      "kucoin",
+      "mexc"
+    ],
+    "timestamp": 1795421965
   },
   {
     "symbol": "WIF",
     "name": "dogwifhat",
-    "price": 0.116373,
-    "market_cap": 116261405,
+    "price": 0.123606,
+    "market_cap": 123473653,
     "exchanges": [
       "bitget",
       "gateio",
@@ -2206,26 +2145,37 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
-    "symbol": "VSN",
-    "name": "Vision",
-    "price": 0.03023022,
-    "market_cap": 115770571,
+    "symbol": "S",
+    "name": "Sonic",
+    "price": 0.02816971,
+    "market_cap": 123288316,
     "exchanges": [
       "bitget",
       "gateio",
       "kucoin",
+      "mexc",
+      "okx"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "USDF",
+    "name": "Aster USDF",
+    "price": 0.997613,
+    "market_cap": 121929718,
+    "exchanges": [
       "mexc"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
-    "symbol": "BAT",
-    "name": "Basic Attention",
-    "price": 0.076437,
-    "market_cap": 113964554,
+    "symbol": "EIGEN",
+    "name": "EigenCloud (prev. EigenLayer)",
+    "price": 0.118219,
+    "market_cap": 120979120,
     "exchanges": [
       "bitget",
       "gateio",
@@ -2233,25 +2183,60 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "NVDAX",
     "name": "NVIDIA xStock",
-    "price": 130.16,
-    "market_cap": 110647092,
+    "price": 135.29,
+    "market_cap": 119669386,
     "exchanges": [
       "gateio",
       "kucoin",
       "mexc"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
-    "symbol": "A",
-    "name": "Vaulta",
-    "price": 0.063873,
-    "market_cap": 107415343,
+    "symbol": "SN51",
+    "name": "lium",
+    "price": 23.48,
+    "market_cap": 119632311,
+    "exchanges": [
+      "mexc"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "XCN",
+    "name": "Onyxcoin",
+    "price": 0.0030145,
+    "market_cap": 119321482,
+    "exchanges": [
+      "gateio",
+      "kucoin",
+      "mexc"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "VSN",
+    "name": "Vision",
+    "price": 0.03062727,
+    "market_cap": 117333466,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "kucoin",
+      "mexc"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "BAT",
+    "name": "Basic Attention",
+    "price": 0.07617,
+    "market_cap": 113929538,
     "exchanges": [
       "bitget",
       "gateio",
@@ -2259,27 +2244,13 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "AXS",
-    "name": "Axie Infinity",
-    "price": 0.609796,
-    "market_cap": 107079849,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "kucoin",
-      "mexc",
-      "okx"
-    ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "MANA",
     "name": "Decentraland",
-    "price": 0.054571,
-    "market_cap": 106800012,
+    "price": 0.05657,
+    "market_cap": 110779263,
     "exchanges": [
       "bitget",
       "gateio",
@@ -2287,23 +2258,13 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "ANVL",
-    "name": "Anvil",
-    "price": 0.00119997,
-    "market_cap": 105696051,
-    "exchanges": [
-      "mexc"
-    ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "NEO",
     "name": "NEO",
-    "price": 1.48,
-    "market_cap": 104520287,
+    "price": 1.56,
+    "market_cap": 110191758,
     "exchanges": [
       "bitget",
       "gateio",
@@ -2311,98 +2272,115 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
-    "symbol": "AWE",
-    "name": "AWE Network",
-    "price": 0.053303,
-    "market_cap": 103498922,
+    "symbol": "AXS",
+    "name": "Axie Infinity",
+    "price": 0.623519,
+    "market_cap": 109488356,
     "exchanges": [
       "bitget",
       "gateio",
       "kucoin",
-      "mexc"
+      "mexc",
+      "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "CVX",
     "name": "Convex Finance",
-    "price": 1.1,
-    "market_cap": 102686754,
+    "price": 1.17,
+    "market_cap": 109425758,
     "exchanges": [
       "gateio",
       "kucoin",
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
-    "symbol": "SYRUP",
-    "name": "Maple Finance",
-    "price": 0.087328,
-    "market_cap": 101953385,
+    "symbol": "A",
+    "name": "Vaulta",
+    "price": 0.065049,
+    "market_cap": 109378628,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "kucoin",
+      "mexc",
+      "okx"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "ANVL",
+    "name": "Anvil",
+    "price": 0.00122476,
+    "market_cap": 107877981,
+    "exchanges": [
+      "mexc"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "AWE",
+    "name": "AWE Network",
+    "price": 0.053061,
+    "market_cap": 103067414,
     "exchanges": [
       "bitget",
       "gateio",
       "kucoin",
       "mexc"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "GENIUS",
     "name": "Genius",
-    "price": 0.301145,
-    "market_cap": 100966150,
+    "price": 0.306999,
+    "market_cap": 102960343,
     "exchanges": [
       "bitget",
       "gateio",
       "kucoin",
       "mexc"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "SYRUP",
+    "name": "Maple Finance",
+    "price": 0.087266,
+    "market_cap": 101862840,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "kucoin",
+      "mexc"
+    ],
+    "timestamp": 1795421965
   },
   {
     "symbol": "XEC",
     "name": "eCash",
-    "price": 4.98e-06,
-    "market_cap": 100106620,
+    "price": 5.06e-06,
+    "market_cap": 101858177,
     "exchanges": [
       "gateio",
       "kucoin",
       "mexc"
     ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "RLB",
-    "name": "Rollbit Coin",
-    "price": 0.06354,
-    "market_cap": 97344812,
-    "exchanges": [
-      "bitget"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "AIOZ",
-    "name": "AIOZ Network",
-    "price": 0.074625,
-    "market_cap": 96417894,
-    "exchanges": [
-      "gateio",
-      "kucoin"
-    ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "SAND",
     "name": "The Sandbox",
-    "price": 0.0327723,
-    "market_cap": 96233529,
+    "price": 0.0338789,
+    "market_cap": 99524007,
     "exchanges": [
       "bitget",
       "gateio",
@@ -2410,26 +2388,13 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "O",
-    "name": "o1.exchange",
-    "price": 0.594585,
-    "market_cap": 95147043,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "kucoin",
-      "mexc"
-    ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "AERO",
     "name": "Aerodrome Finance",
-    "price": 0.397532,
-    "market_cap": 94027360,
+    "price": 0.421718,
+    "market_cap": 99377322,
     "exchanges": [
       "bitget",
       "gateio",
@@ -2437,62 +2402,59 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
-    "symbol": "CHZ",
-    "name": "Chiliz",
-    "price": 0.00874846,
-    "market_cap": 92953234,
+    "symbol": "AIOZ",
+    "name": "AIOZ Network",
+    "price": 0.075553,
+    "market_cap": 97639265,
     "exchanges": [
-      "bitget",
       "gateio",
-      "kucoin",
-      "mexc",
-      "okx"
+      "kucoin"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "RLB",
+    "name": "Rollbit Coin",
+    "price": 0.063268,
+    "market_cap": 96897687,
+    "exchanges": [
+      "bitget"
+    ],
+    "timestamp": 1795421965
   },
   {
     "symbol": "CRCLX",
     "name": "Circle xStock",
-    "price": 48.47,
-    "market_cap": 92450621,
+    "price": 50.46,
+    "market_cap": 96762596,
     "exchanges": [
       "gateio",
       "kucoin",
       "mexc"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
-    "symbol": "SOSO",
-    "name": "SoSoValue",
-    "price": 0.257375,
-    "market_cap": 92159007,
+    "symbol": "O",
+    "name": "o1.exchange",
+    "price": 0.595247,
+    "market_cap": 95239568,
     "exchanges": [
-      "gateio",
-      "mexc"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "PROM",
-    "name": "Prom",
-    "price": 5.0,
-    "market_cap": 91153255,
-    "exchanges": [
+      "bitget",
       "gateio",
       "kucoin",
       "mexc"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
-    "symbol": "NES",
-    "name": "Nesa",
-    "price": 0.298215,
-    "market_cap": 89033999,
+    "symbol": "CHZ",
+    "name": "Chiliz",
+    "price": 0.00894468,
+    "market_cap": 95040079,
     "exchanges": [
       "bitget",
       "gateio",
@@ -2500,139 +2462,84 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "B",
-    "name": "BUILDon",
-    "price": 0.088516,
-    "market_cap": 88527199,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "mexc"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "ICNT",
-    "name": "Impossible Cloud Network Token",
-    "price": 0.347173,
-    "market_cap": 87839178,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "kucoin"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "GLM",
-    "name": "Golem",
-    "price": 0.086598,
-    "market_cap": 86586665,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "kucoin",
-      "okx"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "ONE",
-    "name": "ONEchain",
-    "price": 0.152489,
-    "market_cap": 86446184,
-    "exchanges": [
-      "gateio",
-      "kucoin",
-      "mexc",
-      "okx"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "SOON",
-    "name": "SOON",
-    "price": 0.249099,
-    "market_cap": 84637667,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "kucoin",
-      "mexc"
-    ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "RAIL",
     "name": "Railgun",
-    "price": 1.41,
-    "market_cap": 84363037,
+    "price": 1.52,
+    "market_cap": 91410058,
     "exchanges": [
       "mexc"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
-    "symbol": "2Z",
-    "name": "DoubleZero",
-    "price": 0.01556689,
-    "market_cap": 83202115,
+    "symbol": "ICNT",
+    "name": "Impossible Cloud Network Token",
+    "price": 0.358656,
+    "market_cap": 90752568,
     "exchanges": [
       "bitget",
       "gateio",
-      "kucoin",
-      "mexc",
-      "okx"
+      "kucoin"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "SOSO",
+    "name": "SoSoValue",
+    "price": 0.25271,
+    "market_cap": 90513249,
+    "exchanges": [
+      "gateio",
+      "mexc"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "B",
+    "name": "BUILDon",
+    "price": 0.089748,
+    "market_cap": 89749998,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "mexc"
+    ],
+    "timestamp": 1795421965
   },
   {
     "symbol": "NPC",
     "name": "Non-Playable Coin",
-    "price": 0.01032928,
-    "market_cap": 83132721,
+    "price": 0.011031,
+    "market_cap": 88801801,
     "exchanges": [
       "bitget",
       "gateio",
       "kucoin",
       "mexc"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
-    "symbol": "ULTIMA",
-    "name": "Ultima",
-    "price": 981.19,
-    "market_cap": 83121153,
-    "exchanges": [
-      "gateio",
-      "kucoin",
-      "mexc"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "1INCH",
-    "name": "1INCH",
-    "price": 0.059132,
-    "market_cap": 83081248,
+    "symbol": "GLM",
+    "name": "Golem",
+    "price": 0.088565,
+    "market_cap": 88579428,
     "exchanges": [
       "bitget",
       "gateio",
       "kucoin",
-      "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "EDGE",
     "name": "edgeX",
-    "price": 0.235484,
-    "market_cap": 82392617,
+    "price": 0.252911,
+    "market_cap": 88521710,
     "exchanges": [
       "bitget",
       "gateio",
@@ -2640,151 +2547,217 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "SOON",
+    "name": "SOON",
+    "price": 0.260511,
+    "market_cap": 88515304,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "kucoin",
+      "mexc"
+    ],
+    "timestamp": 1795421965
   },
   {
     "symbol": "DBR",
     "name": "deBridge",
-    "price": 0.01253489,
-    "market_cap": 81933920,
+    "price": 0.01354059,
+    "market_cap": 88454581,
     "exchanges": [
       "bitget",
       "gateio",
       "kucoin",
       "mexc"
     ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "BGBTC",
-    "name": "Bitget Wrapped BTC",
-    "price": 59025,
-    "market_cap": 81706177,
-    "exchanges": [
-      "bitget"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "SNX",
-    "name": "Synthetix",
-    "price": 0.140364,
-    "market_cap": 81502486,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "kucoin",
-      "mexc",
-      "okx"
-    ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "MSTRX",
     "name": "MicroStrategy xStock",
-    "price": 79.41,
-    "market_cap": 81013166,
+    "price": 84.06,
+    "market_cap": 86011208,
     "exchanges": [
       "gateio",
       "kucoin"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "1INCH",
+    "name": "1INCH",
+    "price": 0.060735,
+    "market_cap": 85367725,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "kucoin",
+      "mexc",
+      "okx"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "BGBTC",
+    "name": "Bitget Wrapped BTC",
+    "price": 61228,
+    "market_cap": 84775871,
+    "exchanges": [
+      "bitget"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "2Z",
+    "name": "DoubleZero",
+    "price": 0.01574462,
+    "market_cap": 84236039,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "kucoin",
+      "mexc",
+      "okx"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "SNX",
+    "name": "Synthetix",
+    "price": 0.143695,
+    "market_cap": 83477736,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "kucoin",
+      "mexc",
+      "okx"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "ONE",
+    "name": "ONEchain",
+    "price": 0.146637,
+    "market_cap": 83268225,
+    "exchanges": [
+      "gateio",
+      "kucoin",
+      "mexc",
+      "okx"
+    ],
+    "timestamp": 1795421965
   },
   {
     "symbol": "SFP",
     "name": "SafePal",
-    "price": 0.159928,
-    "market_cap": 79944239,
+    "price": 0.164977,
+    "market_cap": 82482221,
     "exchanges": [
       "gateio",
       "mexc"
     ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "USELESS",
-    "name": "Useless Coin",
-    "price": 0.079246,
-    "market_cap": 79189136,
-    "exchanges": [
-      "gateio",
-      "kucoin",
-      "mexc"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "GMX",
-    "name": "GMX",
-    "price": 7.24,
-    "market_cap": 77856845,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "kucoin",
-      "mexc",
-      "okx"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "PROS",
-    "name": "Pharos",
-    "price": 0.57298,
-    "market_cap": 77686855,
-    "exchanges": [
-      "bitget",
-      "kucoin",
-      "okx"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "IMX",
-    "name": "Immutable",
-    "price": 0.085872,
-    "market_cap": 77611802,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "kucoin",
-      "mexc",
-      "okx"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "RSR",
-    "name": "Reserve Rights",
-    "price": 0.00122988,
-    "market_cap": 76922437,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "kucoin",
-      "mexc",
-      "okx"
-    ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "FARTCOIN",
     "name": "Fartcoin",
-    "price": 0.076412,
-    "market_cap": 76402893,
+    "price": 0.081558,
+    "market_cap": 81566466,
     "exchanges": [
       "bitget",
       "gateio",
       "kucoin",
       "mexc"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "ULTIMA",
+    "name": "Ultima",
+    "price": 957.59,
+    "market_cap": 81116284,
+    "exchanges": [
+      "gateio",
+      "kucoin",
+      "mexc"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "USELESS",
+    "name": "Useless Coin",
+    "price": 0.080867,
+    "market_cap": 80875687,
+    "exchanges": [
+      "gateio",
+      "kucoin",
+      "mexc"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "PROM",
+    "name": "Prom",
+    "price": 4.4,
+    "market_cap": 80146874,
+    "exchanges": [
+      "gateio",
+      "kucoin",
+      "mexc"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "RSR",
+    "name": "Reserve Rights",
+    "price": 0.00127443,
+    "market_cap": 79728937,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "kucoin",
+      "mexc",
+      "okx"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "IMX",
+    "name": "Immutable",
+    "price": 0.08806,
+    "market_cap": 79650492,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "kucoin",
+      "mexc",
+      "okx"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "GMX",
+    "name": "GMX",
+    "price": 7.4,
+    "market_cap": 79643671,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "kucoin",
+      "mexc",
+      "okx"
+    ],
+    "timestamp": 1795421965
   },
   {
     "symbol": "ZK",
     "name": "ZKsync",
-    "price": 0.00671587,
-    "market_cap": 76262285,
+    "price": 0.00685074,
+    "market_cap": 77853170,
     "exchanges": [
       "bitget",
       "gateio",
@@ -2792,131 +2765,93 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "SPYX",
-    "name": "SP500 xStock",
-    "price": 703.54,
-    "market_cap": 74746499,
-    "exchanges": [
-      "gateio",
-      "mexc"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "SUPER",
-    "name": "SuperVerse",
-    "price": 0.113307,
-    "market_cap": 74358025,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "kucoin"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "ORCA",
-    "name": "Orca",
-    "price": 1.22,
-    "market_cap": 74257135,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "kucoin",
-      "mexc"
-    ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "PLUME",
     "name": "Plume",
-    "price": 0.010497,
-    "market_cap": 73762967,
+    "price": 0.01102702,
+    "market_cap": 77525008,
     "exchanges": [
       "bitget",
       "gateio",
       "kucoin",
       "mexc"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
-    "symbol": "SPCXX",
-    "name": "SpaceX xStock",
-    "price": 129.75,
-    "market_cap": 73730930,
-    "exchanges": [
-      "gateio",
-      "kucoin",
-      "mexc"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "SKR",
-    "name": "Seeker",
-    "price": 0.00986973,
-    "market_cap": 73425713,
+    "symbol": "PROS",
+    "name": "Pharos",
+    "price": 0.571612,
+    "market_cap": 77487502,
     "exchanges": [
       "bitget",
-      "gateio",
       "kucoin",
-      "mexc"
+      "okx"
     ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "GGBR",
-    "name": "Goldfish Gold",
-    "price": 3.54,
-    "market_cap": 72562504,
-    "exchanges": [
-      "mexc"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "QQQX",
-    "name": "Nasdaq xStock",
-    "price": 621.67,
-    "market_cap": 72517003,
-    "exchanges": [
-      "gateio"
-    ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "SN64",
     "name": "Chutes",
-    "price": 11.16,
-    "market_cap": 72223314,
+    "price": 11.82,
+    "market_cap": 76643505,
     "exchanges": [
       "mexc"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
-    "symbol": "APE",
-    "name": "ApeCoin",
-    "price": 0.070785,
-    "market_cap": 70755311,
+    "symbol": "SPYX",
+    "name": "SP500 xStock",
+    "price": 711.5,
+    "market_cap": 75635046,
+    "exchanges": [
+      "gateio",
+      "mexc"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "SPCXX",
+    "name": "SpaceX xStock",
+    "price": 132.09,
+    "market_cap": 75123951,
+    "exchanges": [
+      "gateio",
+      "kucoin",
+      "mexc"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "QQQX",
+    "name": "Nasdaq xStock",
+    "price": 630.1,
+    "market_cap": 75043410,
+    "exchanges": [
+      "gateio"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "SUPER",
+    "name": "SuperVerse",
+    "price": 0.113887,
+    "market_cap": 74699127,
     "exchanges": [
       "bitget",
       "gateio",
-      "kucoin",
-      "mexc",
-      "okx"
+      "kucoin"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "ATH",
     "name": "Aethir",
-    "price": 0.00350771,
-    "market_cap": 70575060,
+    "price": 0.0036754,
+    "market_cap": 73998881,
     "exchanges": [
       "bitget",
       "gateio",
@@ -2924,121 +2859,112 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "GGBR",
+    "name": "Goldfish Gold",
+    "price": 3.6,
+    "market_cap": 73874260,
+    "exchanges": [
+      "mexc"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "APE",
+    "name": "ApeCoin",
+    "price": 0.072994,
+    "market_cap": 72998058,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "kucoin",
+      "mexc",
+      "okx"
+    ],
+    "timestamp": 1795421965
   },
   {
     "symbol": "EGLD",
     "name": "MultiversX",
-    "price": 2.25,
-    "market_cap": 70305057,
+    "price": 2.32,
+    "market_cap": 72450343,
     "exchanges": [
       "gateio",
       "kucoin",
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "ORCA",
+    "name": "Orca",
+    "price": 1.19,
+    "market_cap": 72165808,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "kucoin",
+      "mexc"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "SKR",
+    "name": "Seeker",
+    "price": 0.00962845,
+    "market_cap": 71670096,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "kucoin",
+      "mexc"
+    ],
+    "timestamp": 1795421965
   },
   {
     "symbol": "QRL",
     "name": "Quantum Resistant Ledger",
-    "price": 0.887359,
-    "market_cap": 69560579,
+    "price": 0.900287,
+    "market_cap": 70576897,
     "exchanges": [
       "mexc"
     ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "DOG",
-    "name": "Dog (Bitcoin)",
-    "price": 0.0006708,
-    "market_cap": 67102567,
-    "exchanges": [
-      "gateio",
-      "mexc"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "0G",
-    "name": "0G",
-    "price": 0.106434,
-    "market_cap": 66333097,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "kucoin",
-      "mexc"
-    ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "ZEN",
     "name": "Horizen",
-    "price": 3.57,
-    "market_cap": 66198461,
+    "price": 3.69,
+    "market_cap": 68406485,
     "exchanges": [
       "bitget",
       "kucoin",
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
-    "symbol": "QTUM",
-    "name": "Qtum",
-    "price": 0.605617,
-    "market_cap": 64292607,
+    "symbol": "0G",
+    "name": "0G",
+    "price": 0.109092,
+    "market_cap": 68063937,
     "exchanges": [
       "bitget",
       "gateio",
       "kucoin",
-      "mexc",
-      "okx"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "GOOGLX",
-    "name": "Alphabet xStock",
-    "price": 273.02,
-    "market_cap": 63177974,
-    "exchanges": [
-      "gateio",
       "mexc"
     ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "SHX",
-    "name": "Stronghold",
-    "price": 0.00334683,
-    "market_cap": 63099740,
-    "exchanges": [
-      "gateio",
-      "mexc"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "AKE",
-    "name": "Akedo",
-    "price": 0.00276409,
-    "market_cap": 62926311,
-    "exchanges": [
-      "gateio",
-      "kucoin",
-      "mexc"
-    ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "GALA",
     "name": "GALA",
-    "price": 0.00122028,
-    "market_cap": 62810826,
+    "price": 0.00131115,
+    "market_cap": 67513298,
     "exchanges": [
       "bitget",
       "gateio",
@@ -3046,13 +2972,38 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "DOG",
+    "name": "Dog (Bitcoin)",
+    "price": 0.00066382,
+    "market_cap": 66378240,
+    "exchanges": [
+      "gateio",
+      "mexc"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "QTUM",
+    "name": "Qtum",
+    "price": 0.621243,
+    "market_cap": 65947983,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "kucoin",
+      "mexc",
+      "okx"
+    ],
+    "timestamp": 1795421965
   },
   {
     "symbol": "ZRX",
     "name": "0x Protocol",
-    "price": 0.073897,
-    "market_cap": 62692976,
+    "price": 0.076602,
+    "market_cap": 64989304,
     "exchanges": [
       "bitget",
       "gateio",
@@ -3060,57 +3011,13 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "ADI",
-    "name": "ADI",
-    "price": 7.24,
-    "market_cap": 62615371,
-    "exchanges": [
-      "kucoin",
-      "mexc"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "RED",
-    "name": "RedStone",
-    "price": 0.106522,
-    "market_cap": 62184467,
-    "exchanges": [
-      "bitget",
-      "mexc"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "TSLAX",
-    "name": "Tesla xStock",
-    "price": 353.87,
-    "market_cap": 62154817,
-    "exchanges": [
-      "gateio",
-      "kucoin",
-      "mexc"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "XAUM",
-    "name": "Matrixdock Gold",
-    "price": 3536.73,
-    "market_cap": 61395572,
-    "exchanges": [
-      "kucoin"
-    ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "PONS",
     "name": "Pons",
-    "price": 0.090709,
-    "market_cap": 60874597,
+    "price": 0.096726,
+    "market_cap": 64675588,
     "exchanges": [
       "bitget",
       "gateio",
@@ -3118,84 +3025,112 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
-    "symbol": "HOT",
-    "name": "Holo",
-    "price": 0.00033683,
-    "market_cap": 59837327,
+    "symbol": "GOOGLX",
+    "name": "Alphabet xStock",
+    "price": 277.01,
+    "market_cap": 64345769,
     "exchanges": [
       "gateio",
       "mexc"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
-    "symbol": "GAS",
-    "name": "Gas",
-    "price": 0.914203,
-    "market_cap": 59508069,
+    "symbol": "RED",
+    "name": "RedStone",
+    "price": 0.109511,
+    "market_cap": 64054846,
     "exchanges": [
       "bitget",
-      "gateio",
-      "kucoin",
-      "okx"
+      "mexc"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
-    "symbol": "CRCLON",
-    "name": "Circle Internet Group (Ondo Tokenized Stock)",
-    "price": 48.49,
-    "market_cap": 59334405,
+    "symbol": "SHX",
+    "name": "Stronghold",
+    "price": 0.00335603,
+    "market_cap": 63740977,
     "exchanges": [
       "gateio",
       "mexc"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "TSLAX",
+    "name": "Tesla xStock",
+    "price": 360.67,
+    "market_cap": 63362816,
+    "exchanges": [
+      "gateio",
+      "kucoin",
+      "mexc"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "ADI",
+    "name": "ADI",
+    "price": 7.31,
+    "market_cap": 63287718,
+    "exchanges": [
+      "kucoin",
+      "mexc"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "AKE",
+    "name": "Akedo",
+    "price": 0.00276111,
+    "market_cap": 62953838,
+    "exchanges": [
+      "gateio",
+      "kucoin",
+      "mexc"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "XAUM",
+    "name": "Matrixdock Gold",
+    "price": 3596.86,
+    "market_cap": 62441899,
+    "exchanges": [
+      "kucoin"
+    ],
+    "timestamp": 1795421965
   },
   {
     "symbol": "ZANO",
     "name": "Zano",
-    "price": 3.79,
-    "market_cap": 58821884,
+    "price": 3.99,
+    "market_cap": 61944681,
     "exchanges": [
       "mexc"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
-    "symbol": "YFI",
-    "name": "yearn.finance",
-    "price": 1615.99,
-    "market_cap": 57958843,
+    "symbol": "CRCLON",
+    "name": "Circle Internet Group (Ondo Tokenized Stock)",
+    "price": 50.4,
+    "market_cap": 61700133,
     "exchanges": [
       "gateio",
-      "kucoin",
-      "mexc",
-      "okx"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "WAL",
-    "name": "Walrus",
-    "price": 0.02144858,
-    "market_cap": 57291279,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "kucoin",
       "mexc"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "DYDX",
     "name": "dYdX",
-    "price": 0.0673,
-    "market_cap": 56940172,
+    "price": 0.070965,
+    "market_cap": 60043303,
     "exchanges": [
       "bitget",
       "gateio",
@@ -3203,115 +3138,88 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "YFI",
+    "name": "yearn.finance",
+    "price": 1661.19,
+    "market_cap": 59588378,
+    "exchanges": [
+      "gateio",
+      "kucoin",
+      "mexc",
+      "okx"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "GAS",
+    "name": "Gas",
+    "price": 0.910023,
+    "market_cap": 59237141,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "kucoin",
+      "okx"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "HOT",
+    "name": "Holo",
+    "price": 0.00033238,
+    "market_cap": 59030909,
+    "exchanges": [
+      "gateio",
+      "mexc"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "WAL",
+    "name": "Walrus",
+    "price": 0.02207817,
+    "market_cap": 58964259,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "kucoin",
+      "mexc"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "ARIA",
+    "name": "Aria.AI",
+    "price": 0.32061,
+    "market_cap": 58632239,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "kucoin",
+      "mexc"
+    ],
+    "timestamp": 1795421965
   },
   {
     "symbol": "CHEEMS",
     "name": "Cheems Token",
-    "price": 2.79472e-07,
-    "market_cap": 56913392,
+    "price": 2.87101e-07,
+    "market_cap": 58476365,
     "exchanges": [
       "bitget",
       "gateio",
       "mexc"
     ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "SAFE",
-    "name": "Safe",
-    "price": 0.071463,
-    "market_cap": 56502520,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "kucoin",
-      "mexc",
-      "okx"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "GPS",
-    "name": "GoPlus Security",
-    "price": 0.00912778,
-    "market_cap": 56010519,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "kucoin",
-      "mexc"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "RITUAL",
-    "name": "Ritual",
-    "price": 0.03094797,
-    "market_cap": 55683101,
-    "exchanges": [
-      "gateio",
-      "kucoin",
-      "mexc"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "ARKM",
-    "name": "Arkham",
-    "price": 0.075883,
-    "market_cap": 55477549,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "kucoin",
-      "mexc",
-      "okx"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "WEMIX",
-    "name": "WEMIX",
-    "price": 0.110588,
-    "market_cap": 55380150,
-    "exchanges": [
-      "gateio",
-      "kucoin",
-      "mexc"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "MCAT",
-    "name": "Marscat Token",
-    "price": 0.583683,
-    "market_cap": 54899133,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "kucoin",
-      "mexc"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "FORM",
-    "name": "Four",
-    "price": 0.143036,
-    "market_cap": 54595057,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "mexc"
-    ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
     "symbol": "W",
     "name": "Wormhole",
-    "price": 0.00800948,
-    "market_cap": 54542886,
+    "price": 0.00857276,
+    "market_cap": 58406730,
     "exchanges": [
       "bitget",
       "gateio",
@@ -3319,77 +3227,91 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
-    "symbol": "KNTQ",
-    "name": "Kinetiq",
-    "price": 0.167006,
-    "market_cap": 54196288,
+    "symbol": "SAFE",
+    "name": "Safe",
+    "price": 0.073438,
+    "market_cap": 58100405,
     "exchanges": [
+      "bitget",
+      "gateio",
+      "kucoin",
+      "mexc",
+      "okx"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "GPS",
+    "name": "GoPlus Security",
+    "price": 0.00945843,
+    "market_cap": 58053320,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "kucoin",
       "mexc"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
-    "symbol": "NMR",
-    "name": "Numeraire",
-    "price": 7.33,
-    "market_cap": 52672946,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "kucoin",
-      "mexc",
-      "okx"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "MINA",
-    "name": "Mina Protocol",
-    "price": 0.04071437,
-    "market_cap": 52658862,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "kucoin",
-      "mexc",
-      "okx"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "MEGA",
-    "name": "MegaETH",
-    "price": 0.04612039,
-    "market_cap": 52112281,
-    "exchanges": [
-      "bitget",
-      "gateio",
-      "kucoin",
-      "mexc",
-      "okx"
-    ],
-    "timestamp": 1795333004
-  },
-  {
-    "symbol": "AB",
-    "name": "AB",
-    "price": 0.00052149,
-    "market_cap": 51551086,
+    "symbol": "FORM",
+    "name": "Four",
+    "price": 0.149831,
+    "market_cap": 57224594,
     "exchanges": [
       "bitget",
       "gateio",
       "mexc"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "ARKM",
+    "name": "Arkham",
+    "price": 0.078192,
+    "market_cap": 57186366,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "kucoin",
+      "mexc",
+      "okx"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "WEMIX",
+    "name": "WEMIX",
+    "price": 0.11087,
+    "market_cap": 55533308,
+    "exchanges": [
+      "gateio",
+      "kucoin",
+      "mexc"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "MCAT",
+    "name": "Marscat Token",
+    "price": 0.586654,
+    "market_cap": 55180736,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "kucoin",
+      "mexc"
+    ],
+    "timestamp": 1795421965
   },
   {
     "symbol": "ORDI",
     "name": "ORDI",
-    "price": 2.45,
-    "market_cap": 51429157,
+    "price": 2.59,
+    "market_cap": 54499700,
     "exchanges": [
       "bitget",
       "gateio",
@@ -3397,52 +3319,103 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
-    "symbol": "CHIP",
-    "name": "USD.AI",
-    "price": 0.02555341,
-    "market_cap": 51138905,
+    "symbol": "UP",
+    "name": "Unitas",
+    "price": 0.251242,
+    "market_cap": 54254164,
     "exchanges": [
+      "bitget",
+      "gateio",
+      "kucoin",
+      "mexc"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "MINA",
+    "name": "Mina Protocol",
+    "price": 0.04133556,
+    "market_cap": 53479251,
+    "exchanges": [
+      "bitget",
       "gateio",
       "kucoin",
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "NMR",
+    "name": "Numeraire",
+    "price": 7.44,
+    "market_cap": 53434585,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "kucoin",
+      "mexc",
+      "okx"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "KNTQ",
+    "name": "Kinetiq",
+    "price": 0.164396,
+    "market_cap": 53350733,
+    "exchanges": [
+      "mexc"
+    ],
+    "timestamp": 1795421965
   },
   {
     "symbol": "PEAQ",
     "name": "peaq",
-    "price": 0.01949868,
-    "market_cap": 51113599,
+    "price": 0.02032771,
+    "market_cap": 53298398,
     "exchanges": [
       "bitget",
       "gateio",
       "kucoin",
       "mexc"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
-    "symbol": "WIN",
-    "name": "WINkLink",
-    "price": 5.496e-05,
-    "market_cap": 50912270,
+    "symbol": "CHIP",
+    "name": "USD.AI",
+    "price": 0.02661536,
+    "market_cap": 53234592,
+    "exchanges": [
+      "gateio",
+      "kucoin",
+      "mexc",
+      "okx"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "COW",
+    "name": "CoW Protocol",
+    "price": 0.091889,
+    "market_cap": 52756248,
     "exchanges": [
       "bitget",
       "gateio",
       "kucoin",
       "mexc"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
   },
   {
-    "symbol": "ALLO",
-    "name": "Allora",
-    "price": 0.120446,
-    "market_cap": 50717509,
+    "symbol": "MEGA",
+    "name": "MegaETH",
+    "price": 0.0466901,
+    "market_cap": 52747842,
     "exchanges": [
       "bitget",
       "gateio",
@@ -3450,16 +3423,117 @@
       "mexc",
       "okx"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "ALLO",
+    "name": "Allora",
+    "price": 0.124068,
+    "market_cap": 52221781,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "kucoin",
+      "mexc",
+      "okx"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "ACU",
+    "name": "Acurast",
+    "price": 0.113633,
+    "market_cap": 51595855,
+    "exchanges": [
+      "gateio",
+      "kucoin",
+      "mexc"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "AB",
+    "name": "AB",
+    "price": 0.00052179,
+    "market_cap": 51569655,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "mexc"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "NES",
+    "name": "Nesa",
+    "price": 0.172659,
+    "market_cap": 51541216,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "kucoin",
+      "mexc",
+      "okx"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "RITUAL",
+    "name": "Ritual",
+    "price": 0.02861736,
+    "market_cap": 51511662,
+    "exchanges": [
+      "gateio",
+      "kucoin",
+      "mexc"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "MAGMA",
+    "name": "Magma Finance",
+    "price": 0.268121,
+    "market_cap": 50941688,
+    "exchanges": [
+      "bitget",
+      "gateio",
+      "mexc"
+    ],
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "LPT",
+    "name": "Livepeer",
+    "price": 1.022,
+    "market_cap": 50793198,
+    "exchanges": [
+      "gateio",
+      "kucoin",
+      "mexc",
+      "okx"
+    ],
+    "timestamp": 1795421965
   },
   {
     "symbol": "METAL",
     "name": "Metal Blockchain",
-    "price": 0.099401,
-    "market_cap": 50479653,
+    "price": 0.099781,
+    "market_cap": 50656163,
     "exchanges": [
       "mexc"
     ],
-    "timestamp": 1795333004
+    "timestamp": 1795421965
+  },
+  {
+    "symbol": "ESP",
+    "name": "Espresso",
+    "price": 0.068465,
+    "market_cap": 50463003,
+    "exchanges": [
+      "gateio",
+      "kucoin",
+      "mexc"
+    ],
+    "timestamp": 1795421965
   }
 ]
