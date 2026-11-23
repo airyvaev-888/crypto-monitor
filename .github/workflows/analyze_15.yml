@@ -43,15 +43,14 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           
-          # Добавляем файл и коммитим изменения
-          git add data/market_snapshot.json
+          git add data/
           git commit -m "Update market data ($(date +%H:%M) +05) [skip ci]" || echo "Нет изменений для коммита"
           
-          # Пытаемся сделать rebase. Если возникает конфликт — разрешаем его в пользу НАШЕГО файла.
           if ! git pull --rebase origin main; then
             echo "⚠️ Обнаружен конфликт при rebase. Автоматически разрешаем в пользу свежих данных..."
-            git checkout --theirs data/market_snapshot.json
-            git add data/market_snapshot.json
-            git rebase --continue
+            git checkout --theirs data/market_snapshot.json data/signals_history.json || true
+            git add data/market_snapshot.json data/signals_history.json
+            git rebase --continue || true
           fi
           
+          git push origin main
