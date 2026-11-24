@@ -1,8 +1,8 @@
-name: 📊 Анализ рынка (16:00 +05)
+name: 📊 Анализ рынка (08:00 +05)
 
 on:
   schedule:
-    - cron: '0 11 * * *' # 03:00 UTC = 08:00 +05
+    - cron: '0 3 * * *' # 03:00 UTC = 08:00 +05
   workflow_dispatch:
 
 concurrency:
