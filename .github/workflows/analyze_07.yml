@@ -2,7 +2,7 @@ name: 📊 Анализ рынка (12:00 +05)
 
 on:
   schedule:
-    - cron: '0 7 * * *' # 07:00 UTC = 12:00 +05
+    - cron: '0 7 * * *' # 03:00 UTC = 08:00 +05
   workflow_dispatch:
 
 concurrency:
@@ -12,25 +12,37 @@ concurrency:
 jobs:
   analyze:
     runs-on: ubuntu-latest
+    timeout-minutes: 15          # ← фикс #8: страховка от зависания rebase
     permissions:
       contents: write
     steps:
       - name: 📥 Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0         # ← фикс #3: полная история для rebase
 
       - name: 🐍 Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+          cache: 'pip'                             # ← фикс #9
+          cache-dependency-path: src/requirements.txt
 
-      - name: 🧪 Test ntfy notification
+      - name: 🧪 Test ntfy notification (manual only)
+        if: github.event_name == 'workflow_dispatch'   # ← фикс #1
+        env:
+          NTFY_URL: ${{ secrets.NTFY_URL }}
         run: |
-          curl -d "Test message from GitHub Actions" ${{ secrets.NTFY_URL }}
+          if [ -z "$NTFY_URL" ]; then
+            echo "❌ NTFY_URL secret не задан"
+            exit 1
+          fi
+          curl -fsS -d "Test message from GitHub Actions" "$NTFY_URL"
 
       - name: 📦 Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r src/requirements.txt
+          pip install --no-cache-dir -r src/requirements.txt
 
       - name: 🚀 Run analysis script
         env:
@@ -39,18 +51,48 @@ jobs:
         run: python src/main.py
 
       - name: Commit snapshot
+        env:
+          TZ: 'Asia/Yekaterinburg'   # ← фикс #6: время в коммите = +05
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          
-          git add data/
-          git commit -m "Update market data ($(date +%H:%M) +05) [skip ci]" || echo "Нет изменений для коммита"
-          
-          if ! git pull --rebase origin main; then
-            echo "⚠️ Обнаружен конфликт при rebase. Автоматически разрешаем в пользу свежих данных..."
-            git checkout --theirs data/market_snapshot.json data/signals_history.json || true
-            git add data/market_snapshot.json data/signals_history.json
-            git rebase --continue || true
+
+          # Добавляем все измененные файлы данных (включая новые при первом запуске)
+          git add data/ 2>/dev/null || true
+
+          if git diff --cached --quiet; then      # ← фикс #7
+            echo "ℹ️ Нет изменений для коммита"
+          else
+            git commit -m "Update market data ($(date +%H:%M) +05) [skip ci]"
           fi
-          
-          git push origin main
+
+          # Пуш с retry (до 3 попыток)     ← фикс #2, #5
+          for attempt in 1 2 3; do
+            echo "🔄 Попытка $attempt: pull --rebase + push"
+
+            if git pull --rebase --autostash origin main; then
+              if git push origin main; then
+                echo "✅ Успешно запушено"
+                exit 0
+              else
+                echo "⚠️ Push отклонён, повторяем..."
+              fi
+            else
+              # Rebase упал — вероятно конфликт. Разрешаем в пользу наших свежих данных.
+              echo "⚠️ Разрешаем конфликт в пользу свежих данных..."
+              git checkout --theirs data/market_snapshot.json data/signals_history.json 2>/dev/null || true
+              git add data/market_snapshot.json data/signals_history.json 2>/dev/null || true
+              # GIT_EDITOR=true — чтобы не зависнуть в редакторе  ← фикс #4
+              GIT_EDITOR=true git rebase --continue 2>/dev/null || git rebase --abort 2>/dev/null || true
+
+              if git push origin main; then
+                echo "✅ Успешно запушено после разрешения конфликта"
+                exit 0
+              fi
+            fi
+
+            sleep 5
+          done
+
+          echo "❌ Не удалось запушить после 3 попыток"
+          exit 1
